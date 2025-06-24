@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Traits\FileUpload;
 
 class RegisteredUserController extends Controller
+
 {
+    use FileUpload;
     /**
      * Display the registration view.
      */
@@ -29,22 +32,51 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type' => ['required', 'in:student,teacher']
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->type == 'student') {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'student',
+                'approved_status' => 'approved'
+            ]);
+            event(new Registered($user));
 
-        event(new Registered($user));
+            Auth::login($user);
 
-        Auth::login($user);
+            return redirect(route('student.dashboard', false));
+        } elseif ($request->type == 'teacher') {
 
-        return redirect(route('dashboard', absolute: false));
+
+
+            $request->validate([
+                'document' => ['required', 'file', 'max:12000', 'mimes:png,jpg,pdf,docx,doc']
+            ]);
+            $filePath = $this->uploadFile($request->file('document'));
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'student',
+                'approved_status' => 'pending',
+                'document' => $filePath
+            ]);
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect(route('student.dashboard', false));
+        } else {
+            return abort(404);
+        }
     }
 }

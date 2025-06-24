@@ -15,8 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('image')->default('/default-files/avatar.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('bio')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('website')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+            $table->string('headline')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('gender',['male','female'])->nullable();
+            $table->enum('logged_in_as',['teacher','student'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
