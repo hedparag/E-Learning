@@ -1,832 +1,409 @@
-$(function () {
+/*
+  Theme Name: Edubin - LMS Education HTML Template
+  Author: Humayun Ahmed
+  Author URL: https://themeforest.net/user/pixelcurve
+  Support: humayunahmed82@gmail.com
+  Description: Creative  HTML5 template.
+  Version: 1.0
+*/
 
+
+$(function() {
+    
     "use strict";
-
-
-    // Preloader js
-    $(window).on('load', function() {
-        // Hide preloader once the page is fully loaded
-        $('#preloader').fadeOut('slow', function() {
-            $('#main-content').fadeIn('slow');
+    
+    //===== Prealoder
+    
+    $(window).on('load', function(event) {
+        $('.preloader').delay(500).fadeOut(500);
+    });
+    
+    
+    //===== Search
+    
+    $('#search').on('click', function(){
+        $(".search-box").fadeIn(600);
+    });
+    $('.closebtn').on('click', function(){
+        $(".search-box").fadeOut(600);
+    });
+    
+    
+    //===== Sticky
+    
+    $(window).on('scroll', function(event) {    
+        var scroll = $(window).scrollTop();
+        if (scroll < 245) {
+            $(".navigation").removeClass("sticky");
+            $(".navigation-3 img").attr("src", "images/logo-2.png");
+        } else{
+            $(".navigation").addClass("sticky");
+            $(".navigation-3 img").attr("src", "images/logo.png");
+        }
+    });
+    
+    
+    //===== Mobile Menu
+    
+    $(".navbar-toggler").on('click', function() {
+        $(this).toggleClass("active");
+    });
+    
+    var subMenu = $('.sub-menu-bar .navbar-nav .sub-menu');
+    
+    if(subMenu.length) {
+        subMenu.parent('li').children('a').append(function () {
+            return '<button class="sub-nav-toggler"> <i class="fa fa-chevron-down"></i> </button>';
         });
-    });
-
-    // Fallback in case the load event doesn't trigger (after 10 seconds)
-    setTimeout(function() {
-        $('#preloader').fadeOut('slow', function() {
-            $('#main-content').fadeIn('slow');
+        
+        var subMenuToggler = $('.sub-menu-bar .navbar-nav .sub-nav-toggler');
+        
+        subMenuToggler.on('click', function() {
+            $(this).parent().parent().children('.sub-menu').slideToggle();
+            return false
         });
-    }, 3000); // 3 seconds timeout
-
-
-
-    // Menu fix js
-    if ($(window).scrollTop() > 1) {
-        if ($('.main_menu').offset() != undefined) {
-            $('.main_menu').addClass('menu_fix');
-        }
-    } else {
-        if ($('.main_menu').offset() != undefined) {
-            $('.main_menu').removeClass('menu_fix');
-        }
-    };
-
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 1) {
-            if ($('.main_menu').offset() != undefined) {
-                if (!$('.main_menu').hasClass("menu_fix")) {
-                    $('.main_menu').addClass("menu_fix");
-                }
-            }
-        }
-        else {
-            if ($('.main_menu').offset() != undefined) {
-                $('.main_menu').removeClass("menu_fix");
-            }
-        }
-    });
-
-
-    // Marquee animation
-    $('.marquee_animi').marquee({
-        speed: 50,
-        gap: 120,
-        delayBeforeStart: 0,
-        direction: 'left',
-        duplicated: true,
-        pauseOnHover: true
-    });
-
-
-    // Category Slider
-    $('.category_slider').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: true,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // Badge Tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-    // Category Slider
-    $('.instructor_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: true,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // Counter js
-    $('.counter').countUp();
-
-
-    // Testimonial Slider
-    $('.testimonial_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: false,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // Blog Slider
-    $('.blog_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: false,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // Vanobox js
-    $('.venobox').venobox();
-
-
-    // instructor 2 Slider
-    $('.instructor_2_slider').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: true,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // Testimonial 2 Slider
-    $('.testimonial_slider_2_large').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: false,
-        asNavFor: '.testimonial_slider_2_small'
-    });
-
-    $('.testimonial_slider_2_small').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        asNavFor: '.testimonial_slider_2_large',
-        dots: false,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 576,
-                settings: {
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // Select js
-    $('.select_js').niceSelect();
-
-
-    // Menu search
-    $(".menu_search_btn").on("click", function () {
-        $(".wsus__menu_3_search_area").addClass("show_search");
-    });
-    $(".close_search").on("click", function () {
-        $(".wsus__menu_3_search_area").removeClass("show_search");
-    });
-
-
-    //  related course Slider
-    $('.related_course_slider').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: true,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // team slider
-    $('.team_slider_large').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        arrows: false,
-        dots: false,
-        vertical: true,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    vertical: false,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    vertical: false,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    vertical: false,
-                }
-            }
-        ]
-    });
-
-    $('.team_slider_small').slick({
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        asNavFor: '.team_slider_large',
-        centerMode: true,
-        centerPadding: "0",
-        focusOnSelect: true,
-        vertical: true,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-up nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-down prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false
-                }
-            }
-        ]
-    });
-
-
-    // Testimonial 3 Slider
-    $('.testimonial_3_slider').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        dots: false,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1600,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 1400,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // Cursore pointer
-    init_pointer({});
-
-
-    // Top courses slider
-    $('.top_courses_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 4000,
-        dots: false,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // quality course slider
-    $('.quality_course_slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 20000,
-        arrows: false,
-        dots: true,
-    });
-
-    // quality course slider
-    $('.quality_course_card_slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: true,
-        dots: false,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    // arrows: false,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // instructor 4 Slider
-    $('.instructor_4_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        dots: true,
-        arrows: false,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    });
-
-
-    // testimonial 4 Slider
-    $('.testimonial_4_slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        dots: false,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // blog 4 Slider
-    $('.blog_4_slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        dots: false,
-        arrows: true,
-        nextArrow: '<i class="far fa-arrow-right nextArrow"></i>',
-        prevArrow: '<i class="far fa-arrow-left prevArrow"></i>',
-
-        responsive: [
-            {
-                breakpoint: 1800,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 1600,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 1400,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                }
-            }
-        ]
-    });
-
-
-    // sidebar category dropdown
-    $('.categoty_list li').on("click", function () {
-        var isActive = $(this).hasClass("active");
-        var submenu = $(this).find('.wsus__sidebar_sub_category');
-
-        // get the height of the child of submenu
-        var dynamicHeight = 0;
-        $(submenu).find('div').each(function () {
-            dynamicHeight += $(this).outerHeight(true);
+        
+    }
+    
+    
+    
+    //===== Slick Slider
+    
+        function mainSlider() {
+            
+        var BasicSlider = $('.slider-active');
+            
+        BasicSlider.on('init', function(e, slick) {
+            var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+            doAnimations($firstAnimatingElements);
+        });
+            
+        BasicSlider.on('beforeChange', function(e, slick, currentSlide, nextSlide) {
+            var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+            doAnimations($animatingElements);
+        });
+            
+        BasicSlider.slick({
+            autoplay: true,
+            autoplaySpeed: 10000,
+            pauseOnHover: false,
+            dots: false,
+            fade: true,
+			arrows: true,
+            prevArrow:'<span class="prev"><i class="fa fa-angle-left"></i></span>',
+            nextArrow: '<span class="next"><i class="fa fa-angle-right"></i></span>',
+            responsive: [
+                { breakpoint: 767, settings: { dots: false, arrows: false } }
+            ]
         });
 
-        $(".categoty_list li").removeClass("active");
-
-        // and remove the height of all the submenu
-        $(".categoty_list li .wsus__sidebar_sub_category").css("height", "0px");
-
-        // toggle the button
-        if ($(this).hasClass("active")) {
-            $(".categoty_list li").removeClass("active");
-            $(submenu).css("height", "0px");
-        }
-
-        if (!isActive) {
-            $(this).addClass("active");
-            $(submenu).css("height", dynamicHeight + "px");
-        }
-    });
-
-
-    // Range Slider
-    $('.basic').alRangeSlider();
-    const options = {
-        range: { min: 0, max: 1000, step: 1 },
-        initialSelectedValues: { from: 0, to: 1000 },
-        grid: { minTicksStep: 1, marksStep: 5 },
-        theme: "dark",
-    };
-
-    $('.range_slider').alRangeSlider(options);
-    const options2 = {
-        orientation: "vertical"
-    };
-
-
-    // Pregress Bar
-    $(document).ready(function () {
-        $('#bar1').barfiller({});
-        $('#bar2').barfiller({});
-        $('#bar3').barfiller({});
-        $('#bar4').barfiller({});
-        $('#bar5').barfiller({});
-    });
-
-
-    // Select Rating
-    $('#starRating').starRating({})
-
-
-    // Calendar Js
-    $(function () {
-        $('#calendar_js').calendar({
-            months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        });
-    });
-
-
-    // Product Details Slider
-    $('.product_slider_large').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: false,
-        asNavFor: '.product_slider_small',
-    });
-
-    $('.product_slider_small').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        asNavFor: '.product_slider_large',
-        dots: false,
-        arrows: false,
-        centerMode: true,
-        centerPadding: "0",
-        focusOnSelect: true,
-        vertical: true,
-
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 5,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 6,
-                }
-            }
-        ]
-    });
-
-
-    // Forum Topic Popup
-    $(".popup .delete_popup").on("click", function () {
-        $(".wsus__forum_single_topic_input .popup").addClass("hide_popup");
-    });
-
-
-    // Select2
-    $(document).ready(function () {
-        $('.select_2').select2();
-    });
-
-
-    // Sticky menu
-    const mobile_menu = document.querySelectorAll(".mobile_dropdown");
-    mobile_menu.forEach((dropdown) => {
-        const innerMenu = dropdown.querySelector(".inner_menu");
-        dropdown.addEventListener("click", () => {
-            if (innerMenu.style.maxHeight) {
-                innerMenu.style.maxHeight = null;
-                dropdown.classList.remove("active");
-            } else {
-                mobile_menu.forEach((item) => {
-                    const menu = item.querySelector(".inner_menu");
-                    if (menu !== innerMenu) {
-                        menu.style.maxHeight = null;
-                        item.classList.remove("active");
-                    }
+        function doAnimations(elements) {
+            var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            elements.each(function() {
+                var $this = $(this);
+                var $animationDelay = $this.data('delay');
+                var $animationType = 'animated ' + $this.data('animation');
+                $this.css({
+                    'animation-delay': $animationDelay,
+                    '-webkit-animation-delay': $animationDelay
                 });
-                innerMenu.style.maxHeight = innerMenu.scrollHeight + "px";
-                dropdown.classList.add("active");
-            }
-        });
+                $this.addClass($animationType).one(animationEndEvents, function() {
+                    $this.removeClass($animationType);
+                });
+            });
+        }
+    }
+    mainSlider();
+    
+    
+    //===== Slick Category Slied
+    
+    $('.category-slied').slick({
+        dots: false,
+        infinite: false,
+        speed: 800,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        prevArrow:'<span class="prev"><i class="fa fa-angle-left"></i></span>',
+        nextArrow: '<span class="next"><i class="fa fa-angle-right"></i></span>',
+        responsive: [
+        {
+          breakpoint: 922,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+    });
+    
+    
+    //===== Slick Course Slied
+    
+    $('.course-slied').slick({
+        dots: false,
+        infinite: true,
+        speed: 800,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: true,
+        prevArrow:'<span class="prev"><i class="fa fa-angle-left"></i></span>',
+        nextArrow: '<span class="next"><i class="fa fa-angle-right"></i></span>',
+        responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+          }
+        },
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+    });
+    
+    
+    //====== Magnific Popup
+    
+    $('.Video-popup').magnificPopup({
+        type: 'iframe'
+        // other options
+    });
+    
+    
+    //===== Slick testimonial Slied
+    
+    $('.testimonial-slied').slick({
+        dots: true,
+        infinite: true,
+        speed: 800,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: false,
+        responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+    });
+    
+    
+    //===== Slick testimonial Slied
+    
+    $('.patnar-slied').slick({
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 800,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+    });
+    
+    
+    //===== Back to top
+    
+    // Show or hide the sticky footer button
+    $(window).on('scroll', function(event) {
+        if($(this).scrollTop() > 600){
+            $('.back-to-top').fadeIn(200)
+        } else{
+            $('.back-to-top').fadeOut(200)
+        }
+    });
+    
+    
+    //Animate the scroll to yop
+    $('.back-to-top').on('click', function(event) {
+        event.preventDefault();
+        
+        $('html, body').animate({
+            scrollTop: 0,
+        }, 1500);
+    });
+    
+    
+    //===== Counter Up
+    
+    $('.counter').counterUp({
+        delay: 10,
+        time: 3000
+    });
+    
+    
+    //===== Slick testimonial Slied
+    
+    $('.student-slied').slick({
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 800,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+    });
+    
+    
+    
+    //===== Nice Select
+    
+    $('select').niceSelect();
+    
+    
+    
+    //===== Count Down
+    
+    $('[data-countdown]').each(function() {
+      var $this = $(this), finalDate = $(this).data('countdown');
+      $this.countdown(finalDate, function(event) {
+        $this.html(event.strftime('<div class="count-down-time"><div class="singel-count"><span class="number">%D :</span><span class="title">Days</span></div><div class="singel-count"><span class="number">%H :</span><span class="title">Hours</span></div><div class="singel-count"><span class="number">%M :</span><span class="title">Minuits</span></div><div class="singel-count"><span class="number">%S</span><span class="title">Seconds</span></div></div>'));
+      });
+    });
+    
+    
+    //=====  Rating selection
+    
+    $('.reviews-form').on('click', '.rate-wrapper .rate .rate-item', function() {
+        var self = $(this),
+            target = self.parent('.rate');
+        target.addClass('selected');
+        target.find('.rate-item').removeClass('active');
+        self.addClass('active');
+    });
+        
+    
+    
+    //===== Nice Number
+    
+    $('input[type="number"]').niceNumber({
+        // custom button text
+        buttonDecrement: "<i class='fa fa-sort-asc' ></i>",
+        buttonIncrement: "<i class='fa fa-sort-desc' ></i>",
+
     });
 
-
-    // WOW js
-    new WOW().init();
-
-
+    
+    
+    //===== Magnific Popup
+    
+    $('.shop-items').magnificPopup({
+      type: 'image',
+      gallery:{
+        enabled:true
+      }
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 });

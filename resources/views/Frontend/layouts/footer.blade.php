@@ -1,92 +1,96 @@
- <footer class="footer_3" style="background: url(images/footer_3_bg.jpg);">
-        <div class="footer_3_overlay pt_120 xs_pt_100">
-            <div class="wsus__footer_bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 wow fadeInUp">
-                            <div class="wsus__footer_3_logo_area">
-                                <a class="logo" href="index.html">
-                                    <img src="images/footer_logo.png" alt="EduCore" class="img-fluid">
-                                </a>
-                                <p>Nunc in sollicitudin diam, ut bibendum malesuada sodales porttitor.</p>
-                                <h2>Follow Us On</h2>
-                                <ul class="d-flex flex-wrap">
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                </ul>
+    <!--====== FOOTER PART START ======-->
+    
+    <footer id="footer-part">
+        <div class="footer-top pt-40 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-about mt-40">
+                            <div class="logo">
+                                <a href="#"><img src="{{ asset('frontend/assets/images/logo-2.png') }}" alt="Logo"></a>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 col-md-3 wow fadeInUp">
-                            <div class="wsus__footer_link">
-                                <h2>Courses</h2>
-                                <ul>
-                                    <li><a href="#">Life Coach</a></li>
-                                    <li><a href="#">Business Coach</a></li>
-                                    <li><a href="#">Health Coach</a></li>
-                                    <li><a href="#">Development</a></li>
-                                    <li><a href="#">SEO Optimize</a></li>
-                                </ul>
+                            <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
+                            <ul class="mt-20">
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div> <!-- footer about -->
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="footer-link support mt-40">
+                            <div class="footer-title pb-25">
+                                <h6>Support</h6>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 col-md-3 wow fadeInUp">
-                            <div class="wsus__footer_link">
-                                <h2>Programs</h2>
-                                <ul>
-                                    <li><a href="#">The Arts</a></li>
-                                    <li><a href="#">Human Sciences</a></li>
-                                    <li><a href="#">Economics</a></li>
-                                    <li><a href="#">Natural Sciences</a></li>
-                                    <li><a href="#">Business</a></li>
-                                </ul>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>FAQS</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Documentation</a></li>
+                            </ul>
+                        </div> <!-- support -->
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-address mt-40">
+                            <div class="footer-title pb-25">
+                                <h6>Contact Us</h6>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp">
-                            <div class="wsus__footer_3_subscribe">
-                                <h3>Subscribe Our Newsletter</h3>
-                                <form action="#">
-                                    <input type="text" placeholder="Enter Your Email">
-                                    <button type="submit" class="common_btn">Subscribe</button>
-                                </form>
-                                <ul>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="images/call_icon_white.png" alt="Call" class="img-fluid">
-                                        </div>
-                                        <div class="text">
-                                            <h4>Call us:</h4>
-                                            <a href="mailto:example@gmail.com">example@gmail.com</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="images/location_icon_white.png" alt="Call" class="img-fluid">
-                                        </div>
-                                        <div class="text">
-                                            <h4>Office:</h4>
-                                            <p>25-02 44th Queens, NY 3645, United States</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-home"></i>
+                                    </div>
+                                    <div class="cont">
+                                        <p>143 castle road 517 district, kiyev port south Canada</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div class="cont">
+                                        <p>+3 123 456 789</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    <div class="cont">
+                                        <p>info@yourmail.com</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> <!-- footer address -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer top -->
+        
+        <div class="footer-copyright pt-10 pb-25">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="copyright text-md-left text-center pt-15">
+                            <p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a> </p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="wsus__footer_copyright_area mt_140 xs_mt_100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="wsus__footer_copyright_text">
-                                <p>Copyright © 2024 All Rights Reserved by EduCore Education</p>
-                                <ul>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Term of Service</a></li>
-                                </ul>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="copyright text-md-right text-center pt-15">
+                           
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
     </footer>
+    
+    <!--====== FOOTER PART ENDS ======-->
+   
+    <!--====== BACK TO TP PART START ======-->
+    
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    
+    <!--====== BACK TO TP PART ENDS ======-->
