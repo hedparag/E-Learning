@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.css" rel="stylesheet">
-    @vite(['resources/js/frontend.js'])
+@vite(['resources/js/frontend.js'])
 </head>
 
 <body class="home_3">

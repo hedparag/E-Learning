@@ -49,6 +49,6 @@ class InstructorRequestController extends Controller
         } else {
             return abort(404);
         }
-        return redirect()->route('student.dashboard');
+        return redirect()->back();
     }
 }

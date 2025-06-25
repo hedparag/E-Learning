@@ -29,7 +29,8 @@ class User extends Authenticatable
         'approved_status',
         'document',
         'bio',
-        'gender'
+        'gender',
+        'student_classes_id'
     ];
 
     /**

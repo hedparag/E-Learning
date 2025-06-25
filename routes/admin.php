@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\addClassController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
@@ -59,6 +60,8 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','as'=>'admin.'],funct
     Route::get('instructorRequest',[InstructorRequestController::class,'index'])->name('instructor-request');
 Route::get('download/{user}',[InstructorRequestController::class,'download'])->name('document-download');
 Route::post('requestUpdate/{user}',[InstructorRequestController::class,'update'])->name('request-update');
+//Route::post('addClass',[addClassController::class,'store'])
+Route::resource('class',addClassController::class);
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });

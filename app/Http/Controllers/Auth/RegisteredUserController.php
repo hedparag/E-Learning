@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        // dd($request->all());
+        //dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
@@ -42,11 +42,15 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($request->type == 'student') {
+             $request->validate([
+                'class' => ['required', 'exists:student_classes,id']
+            ]);
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'student',
+                'student_classes_id'=>$request->class,
                 'approved_status' => 'approved'
             ]);
             event(new Registered($user));

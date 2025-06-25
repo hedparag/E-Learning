@@ -1,240 +1,125 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-    <title>EduCore - Online Courses & Education HTML Template</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/animated_barfiller.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/venobox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/scroll_button.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/pointer.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/jquery.calendar.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/range_slider.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/startRating.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/video_player.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/jquery.simple-bar-graph.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/sticky_menu.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
 
-    <link rel=" stylesheet" href="{{ asset('frontend/assets/css/spacing.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+<head>
+    <title>Mentor - Bootstrap 4 Admin Dashboard Template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+    <meta name="author" content="Potenza Global Solutions" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="{{ asset('admin_template/assets/img/favicon.ico') }}">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/vendors.css') }}" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/style.css') }}" />
+     <link href="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.css" rel="stylesheet">
 </head>
 
-<body class="home_3">
-
-
-    <!--============ PRELOADER START ===========-->
-    <div id="preloader">
-        <div class="preloader_icon">
-            <img src="{{ asset('frontend/assets/images/preloader.png') }}" alt="Preloader" class="img-fluid">
-        </div>
-    </div>
-    <!--============ PRELOADER START ===========-->
-
-
-    <!--===========================
-        HEADER START
-    ============================-->
-  {{--   @include('Frontend.layouts.header') --}}
-    <!--===========================
-        HEADER END
-    ============================-->
-
-
-    <!--===========================
-        MAIN MENU 3 START
-    ============================-->
-   {{--  @include('Frontend.layouts.navbar') --}}
-    <div class="wsus__menu_3_search_area">
-        <form action="#">
-            <input type="text" placeholder="Search School, Online.....">
-            <button class="common_btn" type="submit">Search</button>
-            <span class="close_search"><i class="far fa-times"></i></span>
-        </form>
-    </div>
-    <!--===========================
-        MAIN MENU 3 END
-    ============================-->
-
-
-    <!--============================
-        STICKY MENU START
-    ==============================-->
-    <section class="wsus__sign_in" style="margin-top:40px;">
-        <div class="row align-items-center">
-            <div class="col-xxl-5 col-xl-6 col-lg-6 wow fadeInLeft">
-                <div class="wsus__sign_img">
-                    <img src="{{ asset('frontend/assets/images/login_img_1.jpg') }}" alt="login" class="img-fluid">
-                    <a href="index.html">
-                        <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="EduCore" class="img-fluid">
-                    </a>
+<body class="bg-white">
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <div class="loader">
+                <div class="h-100 d-flex justify-content-center">
+                    <div class="align-self-center">
+                        <img src="{{ asset('admin_template/assets/img/loader/loader.svg') }}" alt="loader">
+                    </div>
                 </div>
             </div>
-            <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9 m-auto wow fadeInRight">
-                <div class="wsus__sign_form_area">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                aria-selected="true">Login Form</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab" tabindex="0">
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <h2>Log in<span>!</span></h2>
-                                <p class="new_user">New User ? <a href="{{ route('register') }}">Create an Account</a></p>
-                                <div class="row">
+            <!-- end pre-loader -->
 
-
-                                    <div class="col-xl-12">
-                                        <div class="wsus__login_form_input">
-                                            <label>Email or Username*</label>
-                                            <input type="email" name="email" placeholder="Email or Username" value={{ old('email') }}>
-                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-xl-12">
-                                        <div class="wsus__login_form_input">
-                                            <label>Password* <a href="{{ route('password.request') }}">Forgot Password?</a></label>
-                                            <input type="password"
-                                            name="password"
-                                           placeholder="Password">
-                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12">
-                                        <div class="wsus__login_form_input">
-
-
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" name="remember">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    Remember Me
-                                                </label>
+            <!--start login contant-->
+            <div class="app-contant">
+                <div class="bg-white">
+                    <div class="container-fluid p-0">
+                        <div class="row no-gutters">
+                            <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
+                                <div class="d-flex align-items-center h-100-vh">
+                                    <div class="login p-50">
+                                        <h1 class="mb-2">We Are Mentor</h1>
+                                        <p>Welcome back, please login to your account.</p>
+                                        <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Email*</label>
+                                                        <input type="text" class="form-control" name="email" placeholder="Email." />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Password*</label>
+                                                        <input type="password" class="form-control" name="password" placeholder="Password" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="d-block d-sm-flex  align-items-center">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="gridCheck" name="remember">
+                                                            <label class="form-check-label" for="gridCheck">
+                                                                Remember Me
+                                                            </label>
+                                                        </div>
+                                                        <a href="{{ route('password.request') }}" class="ml-auto">Forgot Password ?</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-3">
+                                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                                </div>
+                                                <div class="col-12  mt-3">
+                                                    <p>Don't have an account ?<a href="{{ route('register') }}"> Sign Up</a></p>
+                                                </div>
                                             </div>
-                                            <button type="submit" class="common_btn">Sign In</button>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
-
-                            <p class="create_account">Don't have an account? <a href="{{ route('register') }}">Create free
-                                    account</a></p>
+                            </div>
+                            <div class="col-sm-6 col-xxl-9 col-lg-7 bg-gradient o-hidden order-1 order-sm-2">
+                                <div class="row align-items-center h-100">
+                                    <div class="col-7 mx-auto ">
+                                        <img class="img-fluid" src="{{ asset('admin_template/assets/img/bg/lgbg.png') }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--end login contant-->
         </div>
-        <a class="back_btn" href="{{ url('/') }}">Back to Home</a>
-    </section>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
 
 
-    <!--jquery library js-->
-    <script src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js') }}"></script>
-    <!--bootstrap js-->
-    <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <!--font-awesome js-->
-    <script src="{{ asset('frontend/assets/js/Font-Awesome.js') }}"></script>
-    <!--marquee js-->
-    <script src="{{ asset('frontend/assets/js/jquery.marquee.min.js') }}"></script>
-    <!--slick js-->
-    <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
-    <!--countup js-->
-    <script src="{{ asset('frontend/assets/js/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/jquery.countup.min.js') }}"></script>
-    <!--venobox js-->
-    <script src="{{ asset('frontend/assets/js/venobox.min.js') }}"></script>
-    <!--nice-select js-->
-    <script src="{{ asset('frontend/assets/js/jquery.nice-select.min.js') }}"></script>
-    <!--Scroll Button js-->
-    <script src="{{ asset('frontend/assets/js/scroll_button.js') }}"></script>
-    <!--pointer js-->
-   {{--  <script src="{{ Asset('frontend/assets/js/pointer.js') }}"></script> --}}
-    <!--range slider js-->
-    <script src="{{ asset('frontend/assets/js/range_slider.js') }}"></script>
-    <!--barfiller js-->
-    <script src="{{ asset('frontend/assets/js/animated_barfiller.js') }}"></script>
-    <!--calendar js-->
-    <script src="{{ asset('frontend/assets/js/jquery.calendar.js') }}"></script>
-    <!--starRating js-->
-    <script src="{{ asset('frontend/assets/js/starRating.js') }}"></script>
-    <!--Bar Graph js-->
-    <script src="{{ asset('frontend/assets/js/jquery.simple-bar-graph.min.js') }}"></script>
-    <!--select2 js-->
-    <script src="{{ asset('frontend/assets/js/select2.min.js') }}"></script>
-    <!--Video player js-->
-    <script src="{{ asset('frontend/assets/js/video_player.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/video_player_youtube.js') }}"></script>
-    <!--wow js-->
-    <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
 
-    <!--main/custom js-->
-    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <!-- plugins -->
+    <script src="{{ asset('admin_template/assets/js/vendors.js') }}"></script>
 
+    <!-- custom app -->
+    <script src="{{ asset('admin_template/assets/js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.js"></script>
+<script>
+        var notyf = new Notyf({
+            duration: 6000,
+            dismissible: true
+        });
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                notyf.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
 </body>
 
-</html>
 
+</html>
