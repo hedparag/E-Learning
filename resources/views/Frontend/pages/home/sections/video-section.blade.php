@@ -37,7 +37,7 @@
                             <li>
                                 <div class="singel-feature">
                                     <div class="icon">
-                                        <img src="{{ asset('frontend/asset/images/all-icon/f-3.png') }}" alt="icon">
+                                        <img src="{{ asset('frontend/assets/images/all-icon/f-3.png') }}" alt="icon">
                                     </div>
                                     <div class="cont">
                                         <h4>Books & Library</h4>

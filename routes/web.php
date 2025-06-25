@@ -11,6 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 /**
  * -----------FRONTEND ROUTES-------------------- 
  **/
@@ -25,17 +26,26 @@ Route::get('teachers', [FrontendController::class, 'teachers'])->name('teachers'
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 
 
+
+/**
+ * -----------STUDENT ROUTES-------------------- 
+ **/
 Route::group(['middleware'=>['auth:web','verified','checkRole:student'],'prefix'=>'student','as'=>'student.'],function(){
 Route::get('/dashboard', [studentDashboardController::class,'index'])->name('dashboard');
 Route::get('becomeInstructor/{id}',[studentDashboardController::class,'becomeInstructor'])->name('become-instructor');
 Route::post('becomeInstructorStore/{id}',[studentDashboardController::class,'store'])->name('become-instructor-store');
-
 });
 
+
+
+/**
+ * -----------TEACHERS ROUTES-------------------- 
+ **/
 Route::group(['middleware'=>['auth:web','verified','checkRole:teacher'],'prefix'=>'teacher','as'=>'teacher.'],function(){
 Route::get('/dashboard', [teacherDashboardController::class,'index'])->name('dashboard');
 
 });
+
 
 
 /*Route::get('/dashboard', function () {
