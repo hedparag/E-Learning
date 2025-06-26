@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\InstructorDashboardController;
 use App\Http\Controllers\Frontend\studentDashboardController;
 use App\Http\Controllers\Frontend\teacherDashboardController;
@@ -9,17 +10,42 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/**
+ * -----------FRONTEND ROUTES-------------------- 
+ **/
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+Route::get('about', [FrontendController::class, 'about'])->name('about');
+
+Route::get('announcements', [FrontendController::class, 'announcements'])->name('announcements');
+
+Route::get('teachers', [FrontendController::class, 'teachers'])->name('teachers');
+
+Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
+
+
+
+/**
+ * -----------STUDENT ROUTES-------------------- 
+ **/
 Route::group(['middleware'=>['auth:web','verified','checkRole:student'],'prefix'=>'student','as'=>'student.'],function(){
 Route::get('/dashboard', [studentDashboardController::class,'index'])->name('dashboard');
 Route::get('becomeInstructor/{id}',[studentDashboardController::class,'becomeInstructor'])->name('become-instructor');
 Route::post('becomeInstructorStore/{id}',[studentDashboardController::class,'store'])->name('become-instructor-store');
-
 });
 
+
+
+/**
+ * -----------TEACHERS ROUTES-------------------- 
+ **/
 Route::group(['middleware'=>['auth:web','verified','checkRole:teacher'],'prefix'=>'teacher','as'=>'teacher.'],function(){
 Route::get('/dashboard', [teacherDashboardController::class,'index'])->name('dashboard');
 
 });
+
 
 
 /*Route::get('/dashboard', function () {
