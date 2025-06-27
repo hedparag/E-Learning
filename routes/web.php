@@ -30,20 +30,26 @@ Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 /**
  * -----------STUDENT ROUTES-------------------- 
  **/
-Route::group(['middleware'=>['auth:web','verified','checkRole:student'],'prefix'=>'student','as'=>'student.'],function(){
-Route::get('/dashboard', [studentDashboardController::class,'index'])->name('dashboard');
-Route::get('becomeInstructor/{id}',[studentDashboardController::class,'becomeInstructor'])->name('become-instructor');
-Route::post('becomeInstructorStore/{id}',[studentDashboardController::class,'store'])->name('become-instructor-store');
+Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
+
+    Route::get('/dashboard', [studentDashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('becomeInstructor/{id}', [studentDashboardController::class, 'becomeInstructor'])->name('become-instructor');
+    Route::post('becomeInstructorStore/{id}', [studentDashboardController::class, 'store'])->name('become-instructor-store');
+
+    Route::get('/student/profile', [StudentDashboardController::class, 'profile'])->name('student.profile.index');
+    Route::get('/student/enrolled-courses', [StudentDashboardController::class, 'courses'])->name('student.enrolled-courses.index');
+    Route::get('/student/announcements', [StudentDashboardController::class, 'announcements'])->name('student.announcements.index');
 });
+
 
 
 
 /**
  * -----------TEACHERS ROUTES-------------------- 
  **/
-Route::group(['middleware'=>['auth:web','verified','checkRole:teacher'],'prefix'=>'teacher','as'=>'teacher.'],function(){
-Route::get('/dashboard', [teacherDashboardController::class,'index'])->name('dashboard');
-
+Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
+    Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
 });
 
 
@@ -58,5 +64,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
