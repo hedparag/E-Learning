@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\addClassController;
 use App\Http\Controllers\Admin\AddSubjectController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\SubjectAssignController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +70,8 @@ Route::resource('subject',AddSubjectController::class);
 Route::get('subCategory/{id}',[AddSubjectController::class,'categoryView'])->name('category');
 Route::post('subCategory/{id}',[AddSubjectController::class,'category'])->name('category-store');
 Route::resource('subjectAssign',SubjectAssignController::class);
+Route::resource('announcement',AnnouncementController::class);
+Route::get('data',[DataController::class,'index']);
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });

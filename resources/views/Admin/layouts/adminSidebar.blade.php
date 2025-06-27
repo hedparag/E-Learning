@@ -24,6 +24,9 @@
                             <li><a href="{{ route('admin.subjectAssign.index') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Subject Assignment</span></a>
                             </li>
+                            <li><a href="{{ route('admin.announcement.index') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Announcements</span></a>
+                            </li>
 
 
 

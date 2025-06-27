@@ -59,8 +59,8 @@
                                     Students
                                 </a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);" class="logout">
+                            <li class="logout">
+                                <a href="javascript:;">
                                     <div class="img">
                                         <img src="{{ asset('frontend/assets/images/dash_icon_16.png') }}" alt="icon" class="img-fluid w-100">
                                     </div>
