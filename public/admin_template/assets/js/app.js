@@ -48,7 +48,7 @@
                         },
                     },
                     markers: {
-                        
+
                         size: 6
                     },
                     xaxis: {
@@ -72,12 +72,12 @@
                         offsetX: -5
                     }
                 }
-        
+
                 var chart = new ApexCharts(
                     document.querySelector("#apexdemo1"),
                     options
                 );
-        
+
                 chart.render();
                 }
 
@@ -97,7 +97,7 @@
                         },
                     },
                     stroke: {
-                        width: 7,   
+                        width: 7,
                         curve: 'smooth'
                     },
                     series: [{
@@ -134,7 +134,7 @@
                         colors: ["#2bcbba"],
                         strokeColor: "#fff",
                         strokeWidth: 2,
-                         
+
                         hover: {
                             size: 7,
                         }
@@ -144,15 +144,15 @@
                         max: 40,
                         title: {
                             text: 'Engagement',
-                        },                
+                        },
                     }
                 }
-        
+
                var chart = new ApexCharts(
                     document.querySelector("#apexdemo2"),
                     options
                 );
-                
+
                 chart.render();
                 }
 
@@ -179,7 +179,7 @@
                     colors: ['#8E54E9', '#2bcbba'],
                     xaxis: {
                         type: 'datetime',
-                        categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],                
+                        categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],
                     },
                     tooltip: {
                         x: {
@@ -187,12 +187,12 @@
                         },
                     }
                 }
-        
+
                 var chart = new ApexCharts(
                     document.querySelector("#apexdemo3"),
                     options
                 );
-        
+
                 chart.render();
                 }
 
@@ -208,7 +208,7 @@
                           console.log(new Date(e.xaxis.min) )
                         }
                       },
-              
+
                     },
                     colors: ['#8E54E9', '#2bcbba', '#eceef3'],
                     dataLabels: {
@@ -217,7 +217,7 @@
                     stroke: {
                       curve: 'smooth'
                     },
-              
+
                     series: [{
                         name: 'South',
                         data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
@@ -232,7 +232,7 @@
                           max: 20
                         })
                       },
-                      
+
                       {
                         name: 'Central',
                         data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
@@ -256,28 +256,28 @@
                       type: 'datetime'
                     },
                   }
-              
+
                   var chart = new ApexCharts(
                     document.querySelector("#apexdemo4"),
                     options
                   );
-              
+
                   chart.render();
-              
+
                   function generateDayWiseTimeSeries(baseval, count, yrange) {
                     var i = 0;
                     var series = [];
                     while (i < count) {
                       var x = baseval;
                       var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-              
+
                       series.push([x, y]);
                       baseval += 86400000;
                       i++;
                     }
                     return series;
                   }
-                          
+
                 }
 
                 var apexdemo5 = jQuery('#apexdemo5')
@@ -303,12 +303,12 @@
                         categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany'],
                     }
                 }
-        
+
                var chart = new ApexCharts(
                     document.querySelector("#apexdemo5"),
                     options
                 );
-                
+
                 chart.render();
 
                 }
@@ -326,7 +326,7 @@
                         bar: {
                             horizontal: true,
                             barHeight: '80%',
-                            
+
                         },
                     },
                     dataLabels: {
@@ -382,14 +382,14 @@
                       }
                     },
                 }
-        
+
                var chart = new ApexCharts(
                     document.querySelector("#apexdemo6"),
                     options
                 );
-                
+
                 chart.render();
-            
+
                 }
 
                 var apexdemo7 = jQuery('#apexdemo7')
@@ -419,7 +419,7 @@
                     series: [21, 23, 19, 14, 6],
                     labels: ['Clothing', 'Food Products', 'Electronics', 'Kitchen Utility', 'Gardening'],
                   }
-                  
+
                   var donut = new ApexCharts(
                     document.querySelector("#apexdemo7"),
                     optionDonut
@@ -455,7 +455,7 @@
                     series: [21, 23, 19, 14, 6],
                     labels: ['Clothing', 'Food Products', 'Electronics', 'Kitchen Utility', 'Gardening'],
                   }
-                  
+
                   var donut = new ApexCharts(
                     document.querySelector("#apexdemo8"),
                     optionDonut
@@ -463,7 +463,7 @@
                   donut.render();
 
                 }
-                
+
             // analytics1
             var analytics1 = jQuery('#analytics1')
                 if (analytics1.length > 0) {
@@ -1982,7 +1982,7 @@
                             },
                             offsetX: -25
                         },
-                        
+
                         axisBorder: {
                             show: false
                         },
@@ -2003,7 +2003,7 @@
                     );
 
                     chart.render();
-    
+
             }
             // anaylytics 2
             var analytics2 = jQuery('#analytics2')
@@ -2150,7 +2150,7 @@
                                   offsetX: 10,
                               },
                             categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan'],
-                   
+
                           },
                           tooltip: {
                             y: [{
@@ -3758,7 +3758,7 @@
               }
                 var stockmarket7 = jQuery('#stockmarket7')
                       if (stockmarket7.length > 0) {
-                      
+
                     var options = {
                         chart: {
                             height: 390,
@@ -4798,7 +4798,7 @@
                           ...
                       ]
                       */
-                    
+
                    var chart = new ApexCharts(
                             document.querySelector("#datingdemo3"),
                             options
@@ -5518,7 +5518,7 @@
                               ...
                           ]
                           */
-                       
+
 
                        var chart = new ApexCharts(
                                 document.querySelector("#jobportaldemo4"),
@@ -5781,7 +5781,7 @@
                                  show: false,
                              },
                         },
-                        
+
                         responsive: [{
                           breakpoint: 400,
                           options: {
@@ -5797,7 +5797,7 @@
                                   horizontal: true,
                               }
                           },
-                          
+
                           },
                       }]
                     }
@@ -7154,14 +7154,14 @@
                             type: 'datetime'
                         }
                     }
-            
+
                     var chartCandlestick = new ApexCharts(
                         document.querySelector("#crypto-demo1-candlestick"),
                         optionsCandlestick
                     );
-            
+
                     chartCandlestick.render();
-            
+
                     var options = {
                         chart: {
                             height: 160,
@@ -7203,9 +7203,9 @@
                                             color: '#FEB019'
                                         }
                                     ],
-                                   
+
                                 },
-                            }        
+                            }
                         },
                         stroke: {
                             width: 0
@@ -7226,12 +7226,12 @@
                             }
                         }
                     }
-            
+
                     var chart = new ApexCharts(
                         document.querySelector("#crypto-demo1-bar"),
                         options
                     );
-            
+
                     chart.render();
                 }
             // cryptodemo2
@@ -7677,7 +7677,7 @@
                               enabled: true,
                             },
                           },
-                        
+
                         },
                     }]
                 }
@@ -7692,7 +7692,7 @@
 
                 var cryptodemo7 = jQuery('#cryptodemo7');
                     if (cryptodemo7.length > 0) {
-        
+
                        var optionsDonutTop = {
                               chart: {
                                 height: 140,
@@ -7729,14 +7729,14 @@
                                     offsetX: -35,
                                   }
                                 },
-                                
+
                                 },
                             }]
                             }
                             var cryptodemo7 = new ApexCharts(document.querySelector('#cryptodemo7'), optionsDonutTop);
                             cryptodemo7.render();
                             }
-               
+
              // irregular
              var irregular = jQuery('#irregular')
                 if (irregular.length > 0) {
@@ -9302,9 +9302,9 @@
                     chart.render();
 
                             }
-                  
-                    
-        
+
+
+
     }
     });
 
@@ -10691,7 +10691,7 @@
                             options: {
                                 maintainAspectRatio: false,
                                 responsive: true,
-                      
+
                                 hover: {
                                     mode: 'index'
                                 },
@@ -10802,7 +10802,7 @@
                                     mode: 'index',
                                     intersect: false
                                 },
-                                
+
                                 legend: {
                                     labels: {
                                         fontColor: color(window.chartColors.grey).alpha(0.8).rgbString(),
@@ -10831,7 +10831,7 @@
                             }
                         });
                     }
-                    
+
         }
     });
 
@@ -10907,7 +10907,7 @@ $('.date-picker-default').datepicker({
             rightArrow: '<i class="fa fa-angle-right"></i>'
         }
     });
-    
+
 
     $('#datepicker-inline').datepicker({
         todayHighlight: true,
@@ -11192,7 +11192,7 @@ var checkin = $('.range-from').datepicker({
                 formats: ["xlsx", "csv", "txt"],
                 bootstrap: true,
                 exportButtons: true,
-                position: "top"                
+                position: "top"
             });
         }
     });
@@ -12589,7 +12589,7 @@ var checkin = $('.range-from').datepicker({
                     zoom: 16,
                     lat: -12.043333,
                     lng: -77.028333
-                  
+
                   });
 
                   markerevents.addMarker({
@@ -12998,7 +12998,7 @@ var checkin = $('.range-from').datepicker({
                             colors: ['#45aaf2', '#8E54E9', '#eceef3']
                         });
                     }
-                    
+
                     // morris cardealer1
                     var cardealer1 = jQuery("#cardealer1");
                     if (cardealer1.length > 0) {
@@ -13011,7 +13011,7 @@ var checkin = $('.range-from').datepicker({
                             colors: ['#f7b731', '#2bcbba']
                         });
                     }
-                    
+
         }
     });
 
@@ -13078,7 +13078,7 @@ var checkin = $('.range-from').datepicker({
                         $smartspeed = ($this.attr('data-smartspeed')) ? $this.data('smartspeed') : 1000,
                         $autohgt = ($this.data('autoheight')) ? $this.data('autoheight') : false,
                         $space = ($this.attr('data-space')) ? $this.data('space') : 30;
-        
+
                         $(this).owlCarousel({
                             loop: $loop,
                             items: $items,
@@ -13471,7 +13471,7 @@ var checkin = $('.range-from').datepicker({
                             barColor: '#4776E6'
                         });
                     }
-                    
+
                     //chart widget end
 
                     var sparklinedemo4 = jQuery("#sparklinedemo4");
@@ -14128,7 +14128,7 @@ $(document).ready(function() {
                 $("<span class='fa fa-times form-control-feedback pr-2'></span>").insertAfter(element);
             }
         },
-       
+
         highlight: function(element, errorClass, validClass) {
             $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
             $(element).next("span").addClass("fa fa-times").removeClass("fa fa-check");
@@ -14218,11 +14218,11 @@ $(document).ready(function() {
 
           getSelectorFromElement: function getSelectorFromElement(element) {
             var selector = element.getAttribute('data-target');
-        
+
             if (!selector || selector === '#') {
               selector = element.getAttribute('href') || '';
             }
-        
+
             try {
               return document.querySelector(selector) ? selector : null;
             } catch (err) {
@@ -14255,7 +14255,7 @@ $(document).ready(function() {
         $('.search-wrapper').fadeIn(200);
       });
 
-       //Search Box Close 
+       //Search Box Close
        $('.close-btn').on('click', function() {
         $('.search-wrapper').fadeOut(200);
       });

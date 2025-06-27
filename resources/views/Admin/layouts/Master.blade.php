@@ -5,6 +5,8 @@
 <head>
     <title>Mentor - Bootstrap 4 Admin Dashboard Template</title>
     <meta charset="utf-8" />
+    <meta name="base_url" content="{{ url('/') }}">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
     <meta name="author" content="Potenza Global Solutions" />

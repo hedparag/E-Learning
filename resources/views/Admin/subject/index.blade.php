@@ -9,10 +9,10 @@
                     <!-- begin page title -->
                     <div class="d-block d-sm-flex flex-nowrap align-items-center">
                         <div class="page-title mb-2 mb-sm-0">
-                            <h1>All classes</h1>
+                            <h1>All Subjects</h1>
                         </div>
                         <div class="ml-auto d-flex align-items-center">
-                           <a href="{{ route('admin.class.create') }}" class="btn btn-primary">Add Class</a>
+                           <a href="{{ route('admin.subject.create') }}" class="btn btn-primary">Add Subject</a>
                         </div>
                     </div>
                     <!-- end page title -->
@@ -28,7 +28,9 @@
                                 <table id="datatable" class="display compact table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Class Name</th>
+                                            <th>Subject Name</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                             <th class="w-1"></th>
                                         </tr>
@@ -37,9 +39,25 @@
                                         @forelse ($data ?? [] as $d)
                                             <tr>
                                                 <td>{{ $d?->name }}</td>
+                                                <td>{!! $d?->description !!}</td>
+                                                 <td>
+                                                    @if ($d?->is_active =='true')
+
+                                                    <span class="mr-2 mb-2 mr-sm-0 mb-sm-0 badge badge-success">Active</span>
+
+                                                    @else
+                                                       <span class="mr-2 mb-2 mr-sm-0 mb-sm-0 badge badge-danger">Inactive</span>
+
+                                                    @endif
+                                                </td>
+
                                                 <td>
-                                                   <a id="delete-item"  data-id="{{ $d?->id }}" href="{{ route('admin.class.destroy',$d?->id) }}"> <div class="icon-wrap col-sm-6 col-md-4 col-xl-2"><i
-                                                            class="fa fa-remove"></i></div></a>
+                                                    <div class="row">
+                                                       <div class="col"> <a href="{{ route('admin.subject.edit',$d?->id) }}"><i class="fa fa-edit"></i></a></div>
+                                                   <div class="col"><a id="delete-item"  data-id="{{ $d?->id }}" href="{{ route('admin.subject.destroy',$d?->id) }}"> <div class="icon-wrap col-sm-6 col-md-4 col-xl-2"><i
+                                                            class="fa fa-remove"></i></div></a></div>
+                                                  <div class="col"> <a href="{{ route('admin.category',$d->id) }}"><i class="fa fa-bars"></i></a></div>
+                                                    </div>
                                                 </td>
 
 
@@ -56,7 +74,7 @@
                                     </tbody>
 
                                 </table>
-                                {{ $data->links() }}
+
                             </div>
                         </div>
                     </div>

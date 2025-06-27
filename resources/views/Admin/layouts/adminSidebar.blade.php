@@ -18,6 +18,12 @@
                              <li><a href="{{ route('admin.class.index') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Add Class</span></a>
                             </li>
+                            <li><a href="{{ route('admin.subject.index') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Add Subjects</span></a>
+                            </li>
+                            <li><a href="{{ route('admin.subjectAssign.index') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Subject Assignment</span></a>
+                            </li>
 
 
 
