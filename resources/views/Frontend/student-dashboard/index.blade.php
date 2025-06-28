@@ -35,13 +35,13 @@
                 <div class="teachers-right mt-50">
                     <ul class="nav nav-justified" id="dashboard-tabs">
                         <li class="nav-item">
-                            <a href="{{ route('student.profile.index') }}" class="nav-link active" data-tab="profile">Profile</a>
+                            {{-- <a href="{{ route('student.profile.index') }}" class="nav-link active" data-tab="profile">Profile</a> --}}
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('student.enrolled-courses.index') }}" class="nav-link" data-tab="courses">Courses</a>
+{{--                             <a href="{{ route('student.enrolled-courses.index') }}" class="nav-link" data-tab="courses">Courses</a> --}}
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('student.announcements.index') }}" class="nav-link" data-tab="announcements">Announcements</a>
+                            {{-- <a href="{{ route('student.announcements.index') }}" class="nav-link" data-tab="announcements">Announcements</a> --}}
                         </li>
                     </ul>
 

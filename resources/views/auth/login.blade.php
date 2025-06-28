@@ -43,9 +43,9 @@
                             <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
                                 <div class="d-flex align-items-center h-100-vh">
                                     <div class="login p-50">
-                                        <h1 class="mb-2">We Are Mentor</h1>
+                                        <h1 class="mb-2">We Are Mentors</h1>
                                         <p>Welcome back, please login to your account.</p>
-                                        <form method="POST" action="{{ route('login') }}">
+                                        <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                             <div class="row">
                                                 <div class="col-12">

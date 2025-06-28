@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 
 /**
- * -----------FRONTEND ROUTES-------------------- 
+ * -----------FRONTEND ROUTES--------------------
  **/
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 
 
 /**
- * -----------STUDENT ROUTES-------------------- 
+ * -----------STUDENT ROUTES--------------------
  **/
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
 
@@ -41,16 +41,16 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
     Route::get('becomeInstructor/{id}', [studentDashboardController::class, 'becomeInstructor'])->name('become-instructor');
     Route::post('becomeInstructorStore/{id}', [studentDashboardController::class, 'store'])->name('become-instructor-store');
 
-    Route::get('/student/profile', [StudentDashboardController::class, 'profile'])->name('student.profile.index');
-    Route::get('/student/enrolled-courses', [StudentDashboardController::class, 'courses'])->name('student.enrolled-courses.index');
-    Route::get('/student/announcements', [StudentDashboardController::class, 'announcements'])->name('student.announcements.index');
+    Route::get('/student/profile', [StudentDashboardController::class, 'profile'])->name('profile.index');
+    Route::get('/student/enrolled-courses', [StudentDashboardController::class, 'courses'])->name('enrolled-courses.index');
+    Route::get('/student/announcements', [StudentDashboardController::class, 'announcements'])->name('announcements.index');
 });
 
 
 
 
 /**
- * -----------TEACHERS ROUTES-------------------- 
+ * -----------TEACHERS ROUTES--------------------
  **/
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
     Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
