@@ -16,7 +16,7 @@ class studentDashboardController extends Controller
     use FileUpload;
     function index(): View
     {
-        return view('dashboard');
+        return view('frontend.student-dashboard.index');
     }
     function becomeInstructor(string $id): View
     {
@@ -48,5 +48,20 @@ class studentDashboardController extends Controller
 
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+
+    public function profile()
+    {
+        return view('frontend.student-dashboard.profile.index');
+    }
+
+    public function courses()
+    {
+        return view('frontend.student-dashboard.enrolled-courses.index');
+    }
+
+    public function announcements()
+    {
+        return view('frontend.student-dashboard.announcements.index');
     }
 }
