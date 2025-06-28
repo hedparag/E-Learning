@@ -41,9 +41,15 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
     Route::get('becomeInstructor/{id}', [studentDashboardController::class, 'becomeInstructor'])->name('become-instructor');
     Route::post('becomeInstructorStore/{id}', [studentDashboardController::class, 'store'])->name('become-instructor-store');
 
-    Route::get('/student/profile', [StudentDashboardController::class, 'profile'])->name('profile.index');
-    Route::get('/student/enrolled-courses', [StudentDashboardController::class, 'courses'])->name('enrolled-courses.index');
-    Route::get('/student/announcements', [StudentDashboardController::class, 'announcements'])->name('announcements.index');
+    Route::get('profile', [studentDashboardController::class, 'profile'])->name('profile.index');
+    Route::get('profile/edit', [studentDashboardController::class, 'editProfile'])->name('profile.edit');
+    Route::post('profile/update', [studentDashboardController::class, 'updateProfile'])->name('profile.update');
+    // Route::post('profile/update-password', [studentDashboardController::class, 'updatePassword'])->name('profile.update-password');
+    // Route::post('profile/update-social', [studentDashboardController::class, 'updateSocial'])->name('profile.update-social');
+
+    Route::get('enrolled-courses', [studentDashboardController::class, 'courses'])->name('enrolled-courses.index');
+    Route::get('remarks', [studentDashboardController::class, 'remarks'])->name('remarks.index');
+    Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements.index');
 });
 
 
@@ -53,7 +59,18 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
  * -----------TEACHERS ROUTES--------------------
  **/
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
+
     Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('profile', [TeacherDashboardController::class, 'profile'])->name('profile.index');
+    Route::get('profile/edit', [TeacherDashboardController::class, 'editProfile'])->name('profile.edit');
+    Route::post('profile/update', [TeacherDashboardController::class, 'updateProfile'])->name('profile.update');
+    // Route::post('profile/update-password', [TeacherDashboardController::class, 'updatePassword'])->name('profile.update-password');
+    // Route::post('profile/update-social', [TeacherDashboardController::class, 'updateSocial'])->name('profile.update-social');
+
+    Route::get('enrolled-courses', [TeacherDashboardController::class, 'courses'])->name('enrolled-courses.index');
+    Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');
+    Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
 });
 
 

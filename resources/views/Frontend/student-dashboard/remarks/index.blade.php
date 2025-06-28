@@ -9,11 +9,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-banner-cont">
-                        <h2>Teacher Dashboard</h2>
+                        <h2>Student Dashboard</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Teacher</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>
                     </div> <!-- page banner cont -->
@@ -31,12 +31,12 @@
     <section class="pt-90 pb-90">
         <div class="container">
             <div class="row">
-                @include('frontend.teacher-dashboard.sidebar')
+                @include('frontend.student-dashboard.sidebar')
 
                 <div class="col-lg-8">
-                    @include('frontend.teacher-dashboard.navbar')
+                    @include('frontend.student-dashboard.navbar')
                     <div class="dashboard-content">
-                        <h4 class="mb-4">Create Courses</h4>
+                        <h4 class="mb-4">Remarks</h4>
 
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>

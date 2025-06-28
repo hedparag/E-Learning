@@ -13,7 +13,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Student</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>
                     </div> <!-- page banner cont -->
@@ -26,9 +26,27 @@
 
 
 
-    <!--====== STUDENT PART START ======-->
+    <!--====== TEACHER PART START ======-->
 
+<section class="pt-90 pb-90">
+        <div class="container">
+            <div class="row">
+                @include('frontend.student-dashboard.sidebar')
 
+                <div class="col-lg-8">
+                    @include('frontend.student-dashboard.navbar')
+                    <div class="dashboard-content">
+                        <h4 class="mb-4">Announcements</h4>
 
-    <!--====== STUDENT PART END ======-->
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== TEACHER PART END ======-->
 @endsection
