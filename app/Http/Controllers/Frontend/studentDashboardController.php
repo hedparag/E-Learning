@@ -16,7 +16,7 @@ class studentDashboardController extends Controller
     use FileUpload;
     function index(): View
     {
-        return view('frontend.student-dashboard.index');
+        return view('Frontend.student-dashboard.index');
     }
     function becomeInstructor(string $id): View
     {

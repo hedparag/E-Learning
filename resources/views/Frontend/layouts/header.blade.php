@@ -64,6 +64,10 @@
                             <div class="button float-left">
                                 <a href="{{ route('login') }}" class="main-btn">Login</a>
                             </div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div> <!-- row -->

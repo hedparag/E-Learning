@@ -25,6 +25,10 @@ Route::get('teachers', [FrontendController::class, 'teachers'])->name('teachers'
 
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 
+Route::get('/dashboard', function () {
+    return redirect()->route('home');
+})->name('dashboard');
+
 
 
 /**
