@@ -62,12 +62,20 @@ $(function () {
 
                 success: function (data) {
                     // console.log(data);
-                    let $formGroup = $('<div class="form-group col-md-4">');
+                    let $formGroup = $('<div class="form-group col-md-12 mt-3">');
                     $formGroup.append('<label for="inputState">Class</label>');
 
-                    let $select = $('<select id="inputState" class="form-control" name="class">');
-                    $select.append('<option value="">Select</option>');
+                   let $select = $('<select>', {
+    id: 'inputState',
+    name: 'class',
+    class: 'form-control form-control-lg',
+    css: {
+        minHeight: '30px !important',
+        fontSize: '16px'
+    }
+});
 
+$select.append('<option value="">Select</option>');
 
                     $.each(data, function (index, item) {
                         $select.append('<option value="' + item.id + '">' + item.name + '</option>');

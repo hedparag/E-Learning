@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +16,9 @@ class User extends Authenticatable
     function payout():HasOne{
         return $this->hasOne(PayoutInformation::class,'instructor_id','id');
     }
-
+    function hasClass() :BelongsTo{
+        return $this->belongsTo(StudentClass::class,'student_classes_id','id');
+    }
     /**
      * The attributes that are mass assignable.
      *
