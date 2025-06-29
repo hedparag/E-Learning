@@ -30,14 +30,14 @@
 
                 <div class="col-lg-8">
                     <div class="teachers-right mt-50">
-                        <h4>Welcome, {{ auth()->user()->name }}!</h4>
+                        {{-- <h4>Welcome, {{ auth()->user()->name }}!</h4> --}}
 
                         <ul class="list-group mt-4">
                             <li class="list-group-item">
                                 <a href="{{ route('teacher.profile.index') }}">Profile</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('teacher.enrolled-courses.index') }}">Create Courses</a>
+                                <a href="{{ route('teacher.courses.index') }}">Create Courses</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{ route('teacher.remarks.index') }}">Remarks</a>
