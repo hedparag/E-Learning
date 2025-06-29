@@ -17,9 +17,9 @@
                 <div class="col-lg-8">
                     @include('frontend.teacher-dashboard.navbar')
                     <div class="dashboard-content">
-                        <h4 class="mb-4">Edit Your Profile</h4>
+                        <h4 class="mb-4">Create New Course</h4>
 
-                        @if (session('success'))
+                        {{-- @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
 
@@ -96,16 +96,15 @@
                                     value="{{ auth()->user()->website }}">
                             </div>
 
-                            {{-- <button type="submit" class="main-btn mt-3">Update Profile</button> --}}
-
                             <div class="d-flex justify-content-between align-items-center mt-4">
-                                <button type="submit" class="main-btn">Update Profile</button>
+                                <button type="submit" class="main-btn">Create Course</button>
 
-                                <a href="{{ route('teacher.profile.index') }}" class="btn btn-outline-secondary">
+                                <a href="{{ route('teacher.courses.index') }}" class="btn btn-outline-secondary">
                                     ← Back
                                 </a>
                             </div>
-                        </form>
+
+                        </form> --}}
 
                     </div>
                 </div>

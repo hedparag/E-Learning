@@ -50,8 +50,12 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
     // Route::post('profile/update-social', [studentDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
     Route::get('enrolled-courses', [studentDashboardController::class, 'courses'])->name('enrolled-courses.index');
+
     Route::get('remarks', [studentDashboardController::class, 'remarks'])->name('remarks.index');
+
     Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements.index');
+    // Route::get('announcements/edit', [studentDashboardController::class, 'createAnnouncements'])->name('announcements.create');
+    // Route::post('announcements/update', [studentDashboardController::class, 'postAnnouncements'])->name('announcements.post');
 });
 
 
@@ -70,9 +74,15 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     // Route::post('profile/update-password', [TeacherDashboardController::class, 'updatePassword'])->name('profile.update-password');
     // Route::post('profile/update-social', [TeacherDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
-    Route::get('enrolled-courses', [TeacherDashboardController::class, 'courses'])->name('enrolled-courses.index');
+    Route::get('courses', [TeacherDashboardController::class, 'courses'])->name('courses.index');
+    Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
+    Route::post('courses/post', [TeacherDashboardController::class, 'postCourses'])->name('courses.post');
+
     Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');
+
     Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
+    Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
+    Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
 });
 
 
