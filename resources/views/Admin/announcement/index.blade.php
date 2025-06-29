@@ -44,7 +44,9 @@
                                             <tr>
                                                 <td>{{ $d?->title }}</td>
                                                 <td>{!! $d?->body !!}</td>
+                                                @if($d?->attachment)
                                                 <td><img src="{{ asset($d?->attachment) }}" alt="" style="height:60px;width:100px;"></td>
+                                                @endif
                                                 <td><select name="" id="">
                                                     <option value="" @selected($d?->target_type == 'all')>All</option>
                                                      <option value="" @selected($d?->target_type == 'student')>Student</option>
