@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Announcement;
 use Illuminate\Contracts\View\View;
 use App\Traits\FileUpload;
 use Illuminate\Http\Request;
@@ -59,7 +60,12 @@ class teacherDashboardController extends Controller
 
   public function courses()
   {
-    return view('Frontend.teacher-dashboard.enrolled-courses.index');
+    return view('Frontend.teacher-dashboard.courses.index');
+  }
+
+  public function createCourses()
+  {
+    return view('frontend.teacher-dashboard.courses.create');
   }
 
   public function remarks()
@@ -69,6 +75,19 @@ class teacherDashboardController extends Controller
 
   public function announcements()
   {
-    return view('Frontend.teacher-dashboard.announcements.index');
+    $announcements = Announcement::where('is_active', true)
+      ->where(function ($query) {
+        $query->where('target_type', 'all')
+          ->orWhere('created_by_id', auth()->id());
+      })
+      ->orderBy('start_date', 'desc')
+      ->get();
+
+    return view('frontend.teacher-dashboard.announcements.index', compact('announcements'));
+  }
+
+  public function createAnnouncements()
+  {
+    return view('frontend.teacher-dashboard.announcements.create');
   }
 }

@@ -6,9 +6,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('teacher.enrolled-courses.index') }}"
-           class="nav-link {{ request()->routeIs('teacher.enrolled-courses.index') ? 'active' : '' }}">
-           Create Courses
+        <a href="{{ route('teacher.courses.index') }}"
+           class="nav-link {{ request()->routeIs('teacher.courses.index') ? 'active' : '' }}">
+           Manage Courses
         </a>
     </li>
     <li class="nav-item">

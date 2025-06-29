@@ -34,8 +34,10 @@
                 <div class="col-lg-8">
                     @include('frontend.teacher-dashboard.navbar')
                     <div class="dashboard-content">
-                        <h4 class="mb-5">Welcome Back, {{ auth()->user()->name }} </h3>
-                        <p>Let's Teach!</p>
+                        <div class="mb-5">
+                            <h4 class="mb-2">Welcome Back, {{ auth()->user()->name }} </h3>
+                                <p>Let's Teach!</p>
+                        </div>
 
                         <div class="mb-4">
                             <h6>Email</h6>
