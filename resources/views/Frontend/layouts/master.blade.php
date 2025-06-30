@@ -82,6 +82,9 @@
     
     <!--====== Ajax Contact js ======-->
     <script src="{{ asset('frontend/assets/js/ajax-contact.js') }}"></script>
+
+    <!--====== Ajax Teacher Modal js ======-->
+    <script src="{{ asset('frontend/assets/js/ajax-teacher_modal.js') }}"></script>
     
     <!--====== Main js ======-->
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
