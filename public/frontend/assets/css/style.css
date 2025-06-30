@@ -3811,6 +3811,36 @@ p.form-message.error {
     border-color: #1c87c9;
 }
 
+#teacher_modal {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px; /* Optional: keep it slightly rounded */
+}
+
+.info-box {
+    background-color: #fffbe6; /* light yellow */
+    border: 1px solid #f5e9b4;
+    padding: 1.5rem;
+}
+
+.fixed-table {
+    table-layout: fixed;
+    width: 100%;
+}
+.fixed-table td {
+    width: 50%; /* forces equal width */
+}
+
+.fixed-table td,
+.fixed-table th,
+.fixed-table tr {
+    border: none !important;
+}
+
+
 
 
 

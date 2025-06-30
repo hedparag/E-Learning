@@ -1,6 +1,6 @@
 <header class="header_3">
-       <!--====== PRELOADER PART START ======-->
-    
+    <!--====== PRELOADER PART START ======-->
+
     <div class="preloader">
         <div class="loader rubix-cube">
             <div class="layer layer-1"></div>
@@ -13,21 +13,23 @@
             <div class="layer layer-8"></div>
         </div>
     </div>
-    
+
     <!--====== PRELOADER PART START ======-->
-    
+
     <!--====== HEADER PART START ======-->
-    
+
     <header id="header-part">
-       
+
         <div class="header-top d-none d-lg-block">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="header-contact text-lg-left text-center">
                             <ul>
-                                <li><img src="{{ asset('frontend/assets/images/all-icon/map.png') }}" alt="icon"><span>127/5 Mark street, New york</span></li>
-                                <li><img src="{{ asset('frontend/assets/images/all-icon/email.png') }}" alt="icon"><span>info@yourmail.com</span></li>
+                                <li><img src="{{ asset('frontend/assets/images/all-icon/map.png') }}"
+                                        alt="icon"><span>127/5 Mark street, New york</span></li>
+                                <li><img src="{{ asset('frontend/assets/images/all-icon/email.png') }}"
+                                        alt="icon"><span>info@yourmail.com</span></li>
                             </ul>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header top -->
-        
+
         <div class="header-logo-support pt-30 pb-30">
             <div class="container">
                 <div class="row">
@@ -54,32 +56,37 @@
                         <div class="support-button float-right d-none d-md-block">
                             <div class="support float-left">
                                 <div class="icon">
-                                    <img src="{{ asset('frontend/assets/images/all-icon/support.png') }}" alt="icon">
+                                    <img src="{{ asset('frontend/assets/images/all-icon/support.png') }}"
+                                        alt="icon">
                                 </div>
                                 <div class="cont">
                                     <p>Need Help? call us free</p>
                                     <span>321 325 5678</span>
                                 </div>
                             </div>
+
                             <div class="button float-left">
-                                <a href="{{ route('login') }}" class="main-btn">Login</a>
+                                @if (Auth::check())
+                                    <a href="{{ route('logout') }}" class="main-btn">Logout</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="main-btn">Login</a>
+                                @endif
                             </div>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit">Logout</button>
-                            </form>
+
                         </div>
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header logo support -->
-        
+
         <div class="navigation">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-md-10 col-sm-9 col-8">
                         <nav class="navbar navbar-expand-lg">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -88,22 +95,39 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a class="active" href="{{ route('home') }}">Home</a>
+                                        <a href="{{ route('home') }}"
+                                            class="nav-link {{ request()->is('/') || request()->is('home') ? 'active' : '' }}">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('about') }}">About us</a>
+                                        <a href="{{ route('about') }}"
+                                            class="nav-link {{ request()->is('about') ? 'active' : '' }}">About us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="courses.html">Dashboard</a>
+                                        @if (Auth::check())
+                                            @if (Auth::user()->role === 'teacher')
+                                                <a href="{{ route('teacher.dashboard') }}"
+                                                    class="nav-link {{ request()->routeIs('teacher.dashboard') ? 'active' : '' }}">Dashboard</a>
+                                            @elseif (Auth::user()->role === 'student')
+                                                <a href="{{ route('student.dashboard') }}"
+                                                    class="nav-link {{ request()->routeIs('student.dashboard') ? 'active' : '' }}">Dashboard</a>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('login') }}" class="nav-link">Dashboard</a>
+                                        @endif
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('announcements') }}">Announcements</a>
+                                        <a href="{{ route('announcements') }}"
+                                            class="nav-link {{ request()->is('announcements') ? 'active' : '' }}">Announcements</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('teachers') }}">Our teachers</a>
+                                        <a href="{{ route('teachers') }}"
+                                            class="nav-link {{ request()->is('teachers') ? 'active' : '' }}">Our
+                                            teachers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('contact') }}">Contact Us</a>
+                                        <a href="{{ route('contact') }}"
+                                            class="nav-link {{ request()->is('contacts') ? 'active' : '' }}">Contact
+                                            Us</a>
                                     </li>
                                 </ul>
                             </div>
@@ -119,13 +143,13 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div>
-        
+
     </header>
-    
+
     <!--====== HEADER PART ENDS ======-->
-   
+
     <!--====== SEARCH BOX PART START ======-->
-    
+
     <div class="search-box">
         <div class="serach-form">
             <div class="closebtn">
@@ -138,6 +162,6 @@
             </form>
         </div> <!-- serach form -->
     </div>
-    
+
     <!--====== SEARCH BOX PART ENDS ======-->
-    </header>
+</header>

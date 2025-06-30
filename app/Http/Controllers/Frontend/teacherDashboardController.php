@@ -23,7 +23,7 @@ class teacherDashboardController extends Controller
     return view('frontend.teacher-dashboard.profile.index', compact('user'));
   }
 
-  public function editProfile(): \Illuminate\View\View
+  public function editProfile(): View
   {
     return view('frontend.teacher-dashboard.profile.update');
   }

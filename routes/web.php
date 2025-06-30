@@ -7,9 +7,9 @@ use App\Http\Controllers\Frontend\teacherDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 /**
@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 Route::get('about', [FrontendController::class, 'about'])->name('about');
+
+Route::get('/dashboard', [FrontendController::class, 'dashboardRedirect'])->name('dashboard');
 
 Route::get('announcements', [FrontendController::class, 'announcements'])->name('announcements');
 
@@ -51,9 +53,7 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 
     Route::get('remarks', [studentDashboardController::class, 'remarks'])->name('remarks.index');
 
-    Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements.index');
-    // Route::get('announcements/edit', [studentDashboardController::class, 'createAnnouncements'])->name('announcements.create');
-    // Route::post('announcements/update', [studentDashboardController::class, 'postAnnouncements'])->name('announcements.post');
+    Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements');
 });
 
 
