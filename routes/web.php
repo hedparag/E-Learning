@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DemoController;
+use App\Http\Controllers\Frontend\CourseCreateController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\InstructorDashboardController;
 use App\Http\Controllers\Frontend\studentDashboardController;
@@ -76,6 +77,10 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
 
     Route::get('courses', [TeacherDashboardController::class, 'courses'])->name('courses.index');
     Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
+    Route::post('course/basic-info',[teacherDashboardController::class,'courseStore'])->name('course.basic-info');
+    Route::get('course/{id}/edit',[CourseCreateController::class,'edit'])->name('courses.edit');
+    Route::post('course/update',[CourseCreateController::class,'update'])->name('courses.update');
+
     Route::post('courses/post', [TeacherDashboardController::class, 'postCourses'])->name('courses.post');
 
     Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');

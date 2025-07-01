@@ -1,7 +1,11 @@
 @extends('Frontend.teacher-dashboard.courses.create')
 @section('tab_content')
-    <div class="tab-pane fade show" id="profile-09" role="tabpanel" aria-labelledby="profile-09-tab">
-        <form>
+    <div class="tab-pane fade active show" id="profile-09" role="tabpanel" aria-labelledby="profile-09-tab">
+        <form method="POST" class="course-update" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="course_id" value="{{ $course->id }}">
+        <input type="hidden" name="current_step" value="2">
+        <input type="hidden" name="next_step" value="3">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputAddress2">Demo Video Source</label>
@@ -35,30 +39,31 @@
                     </div>
                 </div>
             </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputAddress">Capacity</label>
-            <input type="text" class="form-control" id="inputAddress" name="capacity">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputAddress">Duration</label>
-            <input type="text" class="form-control" id="inputAddress" name="duration">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck" name="qna">
-                <label class="form-check-label" for="gridCheck">
-                    QNA
-                </label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Capacity</label>
+                    <input type="text" class="form-control" id="inputAddress" name="capacity"
+                        placeholder="enter capacity..">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Duration</label>
+                    <input type="text" class="form-control" id="inputAddress" name="duration">
+                </div>
             </div>
-        </div>
 
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+            <div class="row">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" name="qna" value="1">
+                        <label class="form-check-label" for="gridCheck">
+                            QNA
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
 @endsection

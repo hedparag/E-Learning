@@ -1,7 +1,10 @@
 @extends('Frontend.teacher-dashboard.courses.create')
 @section('tab_content')
     <div class="tab-pane fade active show" id="home-09" role="tabpanel" aria-labelledby="home-09-tab">
-        <form>
+        <form action="{{ route('teacher.course.basic-info') }}" method="POST" class="basic-info-submit" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="current_step" value="1">
+            <input type="hidden" name="next_step" value="2">
             <div class="form-row">
                 <div class="form-group col-md-12 field1">
                     <label for="inputState">Choose Class</label>

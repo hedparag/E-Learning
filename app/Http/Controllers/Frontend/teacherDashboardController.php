@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\AddSubject;
 use App\Models\Announcement;
 use App\Models\ClassSubjectModel;
+use App\Models\Course;
 use App\Models\StudentClass;
 use Illuminate\Contracts\View\View;
 use App\Traits\FileUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class teacherDashboardController extends Controller
 {
@@ -69,8 +72,8 @@ class teacherDashboardController extends Controller
   public function createCourses()
   {
      $classes=StudentClass::all();
-    return view('frontend.teacher-dashboard.courses.basic-info',compact('classes'));
-
+  //  return view('frontend.teacher-dashboard.courses.basic-info',compact('classes'));
+return view('frontend.teacher-dashboard.courses.basic-info', compact('classes'))->with('step', 1);
     //return view('frontend.teacher-dashboard.courses.additional');
   }
 
@@ -132,5 +135,31 @@ if(!($commonSubjectIds)){
     $html .= '</select></div>';
 
     return response()->json(['html' => $html]);
+  }
+  function courseStore(Request $req){
+    $req->validate([
+'target'=>['required','exists:student_classes,id'],
+'title'=>['required','string','max:100'],
+'desc'=>['required','string','max:1000'],
+'thumbnail'=>['required','image','max:5000'],
+'subject_id'=>['required', Rule::in(Auth::user()->subject_ids ?? [])]
+    ]);
+   // dd($req->all());
+   $filePath=$this->uploadFile($req->file('thumbnail'));
+   $course=new Course();
+   $course->title=$req->title;
+   $course->slug=Str::slug($req->title);
+   $course->desc=$req->desc;
+   $course->thumbnail=$filePath;
+   $course->teacher_id=Auth::user()->id;
+   $course->subject_id=$req->subject_id;
+   $course->class_id=$req->target;
+   $course->save();
+
+   return response()->json([
+        'status'=>'success',
+        'message'=>'Creation successful.',
+        'redirect'=>route('teacher.courses.edit',['id'=>$course->id,'step'=>$req->next_step])
+      ]);
   }
 }

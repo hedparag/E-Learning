@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
     <!--====== Required meta tags ======-->
@@ -15,10 +16,10 @@
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
     <!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<!-- Base URL -->
-<meta name="base-url" content="{{ url('/') }}">
+    <!-- Base URL -->
+    <meta name="base-url" content="{{ url('/') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('fronend/assets/css/jquery.nice-number.min.css') }}">
@@ -30,8 +31,16 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/vendors.css') }}" />
     <!-- app style -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/style.css') }}" />
-@vite(['resources/js/frontend.js'])
+    <!--External-->
+
+
+
+
+
+
+    @vite(['resources/js/frontend.js'])
 </head>
 
 <body>
@@ -40,7 +49,7 @@
 
     @include('Frontend.layouts.header')
 
-     <!--====== HEADER PART END ======-->
+    <!--====== HEADER PART END ======-->
 
 
     @yield('content')
@@ -50,19 +59,40 @@
 
     @include('Frontend.layouts.footer')
 
-   <!--====== FOOTER PART END ======-->
+    <!--====== FOOTER PART END ======-->
 
 
-
+    <!--Modal-->
+    <div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body dynamic-modal-content">
+                    <!-- Content will be injected here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
     <!--====== jquery js ======-->
-    @vite('resources/js/app.js')
+
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!--====== Bootstrap js ======-->
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
 
@@ -102,15 +132,27 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <!-- plugins -->
+    <!-- plugins -->
     <script src="{{ asset('admin_template/assets/js/vendors.js') }}"></script>
 
     <!-- custom app -->
     <script src="{{ asset('admin_template/assets/js/app.js') }}"></script>
-     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script>
         $('#lfm').filemanager('file');
     </script>
+    <script>
+        var notyf = new Notyf({
+            duration: 6000,
+            dismissible: true
+        });
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                notyf.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
 
 </body>
+
 </html>

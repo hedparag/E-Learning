@@ -19,39 +19,49 @@
                     <div class="dashboard-content">
                         <h4 class="mb-4">Create New Course</h4>
 
-                         <div class="col-xxl-6">
-                                <div class="card card-statistics">
-                                    <div class="card-header">
-                                        <div class="card-heading">
-                                            <h4 class="card-title">Course Create</h4>
-                                        </div>
+                        <div class="col-xxl-6">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <div class="card-heading">
+                                        <h4 class="card-title">Course Create</h4>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="tab tab-vertical">
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active show" id="home-09-tab" data-toggle="tab" href="#home-09" role="tab" aria-controls="home-09" aria-selected="true">Basic Information</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="profile-09-tab" data-toggle="tab" href="#profile-09" role="tab" aria-controls="profile-09" aria-selected="false">Additional Settings</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="portfolio-09-tab" data-toggle="tab" href="#portfolio-09" role="tab" aria-controls="portfolio-09" aria-selected="false">Curriculum</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="portfolio-09-tab" data-toggle="tab" href="#mock-09" role="tab" aria-controls="portfolio-09" aria-selected="false">Mock Test</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="contact-09-tab" data-toggle="tab" href="#contact-09" role="tab" aria-controls="contact-09" aria-selected="false">Finish</a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                               @yield('tab_content')
-                                            </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab tab-vertical">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ request('step') == 1 ? 'active show' : '' }}"
+                                                    id="home-09-tab" data-toggle="tab" href="#home-09" role="tab"
+                                                    aria-controls="home-09" aria-selected="true">Basic Information</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ request('step') == 2 ? 'active show' : '' }}"
+                                                    id="profile-09-tab" data-toggle="tab" href="#profile-09" role="tab"
+                                                    aria-controls="profile-09" aria-selected="false">Additional Settings</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ request('step') == 3 ? 'active' : '' }}"
+                                                    id="portfolio-09-tab" data-toggle="tab" href="#portfolio-09"
+                                                    role="tab" aria-controls="portfolio-09"
+                                                    aria-selected="false">Curriculum</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ request('step') == 4 ? 'active' : '' }}"
+                                                    id="contact-09-tab" data-toggle="tab" href="#contact-09" role="tab"
+                                                    aria-controls="contact-09" aria-selected="false">Finish</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            @yield('tab_content')
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                         {{-- @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
