@@ -7,6 +7,7 @@ use App\Models\PayoutInformation;
 use App\Models\User;
 use App\Traits\FileUpload;
 use Illuminate\Contracts\View\View;
+use App\Models\Announcement;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,8 +100,21 @@ class studentDashboardController extends Controller
     return view('frontend.student-dashboard.enrolled-courses.index');
   }
 
+  public function remarks()
+  {
+    return view('frontend.student-dashboard.remarks.index');
+  }
+
   public function announcements()
   {
-    return view('frontend.student-dashboard.announcements.index');
+    $announcements = Announcement::where('is_active', true)
+      ->where(function ($query) {
+        $query->where('target_type', 'all')
+          ->orWhere('created_by_id', auth()->id());
+      })
+      ->orderBy('start_date', 'desc')
+      ->get();
+
+    return view('frontend.student-dashboard.announcements.index', compact('announcements'));
   }
 }
