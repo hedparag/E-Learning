@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddSubject;
 use App\Models\Announcement;
+use App\Models\ClassSubjectModel;
+use App\Models\StudentClass;
 use Illuminate\Contracts\View\View;
 use App\Traits\FileUpload;
 use Illuminate\Http\Request;
@@ -65,7 +68,10 @@ class teacherDashboardController extends Controller
 
   public function createCourses()
   {
-    return view('frontend.teacher-dashboard.courses.create');
+     $classes=StudentClass::all();
+    return view('frontend.teacher-dashboard.courses.basic-info',compact('classes'));
+
+    //return view('frontend.teacher-dashboard.courses.additional');
   }
 
   public function remarks()
@@ -89,5 +95,42 @@ class teacherDashboardController extends Controller
   public function createAnnouncements()
   {
     return view('frontend.teacher-dashboard.announcements.create');
+  }
+  public function getCommonSubjects(Request $request){
+     $classId = $request->class_id;
+
+    if (!$classId || !Auth::check()) {
+        return response()->json(['html' => '']);
+    }
+
+    $teacher = Auth::user();
+
+    // Get teacher's assigned subject IDs (stored as JSON array)
+    $teacherSubjectIds = $teacher->subject_ids ?? [];
+
+    // Get class's assigned subject IDs using Eloquent
+    $classSubjectIds = ClassSubjectModel::where('class_id', $classId)
+        ->pluck('subject_id')
+        ->toArray();
+
+    // Find common subject IDs
+    $commonSubjectIds = array_intersect($teacherSubjectIds, $classSubjectIds);
+if(!($commonSubjectIds)){
+ return response()->json(['html' => '<div><center>No Subject found for you for the selected class</center></div>']);
+}
+    // Fetch subject details using Eloquent
+    $subjects = AddSubject::whereIn('id', $commonSubjectIds)->get();
+
+    // Generate dropdown HTML
+    $html = '<div class="form-group col-md-12">
+                <label for="commonSubject">Subject</label>
+                <select class="form-control" name="subject_id" id="commonSubject">
+                    <option value="">-- Select Subject --</option>';
+    foreach ($subjects as $subject) {
+        $html .= '<option value="' . $subject->id . '">' . $subject->name . '</option>';
+    }
+    $html .= '</select></div>';
+
+    return response()->json(['html' => $html]);
   }
 }

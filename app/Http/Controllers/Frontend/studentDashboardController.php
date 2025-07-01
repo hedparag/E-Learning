@@ -105,9 +105,9 @@ class studentDashboardController extends Controller
     return view('frontend.student-dashboard.remarks.index');
   }
 
-  public function announcements()
-  {
-    $announcements = Announcement::where('is_active', true)
+    public function announcements()
+    {
+$announcements = Announcement::where('is_active', true)
       ->where(function ($query) {
         $query->where('target_type', 'all')
           ->orWhere('created_by_id', auth()->id());
@@ -116,5 +116,5 @@ class studentDashboardController extends Controller
       ->get();
 
     return view('frontend.student-dashboard.announcements.index', compact('announcements'));
-  }
+    }
 }

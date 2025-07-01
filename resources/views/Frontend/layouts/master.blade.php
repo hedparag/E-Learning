@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-   
+
     <!--====== Required meta tags ======-->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!--====== Title ======-->
     <title>E-Learning</title>
-    
+
 
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
+    <!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<!-- Base URL -->
+<meta name="base-url" content="{{ url('/') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('fronend/assets/css/jquery.nice-number.min.css') }}">
@@ -23,17 +28,20 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
-  
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/vendors.css') }}" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/style.css') }}" />
+@vite(['resources/js/frontend.js'])
 </head>
 
 <body>
-   
+
     <!--====== HEADER PART START ======-->
 
     @include('Frontend.layouts.header')
 
      <!--====== HEADER PART END ======-->
-   
+
 
     @yield('content')
 
@@ -43,13 +51,13 @@
     @include('Frontend.layouts.footer')
 
    <!--====== FOOTER PART END ======-->
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     <!--====== jquery js ======-->
     @vite('resources/js/app.js')
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
@@ -57,38 +65,36 @@
 
     <!--====== Bootstrap js ======-->
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
-    
+
     <!--====== Slick js ======-->
     <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
-    
+
     <!--====== Magnific Popup js ======-->
     <script src="{{ asset('frontend/assets/js/jquery.magnific-popup.min.js') }}"></script>
-    
+
     <!--====== Counter Up js ======-->
     <script src="{{ asset('frontend/assets/js/waypoints.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/jquery.counterup.min.js') }}"></script>
-    
+
     <!--====== Nice Select js ======-->
     <script src="{{ asset('frontend/assets/js/jquery.nice-select.min.js') }}"></script>
-    
+
     <!--====== Nice Number js ======-->
     <script src="{{ asset('frontend/assets/js/jquery.nice-number.min.js') }}"></script>
-    
+
     <!--====== Count Down js ======-->
     <script src="{{ asset('frontend/assets/js/jquery.countdown.min.js') }}"></script>
-    
+
     <!--====== Validator js ======-->
     <script src="{{ asset('frontend/assets/js/validator.min.js') }}"></script>
-    
+
     <!--====== Ajax Contact js ======-->
     <script src="{{ asset('frontend/assets/js/ajax-contact.js') }}"></script>
-
     <!--====== Ajax Teacher Modal js ======-->
     <script src="{{ asset('frontend/assets/js/ajax-teacher_modal.js') }}"></script>
-    
     <!--====== Main js ======-->
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
-    
+
     <!--====== Map js ======-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
     <script src="{{ asset('frontend/assets/js/map-script.js') }}"></script>
@@ -97,6 +103,15 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <!-- plugins -->
+    <script src="{{ asset('admin_template/assets/js/vendors.js') }}"></script>
+
+    <!-- custom app -->
+    <script src="{{ asset('admin_template/assets/js/app.js') }}"></script>
+     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script>
+        $('#lfm').filemanager('file');
+    </script>
 
 </body>
 </html>

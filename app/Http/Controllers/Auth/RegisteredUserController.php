@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddSubject;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +23,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $subjects=AddSubject::where('is_active','true')->get();
+        return view('auth.register',compact('subjects'));
     }
 
     /**
@@ -33,13 +35,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        //dd($request->all());
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'type' => ['required', 'in:student,teacher']
+            'type' => ['required', 'in:student,teacher'],
+
         ]);
+
 
         if ($request->type == 'student') {
              $request->validate([
@@ -51,7 +55,8 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => 'student',
                 'student_classes_id'=>$request->class,
-                'approved_status' => 'approved'
+                'approved_status' => 'approved',
+
             ]);
             event(new Registered($user));
 
@@ -63,8 +68,10 @@ class RegisteredUserController extends Controller
 
 
             $request->validate([
-                'document' => ['required', 'file', 'max:12000', 'mimes:png,jpg,pdf,docx,doc']
+                'document' => ['required', 'file', 'max:12000', 'mimes:png,jpg,pdf,docx,doc'],
+                'subject_ids'=>['required','array','min:1']
             ]);
+            // dd($request->all());
             $filePath = $this->uploadFile($request->file('document'));
 
             $user = User::create([
@@ -73,7 +80,8 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => 'student',
                 'approved_status' => 'pending',
-                'document' => $filePath
+                'document' => $filePath,
+                'subject_ids' => $request->subject_ids,
             ]);
             event(new Registered($user));
 
