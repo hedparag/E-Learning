@@ -6,41 +6,20 @@
 
         <div class="name">
             <h6>{{ auth()->user()->name }}</h6>
-            <span>{{ ucfirst(auth()->user()->role) }}</span>
+            {{-- <span>{{ ucfirst(auth()->user()->role) }}</span> --}}
+            <p>Class {{ auth()->user()->student_classes_id ?? '' }}</p>
         </div>
 
         <div class="description">
-            <p>{{ auth()->user()->student_classes_id ?? 'No class added yet.' }}</p>
-        </div>
-
-        <div class="social">
-            <ul>
-                @if(auth()->user()->facebook)
-                    <li><a href="{{ auth()->user()->facebook }}" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
-                @endif
-                @if(auth()->user()->linkedin)
-                    <li><a href="{{ auth()->user()->linkedin }}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
-                @endif
-                @if(auth()->user()->github)
-                    <li><a href="{{ auth()->user()->github }}" target="_blank"><i class="fa fa-github-square"></i></a></li>
-                @endif
-                @if(auth()->user()->website)
-                    <li><a href="{{ auth()->user()->website }}" target="_blank"><i class="fa fa-globe"></i></a></li>
-                @endif
-            </ul>
+            <p>{{ auth()->user()->headline ?? '' }}</p>
         </div>
 
         <div class="description">
-            <p>{{ auth()->user()->bio ?? 'No bio added yet.' }}</p>
-        </div>
-
-        {{-- Optional: Add email display here or somewhere else --}}
-        <div class="description mt-3">
-            <small><i class="fa fa-envelope"></i> {{ auth()->user()->email }}</small>
+            <p><i class="fa fa-envelope"></i> {{ auth()->user()->email }}</p>
         </div>
 
         {{-- Logout --}}
-        <div class="description mt-3">
+        <div class="description">
             <a href="javascript:;" onclick="event.preventDefault(); $('#logout').submit();" class="btn btn-sm btn-danger mt-2">
                 Sign Out
             </a>
