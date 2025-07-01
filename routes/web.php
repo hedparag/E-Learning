@@ -83,6 +83,8 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
+    Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
+
 });
 
 

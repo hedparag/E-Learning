@@ -72,8 +72,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-
-                                    {{-- Subjects without subcategories – show as checkboxes --}}
 @foreach ($subjects->filter(fn($s) => is_null($s->parent_id)) as $subject)
     <div class="col-md-3">
         <div class="form-check">
@@ -89,12 +87,7 @@
         </div>
     </div>
 @endforeach
-
-
-
-
-
-                                    {{-- Subjects with subcategories – show as multiselect with optgroup --}}
+{{-- Subjects with subcategories – show as multiselect with optgroup --}}
                                     <div class="col-md-12 mt-3">
                                         <div class="form-group mb-0">
                                             <label><strong>Grouped Sub-Subjects (Multi-Select)</strong></label>

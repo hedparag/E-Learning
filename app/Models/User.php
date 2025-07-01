@@ -33,8 +33,13 @@ class User extends Authenticatable
         'document',
         'bio',
         'gender',
-        'student_classes_id'
+        'student_classes_id',
+        'subject_ids'
+
     ];
+    protected $casts = [
+    'subject_ids' => 'array'
+];
 
     /**
      * The attributes that should be hidden for serialization.

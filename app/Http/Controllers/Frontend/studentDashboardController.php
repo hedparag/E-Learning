@@ -93,4 +93,5 @@ class studentDashboardController extends Controller
     {
         return view('frontend.student-dashboard.announcements.index');
     }
+
 }
