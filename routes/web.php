@@ -52,10 +52,13 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
     // Route::post('profile/update-social', [studentDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
     Route::get('enrolled-courses', [studentDashboardController::class, 'courses'])->name('enrolled-courses.index');
+    Route::get('chapters/{id}', [studentDashboardController::class, 'courseChapters'])->name('enrolled-courses.chapters');
 
     Route::get('remarks', [studentDashboardController::class, 'remarks'])->name('remarks.index');
 
     Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements');
+    Route::get('announcements/{id}', [studentDashboardController::class, 'showAnnouncements'])->name('announcements.show');
+
 });
 
 

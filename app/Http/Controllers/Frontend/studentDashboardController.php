@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\PayoutInformation;
-use App\Models\User;
 use App\Traits\FileUpload;
 use Illuminate\Contracts\View\View;
-use App\Models\Announcement;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use App\Models\AddSubject;
+use App\Models\Announcement;
+use App\Models\Chapter;
+use App\Models\Course;
 
 class studentDashboardController extends Controller
 {
@@ -54,10 +57,15 @@ class studentDashboardController extends Controller
   }
 
 
-  public function profile()
+  public function profile(Request $request)
   {
     $user = Auth::user(); // get the logged in student
-    return view('frontend.student-dashboard.profile.index', compact('user'));
+
+    if ($request->ajax()) {
+        return view('frontend.student-dashboard.profile.index', compact('user'));
+    }
+
+    return view('frontend.student-dashboard.index');
   }
 
   public function editProfile(): View
@@ -95,26 +103,65 @@ class studentDashboardController extends Controller
     return redirect()->route('student.profile.index')->with('success', 'Profile updated successfully.');
   }
 
-  public function courses()
-  {
-    return view('frontend.student-dashboard.enrolled-courses.index');
-  }
+  public function courses(Request $request)
+{
+    $user = Auth::user();
+    $classId = $user->student_classes_id;
 
-  public function remarks()
-  {
-    return view('frontend.student-dashboard.remarks.index');
-  }
+    $courses = Course::where('class_id', $classId)
+        ->where('is_approved', true)
+        ->get();
 
-    public function announcements()
-    {
-$announcements = Announcement::where('is_active', true)
-      ->where(function ($query) {
-        $query->where('target_type', 'all')
-          ->orWhere('created_by_id', auth()->id());
-      })
-      ->orderBy('start_date', 'desc')
-      ->get();
-
-    return view('frontend.student-dashboard.announcements.index', compact('announcements'));
+    if ($request->ajax()) {
+        return view('frontend.student-dashboard.enrolled-courses.index', compact('courses'));
     }
+
+    return view('frontend.student-dashboard.index');
+}
+
+
+  public function courseChapters($id)
+{
+    $course = Course::findOrFail($id);
+    $chapters = Chapter::where('course_id', $id)
+        ->where('status', 'active')
+        ->orderBy('order')
+        ->get();
+
+    return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
+}
+
+  public function remarks(Request $request)
+{
+    if ($request->ajax()) {
+        return view('frontend.student-dashboard.remarks.index');
+    }
+
+    return view('frontend.student-dashboard.index');
+}
+
+  public function announcements(Request $request)
+{
+    $announcements = Announcement::where('is_active', true)
+        ->where(function ($query) {
+            $query->where('target_type', 'all')
+                ->orWhere('created_by_id', auth()->id());
+        })
+        ->orderBy('start_date', 'desc')
+        ->get();
+
+    if ($request->ajax()) {
+        return view('frontend.student-dashboard.announcements.index', compact('announcements'));
+    }
+
+    return view('frontend.student-dashboard.index');
+}
+
+
+  public function showAnnouncements($id)
+  {
+    $announcement = Announcement::findOrFail($id);
+
+    return view('frontend.student-dashboard.announcements.show', compact('announcement'));
+  }
 }

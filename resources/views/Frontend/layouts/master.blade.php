@@ -60,8 +60,11 @@
 
     <!--====== jquery js ======-->
     @vite('resources/js/app.js')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script> --}}
 
     <!--====== Bootstrap js ======-->
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
@@ -96,8 +99,12 @@
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
 
     <!--====== Map js ======-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
-    <script src="{{ asset('frontend/assets/js/map-script.js') }}"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
+    <script src="{{ asset('frontend/assets/js/map-script.js') }}"></script> --}}
+
+    <!--====== Ajax ======-->
+    <script src="{{ asset('frontend/assets/js/ajax-part.js') }}"></script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

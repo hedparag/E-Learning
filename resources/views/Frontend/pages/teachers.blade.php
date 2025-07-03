@@ -26,7 +26,7 @@
 
     <!--====== TEACHERS PART START ======-->
 
-    <section id="teachers-page" class="pt-90 pb-120 gray-bg">
+    <section id="teachers-page" class="pt-50 pb-50 gray-bg">
         <div class="container">
             <div class="row">
 

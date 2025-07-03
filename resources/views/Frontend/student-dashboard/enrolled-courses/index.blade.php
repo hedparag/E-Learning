@@ -1,26 +1,9 @@
-@extends('Frontend.layouts.master')
+{{-- @extends('Frontend.layouts.master')
 
 @section('content')
     <!--====== PAGE BANNER PART START ======-->
 
-    <section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8"
-        style="background-image: url(images/page-banner-3.jpg)">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-banner-cont">
-                        <h2>Student Dashboard</h2>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                            </ol>
-                        </nav>
-                    </div> <!-- page banner cont -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
+    @include('Frontend.student-dashboard.breadcrumb')
 
     <!--====== PAGE BANNER PART ENDS ======-->
 
@@ -35,18 +18,42 @@
 
                 <div class="col-lg-8">
                     @include('frontend.student-dashboard.navbar')
-                    <div class="dashboard-content">
-                        <h4 class="mb-4">Create Courses</h4>
+                    <div class="dashboard-content"> --}}
 
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
+                        <div class="container  ajax-area">
+                            <h4 class="mb-4">Class {{ auth()->user()->student_classes_id ?? '' }}</h4>
+                            <section class="pt-20 pb-20 gray-bg">
+                                <div class="container">
+                                    <div class="row">
+                                        @foreach ($courses as $course)
+                                            <div class="col-lg-12">
+                                                <div class="singel-event-list mt-30">
+                                                    <div class="event-thum">
+                                                        <img src="{{ asset('frontend/assets/images/event/e-1.jpg') }}"
+                                                            alt="Subject Thumbnail">
+                                                    </div>
+                                                    <div class="event-cont">
+                                                        <span><i class="fa fa-book"></i> Subject</span>
+                                                        <a
+                                                            href="{{ route('student.enrolled-courses.chapters', $course->id) }}">
+                                                            <h4>{{ $course->title }}</h4>
+                                                        </a>
+                                                        <p>{{ $course->desc ?? 'No description available.' }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
 
-                    </div>
+                    {{-- </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!--====== TEACHER PART END ======-->
-@endsection
+@endsection --}}

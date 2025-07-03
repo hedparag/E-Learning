@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.master')
+{{-- @extends('Frontend.layouts.master')
 
 @section('content')
     <!--====== PAGE BANNER PART START ======-->
@@ -17,44 +17,52 @@
                 @include('frontend.student-dashboard.sidebar')
 
                 <div class="col-lg-8">
-                    @include('frontend.student-dashboard.navbar')
-                    <div class="dashboard-content">
-                        <h4 class="mb-5">Announcements</h4>
+                    @include('frontend.student-dashboard.navbar') --}}
 
-                        <div class="row">
-                            @forelse($announcements as $announcement)
-                                <div class="col-lg-12">
-                                    <div class="singel-event-list mt-30">
-                                        <div class="event-thum">
-                                            <img src="{{ $announcement->attachment ? asset($announcement->attachment) : asset('frontend/assets/images/event/e-1.jpg') }}"
-                                                alt="Announcement Image">
+                    <div class="dashboard-content ajax-area">
+                        <h4 class="mb-5">Announcements</h4>
+                        <section class="pt-20 pb-20 gray-bg">
+                            <div class="container">
+                                <div class="row">
+                                    @forelse($announcements as $announcement)
+                                        <div class="col-lg-12">
+                                            <div class="singel-event-list mt-30">
+                                                <div class="event-thum">
+                                                    <img src="{{ $announcement->attachment ? asset($announcement->attachment) : asset('frontend/assets/images/event/e-1.jpg') }}"
+                                                        alt="Announcement Image">
+                                                </div>
+                                                <div class="event-cont">
+                                                    <span><i class="fa fa-calendar"></i>
+                                                        {{ \Carbon\Carbon::parse($announcement->start_date)->format('d M Y') }}</span>
+                                                    <a href="{{ route('student.announcements.show', $announcement->id) }}">
+                                                        <h4>{{ $announcement->title }}</h4>
+                                                    </a>
+                                                    <h4>{{ $announcement->title }}</h4>
+                                                    <span><i class="fa fa-clock-o"></i>
+                                                        {{ \Carbon\Carbon::parse($announcement->start_date)->format('h:i A') }}
+                                                        -
+                                                        {{ $announcement->end_date ? \Carbon\Carbon::parse($announcement->end_date)->format('h:i A') : 'N/A' }}
+                                                    </span>
+                                                    <span><i class="fa fa-user"></i>
+                                                        {{ $announcement->created_by_id == auth()->id() ? 'You' : 'Admin / Others' }}</span>
+                                                    <p>{{ $announcement->body }}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="event-cont">
-                                            <span><i class="fa fa-calendar"></i>
-                                                {{ \Carbon\Carbon::parse($announcement->start_date)->format('d M Y') }}</span>
-                                            <h4>{{ $announcement->title }}</h4>
-                                            <span><i class="fa fa-clock-o"></i>
-                                                {{ \Carbon\Carbon::parse($announcement->start_date)->format('h:i A') }}
-                                                -
-                                                {{ $announcement->end_date ? \Carbon\Carbon::parse($announcement->end_date)->format('h:i A') : 'N/A' }}
-                                            </span>
-                                            <span><i class="fa fa-user"></i>
-                                                {{ $announcement->created_by_id == auth()->id() ? 'You' : 'Admin / Others' }}</span>
-                                            <p>{{ $announcement->body }}</p>
+                                    @empty
+                                        <div class="col-lg-12 mt-4">
+                                            <p>No announcements found.</p>
                                         </div>
-                                    </div>
+                                    @endforelse
                                 </div>
-                            @empty
-                                <div class="col-lg-12 mt-4">
-                                    <p>No announcements found.</p>
-                                </div>
-                            @endforelse
-                        </div>
+                            </div>
+                        </section>
                     </div>
-                </div>
+
+                {{-- </div>
             </div>
         </div>
     </section>
 
     <!--====== TEACHER PART END ======-->
-@endsection
+@endsection --}}
