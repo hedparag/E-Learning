@@ -30,26 +30,26 @@
                                     <div class="tab tab-vertical">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link {{ request('step') == 1 ? 'active show' : '' }}"
+                                                <a class="nav-link {{ request('step') == 1 ? 'active show' : '' }} courseTab"
                                                     id="home-09-tab" data-toggle="tab" href="#home-09" role="tab"
-                                                    aria-controls="home-09" aria-selected="true">Basic Information</a>
+                                                    aria-controls="home-09" aria-selected="true" data-step="1">Basic Information</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link {{ request('step') == 2 ? 'active show' : '' }}"
+                                                <a class="nav-link {{ request('step') == 2 ? 'active show' : '' }} courseTab"
                                                     id="profile-09-tab" data-toggle="tab" href="#profile-09" role="tab"
-                                                    aria-controls="profile-09" aria-selected="false">Additional Settings</a>
+                                                    aria-controls="profile-09" aria-selected="false" data-step="2">Additional Settings</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link {{ request('step') == 3 ? 'active' : '' }}"
+                                                <a class="nav-link {{ request('step') == 3 ? 'active' : '' }} courseTab"
                                                     id="portfolio-09-tab" data-toggle="tab" href="#portfolio-09"
                                                     role="tab" aria-controls="portfolio-09"
-                                                    aria-selected="false">Curriculum</a>
+                                                    aria-selected="false" data-step="3">Curriculum</a>
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link {{ request('step') == 4 ? 'active' : '' }}"
+                                                <a class="nav-link {{ request('step') == 4 ? 'active' : '' }} courseTab"
                                                     id="contact-09-tab" data-toggle="tab" href="#contact-09" role="tab"
-                                                    aria-controls="contact-09" aria-selected="false">Finish</a>
+                                                    aria-controls="contact-09" aria-selected="false" data-step="4">Finish</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">

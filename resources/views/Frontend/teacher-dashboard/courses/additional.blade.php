@@ -1,7 +1,7 @@
 @extends('Frontend.teacher-dashboard.courses.create')
 @section('tab_content')
     <div class="tab-pane fade active show" id="profile-09" role="tabpanel" aria-labelledby="profile-09-tab">
-        <form method="POST" class="course-update" enctype="multipart/form-data">
+        <form method="POST" class="course-update course-form" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="course_id" value="{{ $course->id }}">
         <input type="hidden" name="current_step" value="2">

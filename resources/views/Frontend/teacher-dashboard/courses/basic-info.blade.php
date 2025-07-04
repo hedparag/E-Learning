@@ -1,7 +1,7 @@
 @extends('Frontend.teacher-dashboard.courses.create')
 @section('tab_content')
     <div class="tab-pane fade active show" id="home-09" role="tabpanel" aria-labelledby="home-09-tab">
-        <form action="{{ route('teacher.course.basic-info') }}" method="POST" class="basic-info-submit" enctype="multipart/form-data">
+        <form action="{{ route('teacher.course.basic-info') }}" method="POST" class="basic-info-submit course-form" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="current_step" value="1">
             <input type="hidden" name="next_step" value="2">
@@ -9,7 +9,7 @@
                 <div class="form-group col-md-12 field1">
                     <label for="inputState">Choose Class</label>
                     <select id="inputState" class="form-control targetSubject" name="target">
-                        <option selected="">Select</option>
+                        <option value="" selected disabled>Select</option>
                         @foreach ($classes as $class)
                             <option value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
