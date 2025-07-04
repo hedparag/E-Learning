@@ -1,6 +1,8 @@
 @extends('Frontend.layouts.master')
 
+
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
     @include('Frontend.student-dashboard.breadcrumb')
     <!--====== PAGE BANNER PART ENDS ======-->
@@ -33,7 +35,7 @@
 
 
 
-                            {{-- <ul class="list-group mt-4">
+                         {{--  <ul class="list-group mt-4">
                                 <li class="list-group-item">
                                     <a href="{{ route('student.profile.index') }}">Profile</a>
                                 </li>
@@ -50,4 +52,5 @@
 
                             <div id="dashboard-tab-content" class="tab-content mt-4">
                                 @include('frontend.student-dashboard.profile.index')
-                            </div> --}}
+                            </div>
+ --}}

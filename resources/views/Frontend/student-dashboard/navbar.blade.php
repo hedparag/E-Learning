@@ -7,19 +7,19 @@
     </li>
     <li class="nav-item">
         <a href="{{ route('student.enrolled-courses.index') }}"
-           class="ajax-nav nav-link {{ request()->is('student/enrolled-courses*') || request()->is('student/chapters*') ? 'active' : '' }}">
+           class="nav-link {{ request()->is('student/enrolled-courses*') || request()->is('student/chapters*') ? 'active' : '' }} customAjax">
            Courses
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('student.remarks.index') }}"
-           class="ajax-nav nav-link {{ request()->is('student/remarks*') ? 'active' : '' }}">
-           Remarks
+           class="nav-link {{ request()->is('student/remarks*') ? 'active' : '' }} customAjax">
+           Remark
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('student.announcements') }}"
-           class="ajax-nav nav-link {{ request()->is('student/announcements*') ? 'active' : '' }}">
+           class="nav-link {{ request()->is('student/announcements*') ? 'active' : '' }} customAjax">
            Announcements
         </a>
     </li>

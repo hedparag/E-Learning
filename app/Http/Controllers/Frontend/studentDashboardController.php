@@ -22,7 +22,9 @@ class studentDashboardController extends Controller
 
   function index(): View
   {
+   // dd('hello');
     return view('Frontend.student-dashboard.index');
+   //return view('Frontend.layouts.master');
   }
 
   function becomeInstructor(string $id): View
@@ -108,15 +110,14 @@ class studentDashboardController extends Controller
     $user = Auth::user();
     $classId = $user->student_classes_id;
 
-    $courses = Course::where('class_id', $classId)
-        ->where('is_approved', true)
-        ->get();
+    $courses = Course::where('class_id', $classId)->get();
 
-    if ($request->ajax()) {
+    /*if ($request->ajax()) {
         return view('frontend.student-dashboard.enrolled-courses.index', compact('courses'));
-    }
+    }*/
+    return view('frontend.student-dashboard.enrolled-courses.index', compact('courses'));
 
-    return view('frontend.student-dashboard.index');
+   // return view('frontend.student-dashboard.index');
 }
 
 
@@ -133,11 +134,7 @@ class studentDashboardController extends Controller
 
   public function remarks(Request $request)
 {
-    if ($request->ajax()) {
-        return view('frontend.student-dashboard.remarks.index');
-    }
-
-    return view('frontend.student-dashboard.index');
+    return view('frontend.student-dashboard.remarks.index');
 }
 
   public function announcements(Request $request)
@@ -150,11 +147,7 @@ class studentDashboardController extends Controller
         ->orderBy('start_date', 'desc')
         ->get();
 
-    if ($request->ajax()) {
-        return view('frontend.student-dashboard.announcements.index', compact('announcements'));
-    }
-
-    return view('frontend.student-dashboard.index');
+     return view('frontend.student-dashboard.announcements.index', compact('announcements'));
 }
 
 
