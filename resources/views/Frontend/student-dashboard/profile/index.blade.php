@@ -1,4 +1,4 @@
-{{-- @extends('Frontend.layouts.master')
+@extends('Frontend.layouts.master')
 
 @section('content')
     <!--====== PAGE BANNER PART START ======-->
@@ -15,7 +15,7 @@
                 @include('frontend.student-dashboard.sidebar')
 
                 <div class="col-lg-8">
-                    @include('frontend.student-dashboard.navbar') --}}
+                    @include('frontend.student-dashboard.navbar')
 
                     <div class="dashboard-content ajax-area">
                         <div class="mb-5">
@@ -59,10 +59,10 @@
                         <a href="{{ route('student.profile.edit') }}" class="main-btn mt-4">Edit Profile</a>
                     </div>
                     
-                {{-- </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!--====== STUDENT PART START ======-->
-@endsection --}}
+@endsection

@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
     Route::get('announcements', [studentDashboardController::class, 'announcements'])->name('announcements');
     Route::get('announcements/{id}', [studentDashboardController::class, 'showAnnouncements'])->name('announcements.show');
 
+    Route::get('/exam/{course_id}', [studentDashboardController::class, 'showMcqForm'])->name('exam');
+    Route::post('/exam/{course_id}', [studentDashboardController::class, 'submitMcqForm'])->name('submit-mcq');
 });
 
 
@@ -87,7 +89,6 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
     Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
-
 });
 
 

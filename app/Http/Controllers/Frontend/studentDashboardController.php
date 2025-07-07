@@ -22,9 +22,9 @@ class studentDashboardController extends Controller
 
   function index(): View
   {
-   // dd('hello');
+    // dd('hello');
     return view('Frontend.student-dashboard.index');
-   //return view('Frontend.layouts.master');
+    //return view('Frontend.layouts.master');
   }
 
   function becomeInstructor(string $id): View
@@ -64,7 +64,7 @@ class studentDashboardController extends Controller
     $user = Auth::user(); // get the logged in student
 
     if ($request->ajax()) {
-        return view('frontend.student-dashboard.profile.index', compact('user'));
+      return view('frontend.student-dashboard.profile.index', compact('user'));
     }
 
     return view('frontend.student-dashboard.index');
@@ -106,7 +106,7 @@ class studentDashboardController extends Controller
   }
 
   public function courses(Request $request)
-{
+  {
     $user = Auth::user();
     $classId = $user->student_classes_id;
 
@@ -117,38 +117,38 @@ class studentDashboardController extends Controller
     }*/
     return view('frontend.student-dashboard.enrolled-courses.index', compact('courses'));
 
-   // return view('frontend.student-dashboard.index');
-}
+    // return view('frontend.student-dashboard.index');
+  }
 
 
   public function courseChapters($id)
-{
+  {
     $course = Course::findOrFail($id);
     $chapters = Chapter::where('course_id', $id)
-        ->where('status', 'active')
-        ->orderBy('order')
-        ->get();
+      ->where('status', 'active')
+      ->orderBy('order')
+      ->get();
 
     return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
-}
+  }
 
   public function remarks(Request $request)
-{
+  {
     return view('frontend.student-dashboard.remarks.index');
-}
+  }
 
   public function announcements(Request $request)
-{
+  {
     $announcements = Announcement::where('is_active', true)
-        ->where(function ($query) {
-            $query->where('target_type', 'all')
-                ->orWhere('created_by_id', auth()->id());
-        })
-        ->orderBy('start_date', 'desc')
-        ->get();
+      ->where(function ($query) {
+        $query->where('target_type', 'all')
+          ->orWhere('created_by_id', auth()->id());
+      })
+      ->orderBy('start_date', 'desc')
+      ->get();
 
-     return view('frontend.student-dashboard.announcements.index', compact('announcements'));
-}
+    return view('frontend.student-dashboard.announcements.index', compact('announcements'));
+  }
 
 
   public function showAnnouncements($id)
@@ -157,4 +157,38 @@ class studentDashboardController extends Controller
 
     return view('frontend.student-dashboard.announcements.show', compact('announcement'));
   }
+
+
+
+
+  public function showMcqForm($course_id)
+{
+    $course = Course::findOrFail($course_id);
+
+    $questions = [
+        (object)[
+            'id' => 1,
+            'text' => 'Which one is a programming language?',
+            'type' => 'single',
+            'options' => ['HTML', 'Python', 'CSS', 'Photoshop'],
+        ],
+        (object)[
+            'id' => 2,
+            'text' => 'Select the frontend technologies.',
+            'type' => 'multiple',
+            'options' => ['Vue.js', 'Laravel', 'React', 'Tailwind'],
+        ],
+    ];
+
+    return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
 }
+
+  public function submitMcqForm(Request $request)
+  {
+    $answers = $request->input('answers');
+
+    return back()->with('success', 'Your responses have been submitted!');
+  }
+}
+
+
