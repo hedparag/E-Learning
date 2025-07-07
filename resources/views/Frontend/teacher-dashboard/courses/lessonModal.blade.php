@@ -28,25 +28,25 @@
               </select>
           </div>
 
-              <div class="form-group col-md-6 upload_source">
-                  <label for="#">Path</label>
-                  <div class="input-group">
-                      <span class="input-group-btn">
-                          <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                              <i class="fa fa-picture-o"></i> Choose
-                          </a>
-                      </span>
-                      <input id="thumbnail" class="form-control source" type="text" name="file"
-                          value="{{ @$lesson?->path }}">
-                  </div>
-
+          <div class="form-group col-md-6 upload_source">
+              <label for="#">Path</label>
+              <div class="input-group">
+                  <span class="input-group-btn">
+                      <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                          <i class="fa fa-picture-o"></i> Choose
+                      </a>
+                  </span>
+                  <input id="thumbnail" class="form-control source" type="text" name="file"
+                      value="{{ @$lesson?->path }}">
               </div>
 
-              <div class="form-group col-md-6 external_source d-none">
-                  <label for="inputAddress2">Path</label>
-                  <input type="text"name="url" class="source form-control" value="{{ @$lesson?->path }}">
+          </div>
 
-              </div>
+          <div class="form-group col-md-6 external_source d-none">
+              <label for="inputAddress2">Path</label>
+              <input type="text"name="url" class="source form-control" value="{{ @$lesson?->path }}">
+
+          </div>
 
 
       </div>
@@ -68,4 +68,14 @@
           </div>
       </div>
       <button type="submit" class="btn btn-primary">{{ $editMode == 1 ? 'Update' : 'Create' }}</button>
+  <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+
+      <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+     <script>
+          $(function() {
+              $('#lfm').filemanager('file');
+          });
+      </script>
+
+
   </form>

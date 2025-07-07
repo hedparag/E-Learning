@@ -66,10 +66,13 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 /**
  * -----------TEACHERS ROUTES--------------------
  **/
+
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
 
     Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     Route::get('profile', [TeacherDashboardController::class, 'profile'])->name('profile.index');
     Route::get('profile/edit', [TeacherDashboardController::class, 'editProfile'])->name('profile.edit');
     Route::post('profile/update', [TeacherDashboardController::class, 'updateProfile'])->name('profile.update');
@@ -77,27 +80,28 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     // Route::post('profile/update-social', [TeacherDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
     Route::get('courses', [TeacherDashboardController::class, 'courses'])->name('courses.index');
-   // Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
+    // Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
     Route::get('course/basic-info', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
-    Route::post('course/basic-info',[teacherDashboardController::class,'courseStore'])->name('course.basic-info');
-    Route::get('course/{id}/edit',[CourseCreateController::class,'edit'])->name('courses.edit');
-    Route::post('course/update',[CourseCreateController::class,'update'])->name('courses.update');
-    Route::get('course/chapter',[CourseChapterController::class,'index'])->name('course.chapter');
-    Route::get('course/chapter/edit',[CourseChapterController::class,'edit'])->name('course.chapter.edit');
-    Route::post('course/chapter/store',[CourseChapterController::class,'store'])->name('chapter.store');
-Route::get('course/chapter/lesson',[CourseChapterController::class,'lessonCreate'])->name('course.chapter.create');
-Route::post('course/lesson/store',[CourseChapterController::class,'lessonStore'])->name('lesson.store');
-Route::post('courses/post', [TeacherDashboardController::class, 'postCourses'])->name('courses.post');
-Route::post('course/chapter/update',[CourseChapterController::class,'chapterUpdate'])->name('chapter.update');
-Route::post('course/lesson/update',[CourseChapterController::class,'lessonUpdate'])->name('lesson.update');
+    Route::post('course/basic-info', [teacherDashboardController::class, 'courseStore'])->name('course.basic-info');
+    Route::post('course/basic-info-update', [teacherDashboardController::class, 'courseStoreUpdate'])->name('course.basic-info-update');
+    Route::get('course/{id}/edit', [CourseCreateController::class, 'edit'])->name('courses.edit');
+    Route::post('course/update', [CourseCreateController::class, 'update'])->name('courses.update');
+    Route::get('course/chapter', [CourseChapterController::class, 'index'])->name('course.chapter');
+    Route::get('course/chapter/edit', [CourseChapterController::class, 'edit'])->name('course.chapter.edit');
+    Route::post('course/chapter/store', [CourseChapterController::class, 'store'])->name('chapter.store');
+    Route::get('course/chapter/lesson', [CourseChapterController::class, 'lessonCreate'])->name('course.chapter.create');
+    Route::post('course/lesson/store', [CourseChapterController::class, 'lessonStore'])->name('lesson.store');
+    Route::post('courses/post', [TeacherDashboardController::class, 'postCourses'])->name('courses.post');
+    Route::post('course/chapter/update', [CourseChapterController::class, 'chapterUpdate'])->name('chapter.update');
+    Route::post('course/lesson/update', [CourseChapterController::class, 'lessonUpdate'])->name('lesson.update');
     Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');
-Route::delete('course/chapter/delete/{id}',[CourseChapterController::class,'destroyChapter'])->name('chapter.destroy');
-Route::delete('course/lesson/delete/{id}',[CourseChapterController::class,'destroyLesson'])->name('lesson.destroy');
-Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
+    Route::delete('course/chapter/delete/{id}', [CourseChapterController::class, 'destroyChapter'])->name('chapter.destroy');
+    Route::delete('course/lesson/delete/{id}', [CourseChapterController::class, 'destroyLesson'])->name('lesson.destroy');
+    Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
     Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
-
+Route::get('fullCourses/edit/{id}',[teacherDashboardController::class,'editCourse'])->name('fullCourses.edit');
 });
 
 

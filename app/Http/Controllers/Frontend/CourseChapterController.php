@@ -74,16 +74,33 @@ class CourseChapterController extends Controller
     }
     public function lessonStore(Request $request)
     {
-        $request->validate([
+         $rules=[
+            'title' => ['required', 'string', 'max:255'],
+            'desc' => ['nullable', 'string', 'max:1000'],
+            'source' => ['required', 'in:upload,youtube,vimeo,external_links'],
+            'type' => ['required', 'in:audio,video,doc,file'],
+            'duration' => ['required', 'integer']
+        ];
+
+
+         if($request->filled('file')){
+            $rules['file']=['required'];
+           }
+           else{
+            $rules['url']=['required'];
+           }
+            $request->validate($rules);
+
+       /* $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'desc' => ['nullable', 'string', 'max:1000'],
             'source' => ['required', 'in:upload,youtube,vimeo,external_link'],
             'type' => ['required', 'in:audio,video,doc,file'],
             'duration' => ['required', 'integer']
-        ]);
+        ]);*/
         $lesson = new Lesson();
         $order = Lesson::where('chapter_id', $request->chapter_id)->count();
-        if ($request->source == 'upload') {
+       /* if ($request->source == 'upload') {
             $request->validate([
                 'file' => ['required', 'url']
             ]);
@@ -94,8 +111,8 @@ class CourseChapterController extends Controller
                 'url' => ['required', 'url']
             ]);
             $lesson->path = $request->url;
-        }
-
+        }*/
+ $lesson->path = $request->filled('url') ? $request->url :  $request->file;
         $lesson->title = $request->title;
         $lesson->desc = $request->desc;
         $lesson->teacher_id = Auth::guard('web')->user()->id;
@@ -130,15 +147,24 @@ class CourseChapterController extends Controller
     public function lessonUpdate(Request $request)
     {
    // dd($request->all());
-        $request->validate([
+       $rules=[
             'title' => ['required', 'string', 'max:255'],
             'desc' => ['nullable', 'string', 'max:1000'],
             'source' => ['required', 'in:upload,youtube,vimeo,external_links'],
             'type' => ['required', 'in:audio,video,doc,file'],
             'duration' => ['required', 'integer']
-        ]);
+        ];
+
         $lesson = Lesson::findOrFail($request->lesson_id);
-        if ($request->source == 'upload') {
+
+         if($request->filled('file')){
+            $rules['file']=['required'];
+           }
+           else{
+            $rules['url']=['required'];
+           }
+            $request->validate($rules);
+       /* if ($request->source == 'upload') {
             $request->validate([
                 'file' => ['required', 'url']
             ]);
@@ -149,8 +175,8 @@ class CourseChapterController extends Controller
                 'url' => ['required', 'url']
             ]);
             $lesson->path = $request->url;
-        }
-
+        }*/
+        $lesson->path = $request->filled('url') ? $request->url :  $request->file;
         $lesson->title = $request->title;
         $lesson->desc = $request->desc;
         $lesson->teacher_id = Auth::guard('web')->user()->id;

@@ -3,6 +3,7 @@
 <form action="" method="POST" class="course-form course-update">
     @csrf
     <input type="hidden" name="id" value="{{ $course->id }}">
+    <input type="hidden" name="editMode" value="{{ $editMode }}">
     <input type="hidden" name="current_step" value="3">
     <input type="hidden" name="next_step" value="4">
 
@@ -87,4 +88,9 @@
 
         </div>
     </div>
+
+        <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+         <script>
+        $('#lfm').filemanager('file');
+    </script>
 @endsection

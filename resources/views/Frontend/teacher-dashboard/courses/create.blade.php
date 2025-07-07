@@ -51,6 +51,11 @@
                                                     id="contact-09-tab" data-toggle="tab" href="#contact-09" role="tab"
                                                     aria-controls="contact-09" aria-selected="false" data-step="4">Finish</a>
                                             </li>
+                                             <li class="nav-item">
+                                                <a class="nav-link {{ request('step') == 5 ? 'active' : '' }} courseTab"
+                                                    id="contact-09-tab" data-toggle="tab" href="#mock-09" role="tab"
+                                                    aria-controls="mock-09" aria-selected="false" data-step="5">Mock Test</a>
+                                            </li>
                                         </ul>
                                         <div class="tab-content">
                                             @yield('tab_content')

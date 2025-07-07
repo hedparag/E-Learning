@@ -3811,7 +3811,7 @@ p.form-message.error {
     border-color: #1c87c9;
 }
 
-/*external*/
+/*external
     .course-card {
         aspect-ratio: 1 / 1;
         border-radius: 10px;
@@ -3880,7 +3880,56 @@ p.form-message.error {
     .rating i {
         color: #ffc107;
         font-size: 14px;
+    }*/
+    /*External new*/
+
+    .course-card {
+        height: 100%;
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
+
+    .course-img-wrapper img {
+        width: 100%;
+        height: 180px; /* fixed height */
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .course-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+        height: 48px;
+        overflow: hidden;
+    }
+
+    .course-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .course-footer img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 5px;
+    }
+    .alert.alert-outline-danger {
+    border-color: #e3324c !important;
+    color: #f0072a !important;
+}
+
+
 
 
 
