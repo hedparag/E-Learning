@@ -7,7 +7,7 @@
   Version: 1.1
 */
 
-/* CSS Index 
+/* CSS Index
 -----------------------------------
 1. Theme default
 2. HEADER
@@ -39,13 +39,13 @@
 28. BLOG SINGEL PAGE
 29. SHOP PAGE
 30. SHOP SINGEL PAGE
-31. CONTACT PAGE 
+31. CONTACT PAGE
 
 */
 
 
 /*===========================
-    1. Theme default css 
+    1. Theme default css
 ===========================*/
 
 
@@ -220,6 +220,7 @@ p {
 }
 
 .rubix-cube {
+<<<<<<< HEAD
     border: 1px solid #FFF;
     width: 48px;
     height: 48px;
@@ -229,6 +230,117 @@ p {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+=======
+	border: 1px solid #FFF;
+	width: 48px;
+	height: 48px;
+	background-color: #FFF;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.rubix-cube .layer{
+	width:14px;
+	height:14px;
+	background-color:#07294d;
+	border:1px solid #FFF;
+	position:absolute;
+
+}
+.rubix-cube .layer-1{
+	left:0px;
+	top:0px;
+	-webkit-animation: rubixcube4 2s infinite linear;
+	animation: rubixcube4 2s infinite linear;
+}
+.rubix-cube .layer-2{
+	left:16px;
+	top:0px;
+	-webkit-animation: rubixcube3 2s infinite  linear;
+	animation: rubixcube3 2s infinite  linear;
+}
+.rubix-cube .layer-3{
+	left:32px;
+	top:0px;
+}
+.rubix-cube .layer-4{
+	left:0px;
+	top:16px;
+	-webkit-animation: rubixcube5 2s infinite linear;
+	animation: rubixcube5 2s infinite linear;
+
+}
+.rubix-cube .layer-5{
+	left:16px;
+	top:16px;
+	-webkit-animation: rubixcube2 2s infinite linear;
+	animation: rubixcube2 2s infinite linear;
+}
+.rubix-cube .layer-6{
+	left:32px;
+	top:16px;
+	-webkit-animation: rubixcube1 2s infinite linear;
+	animation: rubixcube1 2s infinite linear;
+}
+.rubix-cube .layer-7{
+	left:0px;
+	top:32px;
+	-webkit-animation: rubixcube6 2s infinite linear;
+	animation: rubixcube6 2s infinite linear;
+}
+.rubix-cube .layer-8{
+	left:16px;
+	top:32px;
+	-webkit-animation: rubixcube7 2s infinite linear;
+	animation: rubixcube7 2s infinite linear;
+
+}
+@-webkit-keyframes rubixcube1{
+	20%{ top:16px; left:32px;}
+	30%{ top:32px; left:32px; }
+	40%{ top:32px; left:32px; }
+	50%{ top:32px; left:32px; }
+	60%{ top:32px; left:32px; }
+	70%{ top:32px; left:32px; }
+	80%{ top:32px; left:32px; }
+	90%{ top:32px; left:32px; }
+	100%{ top:32px; left:16px; }
+
+}
+@keyframes rubixcube1{
+	20%{ top:16px; left:32px;}
+	30%{ top:32px; left:32px; }
+	40%{ top:32px; left:32px; }
+	50%{ top:32px; left:32px; }
+	60%{ top:32px; left:32px; }
+	70%{ top:32px; left:32px; }
+	80%{ top:32px; left:32px; }
+	90%{ top:32px; left:32px; }
+	100%{ top:32px; left:16px; }
+
+}
+@-webkit-keyframes rubixcube2{
+	30%{ left:16px;}
+	40%{ left:32px;}
+	50%{ left:32px;}
+	60%{ left:32px;}
+	70%{ left:32px;}
+	80%{ left:32px;}
+	90%{ left:32px;}
+	100%{ left:32px;}
+}
+@keyframes rubixcube2{
+	30%{ left:16px;}
+	40%{ left:32px;}
+	50%{ left:32px;}
+	60%{ left:32px;}
+	70%{ left:32px;}
+	80%{ left:32px;}
+	90%{ left:32px;}
+	100%{ left:32px;}
+>>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
 }
 
 .rubix-cube .layer {
@@ -693,7 +805,7 @@ p {
 
 
 /*=====================================================
-    2. HEADER css 
+    2. HEADER css
 ======================================================*/
 
 
@@ -1097,7 +1209,7 @@ p {
 
 
 /*=====================================================
-    3. SLIDER css 
+    3. SLIDER css
 ======================================================*/
 
 .single-slider {
@@ -1304,7 +1416,7 @@ p {
 
 
 /*=====================================================
-    4. CATEGORY css 
+    4. CATEGORY css
 ======================================================*/
 
 .color-1 {
@@ -1397,7 +1509,7 @@ p {
 
 
 /*=====================================================
-    5. ABOUT css 
+    5. ABOUT css
 ======================================================*/
 
 #about-part {
@@ -1485,7 +1597,7 @@ p {
 
 
 /*=====================================================
-    6. APPLY css 
+    6. APPLY css
 ======================================================*/
 
 
@@ -1527,7 +1639,7 @@ p {
 
 
 /*=====================================================
-    7. COURSE css 
+    7. COURSE css
 ======================================================*/
 
 .singel-course {
@@ -1717,7 +1829,7 @@ p {
 
 
 /*=====================================================
-    8. VIDEO FEATURES css 
+    8. VIDEO FEATURES css
 ======================================================*/
 
 #video-feature {
@@ -1791,7 +1903,7 @@ p {
 
 
 /*=====================================================
-    9. TEACHERS css 
+    9. TEACHERS css
 ======================================================*/
 
 .teachers-cont {}
@@ -1855,7 +1967,7 @@ p {
 
 
 /*=====================================================
-    10. PUBLICATION css 
+    10. PUBLICATION css
 ======================================================*/
 
 
@@ -1966,7 +2078,7 @@ p {
 }
 
 /*=====================================================
-    11. TEASTIMONIAL css 
+    11. TEASTIMONIAL css
 ======================================================*/
 
 #testimonial {}
@@ -2070,7 +2182,7 @@ p {
 
 
 /*=====================================================
-    12. NEWS css 
+    12. NEWS css
 ======================================================*/
 
 .singel-news {}
@@ -2134,7 +2246,7 @@ p {
 
 
 /*=====================================================
-    13. FOOTER css 
+    13. FOOTER css
 ======================================================*/
 
 .footer-top {
@@ -2289,7 +2401,7 @@ p {
 
 
 /*=====================================================
-    14. CATEGORY 2 css 
+    14. CATEGORY 2 css
 ======================================================*/
 
 .category-2-items {}
@@ -2400,7 +2512,7 @@ p {
 
 
 /*=====================================================
-    15. COURSE 2 css 
+    15. COURSE 2 css
 ======================================================*/
 
 .singel-course-2 {}
@@ -2503,7 +2615,7 @@ p {
 
 
 /*=====================================================
-    16. COUNTER css 
+    16. COUNTER css
 ======================================================*/
 
 .singel-counter {
@@ -2536,7 +2648,7 @@ p {
 
 
 /*=====================================================
-    17. TEACHERS 2 css 
+    17. TEACHERS 2 css
 ======================================================*/
 
 .teachers-2 {}
@@ -2657,7 +2769,7 @@ p {
 
 
 /*=====================================================
-    18. EVENT 2 css 
+    18. EVENT 2 css
 ======================================================*/
 
 .event-bg {
@@ -2673,9 +2785,15 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
+<<<<<<< HEAD
     background: -webkit-gradient(linear, left top, right top, from(rgba(7, 41, 77, 0.3)), color-stop(10%, rgba(7, 41, 77, 0.3)), to(rgba(7, 41, 77, 1)));
     background: linear-gradient(to right, rgba(7, 41, 77, 0.3) 0%, rgba(7, 41, 77, 0.3) 10%, rgba(7, 41, 77, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d07294d', endColorstr='#07294d', GradientType=1);
+=======
+    background: -webkit-gradient(linear, left top, right top, from(rgba(7,41,77,0.3)),color-stop(10%, rgba(7,41,77,0.3)),to(rgba(7,41,77,1)));
+    background: linear-gradient(to right, rgba(7,41,77,0.3) 0%,rgba(7,41,77,0.3) 10%,rgba(7,41,77,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d07294d', endColorstr='#07294d',GradientType=1 );
+>>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
 }
 
 .event-2 .event-title h3 {
@@ -2723,7 +2841,7 @@ p {
 
 
 /*=====================================================
-    19. COUNT DOWN css 
+    19. COUNT DOWN css
 ======================================================*/
 
 .count-down-cont {
@@ -2809,7 +2927,7 @@ p {
 
 
 /*=====================================================
-    20. PAGE BANNER  css 
+    20. PAGE BANNER  css
 ======================================================*/
 
 .page-banner-cont {
@@ -2848,7 +2966,7 @@ p {
 
 
 /*=====================================================
-    21. ABOUT PAGE css 
+    21. ABOUT PAGE css
 ======================================================*/
 
 .about-image img {
@@ -2876,7 +2994,7 @@ p {
 
 
 /*=====================================================
-    22. COURSES PAGE css 
+    22. COURSES PAGE css
 ======================================================*/
 
 .tab-content {}
@@ -2974,7 +3092,7 @@ p {
 
 
 /*=====================================================
-    23. COURSE SINGEl PAGE css 
+    23. COURSE SINGEl PAGE css
 ======================================================*/
 
 .corses-singel-left {
@@ -3531,7 +3649,7 @@ p {
 
 
 /*=====================================================
-    24. EVENT PAGE css 
+    24. EVENT PAGE css
 ======================================================*/
 
 .singel-event-list {
@@ -3595,7 +3713,7 @@ p {
 
 
 /*=====================================================
-    25. EVENT SINGEL PAGE css 
+    25. EVENT SINGEL PAGE css
 ======================================================*/
 
 .events-area {
@@ -3711,7 +3829,7 @@ p {
 
 
 /*=====================================================
-    26. TEACHERS SInGEL PAGE css 
+    26. TEACHERS SInGEL PAGE css
 ======================================================*/
 
 .teachers-left {
@@ -3821,7 +3939,7 @@ p {
 
 
 /*=====================================================
-    27. BLOG PAGE css 
+    27. BLOG PAGE css
 ======================================================*/
 
 .singel-blog {
@@ -3997,7 +4115,7 @@ p {
 
 
 /*=====================================================
-    28. BLOG SINGEL PAGE css 
+    28. BLOG SINGEL PAGE css
 ======================================================*/
 
 
@@ -4109,7 +4227,322 @@ p {
     border-bottom: 1px solid #d2d2d2;
 }
 
+<<<<<<< HEAD
 .blog-comment .comment .comment-author {
+=======
+.blog-comment .comment .comment-author{
+    display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+.blog-comment .comment .comment-author .author-thum img{
+    border-radius: 5px;
+}
+.blog-comment .comment .comment-author .comment-name{
+    padding-left: 20px;
+}
+.blog-comment .comment .comment-author .comment-name h6{
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+.blog-comment .comment .comment-author .comment-name span{
+    font-size: 15px;
+	color: #8a8a8a;
+	font-weight: 400;
+	font-family: 'Poppins', sans-serif;
+}
+.blog-comment .comment .comment-replay {
+	position: absolute;
+	top: 15px;
+	right: 0;
+}
+.comment-form .form-singel{
+    margin-top: 20px;
+}
+.comment-form .form-singel input,
+.comment-form .form-singel textarea{
+    height: 60px;
+    width: 100%;
+    padding: 0 20px;
+    border: 1px solid #b8b8b8;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.comment-form .form-singel textarea{
+    height: 120px;
+    resize: none;
+    padding-top: 20px;
+}
+
+/*=====================================================
+    29. SHOP PAGE css
+======================================================*/
+
+.shop-top-search {
+	background-color: #fff;
+	padding: 15px 30px;
+	border-radius: 5px;
+}
+.shop-top-search .shop-bar {
+    display: inline-block;
+}
+.shop-top-search .nav .nav-item {
+	margin-right: 15px;
+	font-size: 15px;
+	color: #8a8a8a;
+}
+.shop-top-search .nav .nav-item a{
+    font-size: 16px;
+    color: #8a8a8a;
+}
+.shop-top-search .nav .nav-item a.active {
+	color: #ffc600;
+}
+.shop-top-search .shop-select {
+	display: inline-block;
+    float: right;
+    margin-top: -3px;
+}
+
+.shop-top-search .shop-select .nice-select {
+	background-color: #f6f6f6;
+	border-radius: 5px;
+	border: 0;
+	font-size: 14px;
+	height: 30px;
+	width: 135px;
+    line-height: 30px;
+    color: #8a8a8a;
+}
+.shop-top-search .shop-select .nice-select.open .list {
+	width: 100%;
+    margin-top: 0;
+    background-color: #f6f6f6;
+    border: 0;
+}
+
+#shop-list .singel-publication .cont {
+	display: block;
+    padding-top: 0;
+}
+#shop-list .singel-publication .cont .name {
+	width: 100%;
+}
+#shop-list .singel-publication .cont .name a h6 {
+	font-size: 18px;
+}
+#shop-list .singel-publication .cont .name span {
+	font-size: 16px;
+	color: #8a8a8a;
+	padding-top: 15px;
+}
+#shop-list .singel-publication .cont .button {
+	width: 100%;
+    padding-top: 10px;
+}
+
+#shop-list .singel-publication .cont .button a {
+	padding: 0 20px;
+	font-size: 12px;
+	line-height: 35px;
+}
+
+
+/*=====================================================
+    30. SHOP SINGEL PAGE css
+======================================================*/
+
+.shop-destails{
+    background-color: #fff;
+    padding: 20px 50px 50px;
+    border-radius: 5px;
+}
+.shop-destails .shop-left{
+    padding-right: 50px;
+}
+.shop-destails .shop-left .shop-image a{
+    display: block;
+}
+.shop-destails .shop-left .shop-image img{
+    width: 100%;
+    border-radius: 4px;
+}
+.shop-destails .shop-left .nav .nav-item{
+    margin-right: 25px;
+}
+.shop-destails .shop-left .nav .nav-item:last-child{
+    margin-right: 0;
+}
+.shop-destails .shop-left .nav .nav-item a {
+	display: block;
+}
+.shop-destails .shop-left .nav .nav-item a .shop-thum img{
+    width: 100%;
+    border-radius: 3px;
+}
+
+.shop-right{}
+.shop-right h6{
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+.shop-right span{
+    font-size: 15px;
+    color: #8a8a8a;
+}
+.shop-right p{
+    padding-bottom: 15px;
+}
+.nice-number {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+.nice-number input {
+	width: 50px !important;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #aaa;
+    padding-right: 20px;
+}
+.nice-number button {
+	position: absolute;
+	width: 25px;
+	padding: 0;
+	right: 2px;
+	top: 2px;
+	border: 0;
+    border-top-right-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
+
+.nice-number button:last-child{
+    top: auto;
+    bottom: 2px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 5px;
+}
+.nice-number button i{
+    font-size: 15px;
+    color: #000;
+}
+.add-btn{
+    display: inline-block;
+}
+.add-btn .main-btn{
+    line-height: 46px;
+}
+
+.shop-reviews .nav .nav-item{}
+.shop-reviews .nav .nav-item:first-child a{
+    border-top-left-radius: 5px;
+}
+.shop-reviews .nav .nav-item:last-child a{
+    border-top-right-radius: 5px;
+}
+.shop-reviews .nav .nav-item a{
+    width: 165px;
+    line-height: 55px;
+    background-color: #315377;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #fff;
+    -webkit-transition: all 0.4s linear;
+    transition: all 0.4s linear;
+}
+.shop-reviews .nav .nav-item a.active{
+    background-color: #fafafa;
+    color: #315377;
+}
+
+.shop-reviews .tab-content{
+    background-color: #fafafa;
+    padding: 0px 45px 40px;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+}
+.shop-reviews .tab-content .reviews-cont{
+    padding: 0;
+}
+
+.releted-item{}
+.releted-item .title h3{
+    font-size: 30px;
+    color: #07294d;
+}
+
+
+
+/*=====================================================
+    31. CONTACT PAGE css
+======================================================*/
+
+.contact-from{
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
+}
+.contact-from .main-form{}
+.contact-from .main-form .singel-form{
+    margin-top: 20px;
+}
+.contact-from .main-form .singel-form input,
+.contact-from .main-form .singel-form textarea{
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    border: 1px solid #a1a1a1;
+    border-radius: 5px;
+    color: #8a8a8a;
+    font-size: 15px;
+}
+
+.contact-from .main-form .singel-form textarea{
+    padding-top: 10px;
+    height: 100px;
+    resize: none;
+}
+
+.form-group{
+    margin: 0;
+}
+.list-unstyled li {
+	font-size: 13px;
+	margin-left: 2px;
+	margin-top: 5px;
+	color: #f00;
+}
+p.form-message.success,
+p.form-message.error {
+	font-size: 16px;
+	color: #353535;
+	background: #ddd;
+	padding: 10px 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.contact-address{
+    background-color: #fff;
+    padding: 20px 50px 50px;
+    border-radius: 5px;
+}
+
+.contact-address ul li{
+    padding-top: 30px;
+}
+.contact-address ul li .singel-address{
+>>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
@@ -4574,6 +5007,126 @@ p.form-message.error {
 .fixed-table tr {
     border: none !important;
 }
+/*external
+    .course-card {
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+    }
+
+    .course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-img-wrapper {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .course-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .price-badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: #ffc107;
+        color: #000;
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .course-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 5px 0;
+    }
+
+    .course-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .teacher-info img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
+
+    .rating i {
+        color: #ffc107;
+        font-size: 14px;
+    }*/
+    /*External new*/
+
+    .course-card {
+        height: 100%;
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .course-img-wrapper img {
+        width: 100%;
+        height: 180px; /* fixed height */
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .course-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+        height: 48px;
+        overflow: hidden;
+    }
+
+    .course-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .course-footer img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 5px;
+    }
+    .alert.alert-outline-danger {
+    border-color: #e3324c !important;
+    color: #f0072a !important;
+}
+
+
+
 
 
 
