@@ -15,6 +15,10 @@ use App\Models\AddSubject;
 use App\Models\Announcement;
 use App\Models\Chapter;
 use App\Models\Course;
+use App\Models\MockTest;
+use App\Models\MockQuestion;
+use App\Models\MockQuestionOption;
+use App\Models\MockTestAttempt;
 
 class studentDashboardController extends Controller
 {
@@ -161,34 +165,119 @@ class studentDashboardController extends Controller
 
 
 
+  //   public function showMcqForm($course_id)
+  // {
+  //     $course = Course::findOrFail($course_id);
+
+  //     $questions = [
+  //         (object)[
+  //             'id' => 1,
+  //             'text' => 'Which one is a programming language?',
+  //             'type' => 'single',
+  //             'options' => ['HTML', 'Python', 'CSS', 'Photoshop'],
+  //         ],
+  //         (object)[
+  //             'id' => 2,
+  //             'text' => 'Select the frontend technologies.',
+  //             'type' => 'multiple',
+  //             'options' => ['Vue.js', 'Laravel', 'React', 'Tailwind'],
+  //         ],
+  //     ];
+
+  //     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
+  // }
+
   public function showMcqForm($course_id)
-{
+  {
     $course = Course::findOrFail($course_id);
 
-    $questions = [
-        (object)[
-            'id' => 1,
-            'text' => 'Which one is a programming language?',
-            'type' => 'single',
-            'options' => ['HTML', 'Python', 'CSS', 'Photoshop'],
-        ],
-        (object)[
-            'id' => 2,
-            'text' => 'Select the frontend technologies.',
-            'type' => 'multiple',
-            'options' => ['Vue.js', 'Laravel', 'React', 'Tailwind'],
-        ],
-    ];
+    // Check if there is an active test
+    $mockTest = MockTest::where('course_id', $course_id)
+      ->where('status', 'active')
+      ->first();
+
+    if (!$mockTest) {
+      return redirect()->back()->with('error', 'No active test found for this course.');
+    }
+
+    // Fetch all questions
+    $rawQuestions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
+
+    if ($rawQuestions->isEmpty()) {
+      return redirect()->back()->with('error', 'No questions found in this test.');
+    }
+
+    // Prepare questions with at least one option
+    $questions = $rawQuestions->map(function ($question) {
+      $options = MockQuestionOption::where('mock_question_id', $question->id)->get();
+
+      return $options->isNotEmpty()
+        ? (object)[
+          'id' => $question->id,
+          'text' => $question->question_text,
+          'type' => 'single', // placeholder for now
+          'options' => $options->map(fn($opt) => $opt->option_text)->toArray(),
+        ]
+        : null;
+    })->filter(); // Remove null entries
+
+    if ($questions->isEmpty()) {
+      return redirect()->back()->with('error', 'No valid questions with options found.');
+    }
 
     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
-}
+  }
 
-  public function submitMcqForm(Request $request)
+
+
+
+  public function submitMcqForm(Request $request, $course_id)
   {
-    $answers = $request->input('answers');
+    $answers = $request->input('answers', []);
+    $user = Auth::user();
 
-    return back()->with('success', 'Your responses have been submitted!');
+    // Get the active test for this course
+    $mockTest = MockTest::where('course_id', $course_id)->where('status', 'active')->first();
+    if (!$mockTest) {
+      return back()->with('error', 'No active test found for this course.');
+    }
+
+    $questions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
+    $score = 0;
+
+    foreach ($questions as $question) {
+      $submitted = $answers[$question->id] ?? null;
+
+      $correctOptions = MockQuestionOption::where('mock_question_id', $question->id)
+        ->where('correct_option', true)
+        ->pluck('option_text')
+        ->sort()
+        ->values()
+        ->toArray();
+
+      if (!$submitted) {
+        continue;
+      }
+
+      $submittedArray = is_array($submitted)
+        ? collect($submitted)->sort()->values()->toArray()
+        : [$submitted];
+
+      if ($submittedArray === $correctOptions) {
+        $score++;
+      }
+    }
+
+    // Save attempt
+    MockTestAttempt::create([
+      'student_id'   => $user->id,
+      'mock_test_id' => $mockTest->id,
+      'score'        => $score,
+      'total_marks'  => $questions->count(),
+      'attempt_date' => now()->toDateString(),
+      'remarks'      => 'Submitted via MCQ form',
+    ]);
+
+    return back()->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
   }
 }
-
-
