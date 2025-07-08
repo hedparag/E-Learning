@@ -92,6 +92,8 @@
 
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
    <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!--====== Bootstrap js ======-->
 
@@ -134,7 +136,7 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
  {{--   <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script> --}}
 
-   <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- plugins -->
 
@@ -148,7 +150,8 @@
           $(function() {
               $('#lfm').filemanager('file');
           });
-</script>
+      </script>
+
 
 
     <script>

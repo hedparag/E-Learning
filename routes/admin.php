@@ -12,10 +12,12 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\CourseApproveController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\MockSettingController;
+use App\Http\Controllers\Admin\ReportCardController;
 use App\Http\Controllers\Admin\SubjectAssignController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,4 +79,8 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
         ->name('logout');
     Route::get('mock',[MockSettingController::class,'index'])->name('mock');
     Route::post('mock/store',[MockSettingController::class,'store'])->name('mock.store');
+     Route::get('courseApprove',[CourseApproveController::class,'index'])->name('courseApprove');
+     Route::post('approveSubmit/{id}',[CourseApproveController::class,'store'])->name('approveSubmit');
+     Route::get('coursePreview/{id}',[CourseApproveController::class,'preview'])->name('course.preview');
+     Route::get('ReportCard',[ReportCardController::class,'index'])->name('reportCard');
 });
