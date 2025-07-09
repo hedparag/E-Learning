@@ -45,9 +45,7 @@
                                                             Take Quiz
                                                         </a> --}}
                                                         <a href="{{ route('student.exam', ['course_id' => $course->id]) }}"
-                                                            style="display: inline-block; padding: 6px 16px; background-color: #8b5cf6; color: white; border-radius: 5px;">
-                                                            Take Quiz
-                                                        </a>
+                                                            class="btn btn-primary">Take Quiz</a>
 
                                                     </div>
                                                 </div>

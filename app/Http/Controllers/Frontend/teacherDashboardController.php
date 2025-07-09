@@ -18,45 +18,10 @@ use Illuminate\Support\Str;
 
 class teacherDashboardController extends Controller
 {
-  use FileUpload;
-  function index(): View
-  {
-    return view('Frontend.teacher-dashboard.index');
-  }
-
-  public function profile()
-  {
-    $user = Auth::user(); // get the logged in teacher
-    return view('frontend.teacher-dashboard.profile.index', compact('user'));
-  }
-
-  public function editProfile(): View
-  {
-    return view('frontend.teacher-dashboard.profile.update');
-  }
-
-  public function updateProfile(Request $request)
-  {
-    $user = Auth::user();
-
-    $request->validate([
-      'name' => 'required|string|max:255',
-      'email' => 'required|email|unique:users,email,' . $user->id,
-      'phone' => 'nullable|string|max:15',
-      'gender' => 'nullable|in:male,female',
-      'bio' => 'nullable|string',
-      'headline' => 'nullable|string|max:255',
-      'facebook' => 'nullable|url',
-      'linkedin' => 'nullable|url',
-      'github' => 'nullable|url',
-      'website' => 'nullable|url',
-      'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
-
-    // Handle image upload
-    if ($request->hasFile('image')) {
-      $path = $request->file('image')->store('uploads', 'public');
-      $user->image = '/storage/' . $path;
+    use FileUpload;
+    function index(): View
+    {
+        return view('Frontend.teacher-dashboard.index');
     }
 
     public function profile()

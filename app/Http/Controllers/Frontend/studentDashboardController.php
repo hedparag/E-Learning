@@ -124,17 +124,18 @@ class studentDashboardController extends Controller
     // return view('frontend.student-dashboard.index');
   }
 
-
   public function courseChapters($id)
   {
     $course = Course::findOrFail($id);
-    $chapters = Chapter::where('course_id', $id)
+    $chapters = Chapter::with('lessons') // eager load lessons
+      ->where('course_id', $id)
       ->where('status', 'active')
       ->orderBy('order')
       ->get();
 
     return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
   }
+
 
   public function remarks(Request $request)
   {
@@ -163,29 +164,6 @@ class studentDashboardController extends Controller
   }
 
 
-
-
-  //   public function showMcqForm($course_id)
-  // {
-  //     $course = Course::findOrFail($course_id);
-
-  //     $questions = [
-  //         (object)[
-  //             'id' => 1,
-  //             'text' => 'Which one is a programming language?',
-  //             'type' => 'single',
-  //             'options' => ['HTML', 'Python', 'CSS', 'Photoshop'],
-  //         ],
-  //         (object)[
-  //             'id' => 2,
-  //             'text' => 'Select the frontend technologies.',
-  //             'type' => 'multiple',
-  //             'options' => ['Vue.js', 'Laravel', 'React', 'Tailwind'],
-  //         ],
-  //     ];
-
-  //     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
-  // }
 
   public function showMcqForm($course_id)
   {
@@ -227,8 +205,6 @@ class studentDashboardController extends Controller
 
     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
   }
-
-
 
 
   public function submitMcqForm(Request $request, $course_id)
