@@ -174,6 +174,7 @@ class studentDashboardController extends Controller
       ->where('status', 'active')
       ->first();
 
+
     if (!$mockTest) {
       return redirect()->back()->with('error', 'No active test found for this course.');
     }
@@ -184,6 +185,7 @@ class studentDashboardController extends Controller
     if ($rawQuestions->isEmpty()) {
       return redirect()->back()->with('error', 'No questions found in this test.');
     }
+
 
     // Prepare questions with at least one option
     $questions = $rawQuestions->map(function ($question) {
