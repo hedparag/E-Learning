@@ -193,13 +193,13 @@ class studentDashboardController extends Controller
 
     // Check if there is an active test
     $mockTest = MockTest::where('course_id', $course_id)
-      ->where('status', 'active')
+      ->where('status', 'pending')
       ->first();
 
 
-    if (!$mockTest) {
+   /* if (!$mockTest) {
       return redirect()->back()->with('error', 'No active test found for this course.');
-    }
+    }*/
 
     // Fetch all questions
     $rawQuestions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
@@ -240,7 +240,7 @@ class studentDashboardController extends Controller
 
     // Get the active test for this course
     $mockTest = MockTest::where('course_id', $course_id)->where('status', 'active')->first();
-    if (!$mockTest) {
+   if (!$mockTest) {
       return back()->with('error', 'No active test found for this course.');
     }
 
