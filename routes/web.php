@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 
     Route::get('enrolled-courses', [studentDashboardController::class, 'courses'])->name('enrolled-courses.index');
     Route::get('chapters/{id}', [studentDashboardController::class, 'courseChapters'])->name('enrolled-courses.chapters');
+    Route::post('/chapter/{id}/comment', [StudentDashboardController::class, 'submitChapterComment'])->name('chapter.comment');
 
     Route::get('remarks', [studentDashboardController::class, 'remarks'])->name('remarks.index');
 

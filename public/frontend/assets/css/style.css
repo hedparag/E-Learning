@@ -220,7 +220,6 @@ p {
 }
 
 .rubix-cube {
-<<<<<<< HEAD
     border: 1px solid #FFF;
     width: 48px;
     height: 48px;
@@ -230,117 +229,6 @@ p {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-=======
-	border: 1px solid #FFF;
-	width: 48px;
-	height: 48px;
-	background-color: #FFF;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-.rubix-cube .layer{
-	width:14px;
-	height:14px;
-	background-color:#07294d;
-	border:1px solid #FFF;
-	position:absolute;
-
-}
-.rubix-cube .layer-1{
-	left:0px;
-	top:0px;
-	-webkit-animation: rubixcube4 2s infinite linear;
-	animation: rubixcube4 2s infinite linear;
-}
-.rubix-cube .layer-2{
-	left:16px;
-	top:0px;
-	-webkit-animation: rubixcube3 2s infinite  linear;
-	animation: rubixcube3 2s infinite  linear;
-}
-.rubix-cube .layer-3{
-	left:32px;
-	top:0px;
-}
-.rubix-cube .layer-4{
-	left:0px;
-	top:16px;
-	-webkit-animation: rubixcube5 2s infinite linear;
-	animation: rubixcube5 2s infinite linear;
-
-}
-.rubix-cube .layer-5{
-	left:16px;
-	top:16px;
-	-webkit-animation: rubixcube2 2s infinite linear;
-	animation: rubixcube2 2s infinite linear;
-}
-.rubix-cube .layer-6{
-	left:32px;
-	top:16px;
-	-webkit-animation: rubixcube1 2s infinite linear;
-	animation: rubixcube1 2s infinite linear;
-}
-.rubix-cube .layer-7{
-	left:0px;
-	top:32px;
-	-webkit-animation: rubixcube6 2s infinite linear;
-	animation: rubixcube6 2s infinite linear;
-}
-.rubix-cube .layer-8{
-	left:16px;
-	top:32px;
-	-webkit-animation: rubixcube7 2s infinite linear;
-	animation: rubixcube7 2s infinite linear;
-
-}
-@-webkit-keyframes rubixcube1{
-	20%{ top:16px; left:32px;}
-	30%{ top:32px; left:32px; }
-	40%{ top:32px; left:32px; }
-	50%{ top:32px; left:32px; }
-	60%{ top:32px; left:32px; }
-	70%{ top:32px; left:32px; }
-	80%{ top:32px; left:32px; }
-	90%{ top:32px; left:32px; }
-	100%{ top:32px; left:16px; }
-
-}
-@keyframes rubixcube1{
-	20%{ top:16px; left:32px;}
-	30%{ top:32px; left:32px; }
-	40%{ top:32px; left:32px; }
-	50%{ top:32px; left:32px; }
-	60%{ top:32px; left:32px; }
-	70%{ top:32px; left:32px; }
-	80%{ top:32px; left:32px; }
-	90%{ top:32px; left:32px; }
-	100%{ top:32px; left:16px; }
-
-}
-@-webkit-keyframes rubixcube2{
-	30%{ left:16px;}
-	40%{ left:32px;}
-	50%{ left:32px;}
-	60%{ left:32px;}
-	70%{ left:32px;}
-	80%{ left:32px;}
-	90%{ left:32px;}
-	100%{ left:32px;}
-}
-@keyframes rubixcube2{
-	30%{ left:16px;}
-	40%{ left:32px;}
-	50%{ left:32px;}
-	60%{ left:32px;}
-	70%{ left:32px;}
-	80%{ left:32px;}
-	90%{ left:32px;}
-	100%{ left:32px;}
->>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
 }
 
 .rubix-cube .layer {
@@ -1236,7 +1124,7 @@ p {
     padding-bottom: 50px;
 }
 
-.slider-cont ul {}
+/* .slider-cont ul {} */
 
 .slider-cont ul li {
     display: inline-block;
@@ -1382,7 +1270,7 @@ p {
 }
 
 
-.slider-feature {}
+/* .slider-feature {} */
 
 .singel-slider-feature {
     display: -moz-flex;
@@ -1396,7 +1284,7 @@ p {
     align-items: flex-start;
 }
 
-.singel-slider-feature .icon {}
+/* .singel-slider-feature .icon {} */
 
 .singel-slider-feature .cont {
     padding-left: 30px;
@@ -1439,7 +1327,7 @@ p {
     z-index: 5;
 }
 
-.category-text {}
+/* .category-text {} */
 
 .category-text h2 {
     font-size: 36px;
@@ -1469,7 +1357,7 @@ p {
     font-weight: 700;
 }
 
-.category-slied {}
+/* .category-slied {} */
 
 .category-slied a {
     display: block;
@@ -1795,7 +1683,7 @@ p {
     margin-left: 3px;
 }
 
-.course-slied {}
+/* .course-slied {} */
 
 .course-slied .slick-arrow {
     position: absolute;
@@ -1865,7 +1753,7 @@ p {
     z-index: 5;
 }
 
-.feature .feature-title {}
+/* .feature .feature-title {} */
 
 .feature .feature-title h3 {
     font-size: 36px;
@@ -1906,7 +1794,7 @@ p {
     9. TEACHERS css
 ======================================================*/
 
-.teachers-cont {}
+/* .teachers-cont {} */
 
 .teachers-cont p {
     padding-top: 30px;
@@ -2081,7 +1969,7 @@ p {
     11. TEASTIMONIAL css
 ======================================================*/
 
-#testimonial {}
+/* #testimonial {} */
 
 #testimonial .section-title {
     position: relative;
@@ -2185,16 +2073,16 @@ p {
     12. NEWS css
 ======================================================*/
 
-.singel-news {}
+/* .singel-news {} */
 
-.singel-news .news-thum {}
+/* .singel-news .news-thum {} */
 
 .singel-news .news-thum img {
     width: 100%;
     border-radius: 5px;
 }
 
-.singel-news .news-cont {}
+/* .singel-news .news-cont {} */
 
 .singel-news .news-cont ul li {
     display: inline-block;
@@ -2404,7 +2292,7 @@ p {
     14. CATEGORY 2 css
 ======================================================*/
 
-.category-2-items {}
+/* .category-2-items {} */
 
 .category-2-items .singel-items {
     position: relative;
@@ -2515,7 +2403,7 @@ p {
     15. COURSE 2 css
 ======================================================*/
 
-.singel-course-2 {}
+/* .singel-course-2 {} */
 
 .singel-course-2>.thum {
     position: relative;
@@ -2595,7 +2483,7 @@ p {
     color: #ffc600;
 }
 
-.singel-course-2>.thum .course-teacher .review ul li {}
+/* .singel-course-2>.thum .course-teacher .review ul li {} */
 
 .singel-course-2 .cont {
     padding-top: 25px;
@@ -2639,7 +2527,7 @@ p {
 
 /*===== Index-3 =====*/
 
-.counter-3 {}
+/* .counter-3 {} */
 
 .counter-3 p {
     color: #07294d;
@@ -2651,7 +2539,7 @@ p {
     17. TEACHERS 2 css
 ======================================================*/
 
-.teachers-2 {}
+/* .teachers-2 {} */
 
 .teachers-2 .teachers-2-singel {
     background-color: #fff;
@@ -2667,7 +2555,7 @@ p {
     padding: 40px 15px;
 }
 
-.teachers-2 .teachers-2-singel .thum {}
+/* .teachers-2 .teachers-2-singel .thum {} */
 
 .teachers-2 .teachers-2-singel .thum img {
     border-radius: 50%;
@@ -2677,7 +2565,7 @@ p {
     padding-left: 20px;
 }
 
-.teachers-2 .teachers-2-singel .cont a {}
+/* .teachers-2 .teachers-2-singel .cont a {} */
 
 .teachers-2 .teachers-2-singel .cont a h5 {
     font-size: 18px;
@@ -2728,7 +2616,7 @@ p {
     position: relative;
 }
 
-.happy-student .happy-title {}
+/* .happy-student .happy-title {} */
 
 .happy-student .happy-title h3 {
     font-size: 36px;
@@ -2785,15 +2673,9 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-<<<<<<< HEAD
     background: -webkit-gradient(linear, left top, right top, from(rgba(7, 41, 77, 0.3)), color-stop(10%, rgba(7, 41, 77, 0.3)), to(rgba(7, 41, 77, 1)));
     background: linear-gradient(to right, rgba(7, 41, 77, 0.3) 0%, rgba(7, 41, 77, 0.3) 10%, rgba(7, 41, 77, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d07294d', endColorstr='#07294d', GradientType=1);
-=======
-    background: -webkit-gradient(linear, left top, right top, from(rgba(7,41,77,0.3)),color-stop(10%, rgba(7,41,77,0.3)),to(rgba(7,41,77,1)));
-    background: linear-gradient(to right, rgba(7,41,77,0.3) 0%,rgba(7,41,77,0.3) 10%,rgba(7,41,77,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d07294d', endColorstr='#07294d',GradientType=1 );
->>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
 }
 
 .event-2 .event-title h3 {
@@ -2974,7 +2856,7 @@ p {
     border-radius: 5px;
 }
 
-.about-singel-items {}
+/* .about-singel-items {} */
 
 .about-singel-items span {
     font-size: 60px;
@@ -2997,7 +2879,7 @@ p {
     22. COURSES PAGE css
 ======================================================*/
 
-.tab-content {}
+/* .tab-content {} */
 
 .tab-content .singel-course .course-teacher .name {
     bottom: 0;
@@ -3063,9 +2945,9 @@ p {
     top: 30px;
 }
 
-.courses-pagination {}
+/* .courses-pagination {} */
 
-.courses-pagination .pagination {}
+/* .courses-pagination .pagination {} */
 
 .courses-pagination .pagination .page-item {
     margin: 0 5px;
@@ -3100,7 +2982,7 @@ p {
     background-color: #fff;
 }
 
-.corses-singel-left .title {}
+/* .corses-singel-left .title {} */
 
 .corses-singel-left .title h3 {
     font-size: 30px;
@@ -3109,7 +2991,7 @@ p {
     padding-bottom: 25px;
 }
 
-.corses-singel-left .course-terms {}
+/* .corses-singel-left .course-terms {} */
 
 .corses-singel-left .course-terms>ul>li {
     display: inline-block;
@@ -3156,7 +3038,7 @@ p {
     font-weight: 700;
 }
 
-.corses-singel-left .course-terms ul li .review {}
+/* .corses-singel-left .course-terms ul li .review {} */
 
 .corses-singel-left .course-terms ul li .review ul li {
     display: inline-block;
@@ -3174,7 +3056,7 @@ p {
     margin-left: 13px;
 }
 
-.corses-singel-image {}
+/* .corses-singel-image {} */
 
 .corses-singel-image img {
     width: 100%;
@@ -3185,9 +3067,9 @@ p {
     border-radius: 5px;
 }
 
-.corses-tab .nav {}
+/* .corses-tab .nav {} */
 
-.corses-tab .nav .nav-item {}
+/* .corses-tab .nav .nav-item {} */
 
 .corses-tab .nav .nav-item a {
     font-size: 16px;
@@ -3207,7 +3089,7 @@ p {
     padding: 0px 30px 25px;
 }
 
-.overview-description .singel-description {}
+/* .overview-description .singel-description {} */
 
 .overview-description .singel-description h6 {
     font-size: 18px;
@@ -3319,7 +3201,7 @@ p {
     margin-right: 5px;
 }
 
-.curriculam-cont .accordion .card .card-header a ul li>.time span {}
+/* .curriculam-cont .accordion .card .card-header a ul li>.time span {} */
 
 .curriculam-cont .accordion .card .card-body {
     background-color: #edf0f2;
@@ -3439,7 +3321,7 @@ p {
     font-family: 'Poppins', sans-serif;
 }
 
-.reviews-cont ul li .singel-reviews .reviews-description {}
+/* .reviews-cont ul li .singel-reviews .reviews-description {} */
 
 .reviews-cont ul li .singel-reviews .reviews-description p {
     padding-bottom: 17px;
@@ -3537,7 +3419,7 @@ p {
     padding-bottom: 15px;
 }
 
-.course-features ul {}
+/* .course-features ul {} */
 
 .course-features ul li {
     font-size: 15px;
@@ -3722,7 +3604,7 @@ p {
     border-radius: 5px
 }
 
-.events-left {}
+/* .events-left {} */
 
 .events-left h3 {
     padding-top: 5px;
@@ -3751,7 +3633,7 @@ p {
     padding-top: 31px;
 }
 
-.events-right {}
+/* .events-right {} */
 
 .events-coundwon {
     padding: 25px 30px 30px;
@@ -3765,7 +3647,7 @@ p {
     z-index: 5;
 }
 
-.events-coundwon .count-down-time .singel-count {}
+/* .events-coundwon .count-down-time .singel-count {} */
 
 .events-coundwon .count-down-time .singel-count .number {
     font-size: 24px;
@@ -3776,7 +3658,7 @@ p {
     font-size: 13px;
 }
 
-.events-coundwon .events-coundwon-btn {}
+/* .events-coundwon .events-coundwon-btn {} */
 
 .events-coundwon .events-coundwon-btn .main-btn {
     width: 100%;
@@ -3895,9 +3777,9 @@ p {
     overflow: hidden;
 }
 
-.teachers-right .nav {}
+/* .teachers-right .nav {} */
 
-.teachers-right .nav .nav-item {}
+/* .teachers-right .nav .nav-item {} */
 
 .teachers-right .nav .nav-item a {
     padding: 20px 0;
@@ -3922,7 +3804,7 @@ p {
     background-color: #fff;
 }
 
-.teachers-right .tab-content .dashboard-cont {}
+/* .teachers-right .tab-content .dashboard-cont {} */
 
 .teachers-right .tab-content .dashboard-cont .singel-dashboard h5 {
     font-size: 18px;
@@ -3935,7 +3817,7 @@ p {
     padding: 45px 0 15px;
 }
 
-.teachers-right .tab-content {}
+/* .teachers-right .tab-content {} */
 
 
 /*=====================================================
@@ -3994,10 +3876,10 @@ p {
     margin-right: 5px;
 }
 
-.singel-blog .blog-cont p {}
+/* .singel-blog .blog-cont p {} */
 
 
-.saidbar {}
+/* .saidbar {} */
 
 .saidbar .saidbar-search {
     padding: 35px;
@@ -4093,7 +3975,7 @@ p {
     border-radius: 5px;
 }
 
-.saidbar .saidbar-post ul li a .singel-post .cont {}
+/* .saidbar .saidbar-post ul li a .singel-post .cont {} */
 
 .saidbar .saidbar-post ul li a .singel-post .cont h6 {
     font-weight: 600;
@@ -4168,7 +4050,7 @@ p {
     margin-right: 10px;
 }
 
-.blog-details .cont .share li a {}
+/* .blog-details .cont .share li a {} */
 
 .blog-details .cont .share li a i {
     width: 35px;
@@ -4227,9 +4109,6 @@ p {
     border-bottom: 1px solid #d2d2d2;
 }
 
-<<<<<<< HEAD
-.blog-comment .comment .comment-author {
-=======
 .blog-comment .comment .comment-author{
     display: -moz-flex;
 	display: -ms-flex;
@@ -4388,7 +4267,7 @@ p {
     border-radius: 3px;
 }
 
-.shop-right{}
+/* .shop-right{} */
 .shop-right h6{
     font-size: 18px;
     padding-bottom: 5px;
@@ -4441,7 +4320,7 @@ p {
     line-height: 46px;
 }
 
-.shop-reviews .nav .nav-item{}
+/* .shop-reviews .nav .nav-item{} */
 .shop-reviews .nav .nav-item:first-child a{
     border-top-left-radius: 5px;
 }
@@ -4475,7 +4354,7 @@ p {
     padding: 0;
 }
 
-.releted-item{}
+/* .releted-item{} */
 .releted-item .title h3{
     font-size: 30px;
     color: #07294d;
@@ -4492,7 +4371,7 @@ p {
     padding: 50px;
     border-radius: 5px;
 }
-.contact-from .main-form{}
+/* .contact-from .main-form{} */
 .contact-from .main-form .singel-form{
     margin-top: 20px;
 }
@@ -4542,7 +4421,6 @@ p.form-message.error {
     padding-top: 30px;
 }
 .contact-address ul li .singel-address{
->>>>>>> 2c5973f26d01d03b921acc224c7caf038ae93b16
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
@@ -4725,7 +4603,7 @@ p.form-message.error {
     border-radius: 3px;
 }
 
-.shop-right {}
+/* .shop-right {} */
 
 .shop-right h6 {
     font-size: 18px;
@@ -4787,7 +4665,7 @@ p.form-message.error {
     line-height: 46px;
 }
 
-.shop-reviews .nav .nav-item {}
+/* .shop-reviews .nav .nav-item {} */
 
 .shop-reviews .nav .nav-item:first-child a {
     border-top-left-radius: 5px;
@@ -4826,7 +4704,7 @@ p.form-message.error {
     padding: 0;
 }
 
-.releted-item {}
+/* .releted-item {} */
 
 .releted-item .title h3 {
     font-size: 30px;
@@ -4845,7 +4723,7 @@ p.form-message.error {
     border-radius: 5px;
 }
 
-.contact-from .main-form {}
+/* .contact-from .main-form {} */
 
 .contact-from .main-form .singel-form {
     margin-top: 20px;
@@ -4925,9 +4803,9 @@ p.form-message.error {
     padding-left: 20px;
 }
 
-.contact-address ul li .singel-address .cont p {}
+/* .contact-address ul li .singel-address .cont p {} */
 
-.map {}
+/* .map {} */
 
 .map #contact-map {
     width: 100%;
@@ -5082,8 +4960,8 @@ p.form-message.error {
     .course-card {
         height: 100%;
         padding: 15px;
-        background: #fff;
-        border: 1px solid #ddd;
+        /* background: #fff;
+        border: 1px solid #ddd; */
         border-radius: 10px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         display: flex;
@@ -5126,6 +5004,21 @@ p.form-message.error {
 }
 
 
+.lesson-box {
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+.lesson-box * {
+    color: #000 !important;
+}
+.lesson-box:hover {
+    background-color: #f1f1f1;
+}
+.lesson-icon {
+    width: 40px;
+}
 
 
 

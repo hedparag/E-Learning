@@ -19,6 +19,7 @@ use App\Models\MockTest;
 use App\Models\MockQuestion;
 use App\Models\MockQuestionOption;
 use App\Models\MockTestAttempt;
+use App\Models\ChapterComment;
 
 class studentDashboardController extends Controller
 {
@@ -124,17 +125,18 @@ class studentDashboardController extends Controller
     // return view('frontend.student-dashboard.index');
   }
 
-
   public function courseChapters($id)
   {
     $course = Course::findOrFail($id);
-    $chapters = Chapter::where('course_id', $id)
+    $chapters = Chapter::with('lessons') // eager load lessons
+      ->where('course_id', $id)
       ->where('status', 'active')
       ->orderBy('order')
       ->get();
 
     return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
   }
+
 
   public function remarks(Request $request)
   {
@@ -163,29 +165,6 @@ class studentDashboardController extends Controller
   }
 
 
-
-
-  //   public function showMcqForm($course_id)
-  // {
-  //     $course = Course::findOrFail($course_id);
-
-  //     $questions = [
-  //         (object)[
-  //             'id' => 1,
-  //             'text' => 'Which one is a programming language?',
-  //             'type' => 'single',
-  //             'options' => ['HTML', 'Python', 'CSS', 'Photoshop'],
-  //         ],
-  //         (object)[
-  //             'id' => 2,
-  //             'text' => 'Select the frontend technologies.',
-  //             'type' => 'multiple',
-  //             'options' => ['Vue.js', 'Laravel', 'React', 'Tailwind'],
-  //         ],
-  //     ];
-
-  //     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
-  // }
 
   public function showMcqForm($course_id)
   {
@@ -229,8 +208,6 @@ class studentDashboardController extends Controller
 
     return view('Frontend.student-dashboard.questions.mcq', compact('course', 'questions'));
   }
-
-
 
 
   public function submitMcqForm(Request $request, $course_id)
@@ -280,6 +257,35 @@ class studentDashboardController extends Controller
       'remarks'      => 'Submitted via MCQ form',
     ]);
 
-    return back()->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
+    return redirect()->route('student.enrolled-courses.index')->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
+  }
+
+  public function submitChapterComment(Request $request, $chapter_id)
+  {
+    $request->validate([
+      'subject' => 'required|string|max:255',
+      'message' => 'required|string',
+    ]);
+
+    $chapter = Chapter::findOrFail($chapter_id);
+    $user = Auth::user();
+
+    // Find teacher based on course_id of the chapter
+    $subject = AddSubject::where('id', $chapter->course_id)->first();
+    $teacherId = $subject ? $subject->created_by : null;
+
+    if (!$teacherId) {
+      return back()->with('error', 'Teacher not found for this subject.');
+    }
+
+    ChapterComment::create([
+      'student_id' => $user->id,
+      'teacher_id' => $teacherId,
+      'chapter_id' => $chapter_id,
+      'subject' => $request->subject,
+      'message' => $request->message,
+    ]);
+
+    return back()->with('success', 'Your message has been sent to the teacher!');
   }
 }

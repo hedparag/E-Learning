@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
 
         <h1 class="mcq-chapter-title">{{ $course->title }}</h1>
         <hr>
-        
+
         {{-- <form action="{{ route('student.submit-mcq') }}" method="POST" class="mcq-form"> --}}
         <form action="{{ route('student.submit-mcq', ['course_id' => $course->id]) }}" method="POST">
             @csrf
@@ -26,20 +27,16 @@
 
                     @foreach ($question->options as $option)
                         <div class="mcq-option-block">
-                            @if($question->type === 'single')
+                            @if ($question->type === 'single')
                                 <label class="mcq-option-label">
-                                    <input type="radio"
-                                           name="answers[{{ $question->id }}]"
-                                           value="{{ $option }}"
-                                           class="mcq-option-input" />
+                                    <input type="radio" name="answers[{{ $question->id }}]"
+                                        value="{{ $option }}" class="mcq-option-input" />
                                     <span>{{ $option }}</span>
                                 </label>
                             @else
                                 <label class="mcq-option-label">
-                                    <input type="checkbox"
-                                           name="answers[{{ $question->id }}][]"
-                                           value="{{ $option }}"
-                                           class="mcq-option-input" />
+                                    <input type="checkbox" name="answers[{{ $question->id }}][]"
+                                        value="{{ $option }}" class="mcq-option-input" />
                                     <span>{{ $option }}</span>
                                 </label>
                             @endif
@@ -51,5 +48,25 @@
             <button type="submit" class="mcq-submit-btn">Submit</button>
         </form>
     </div>
+
+    {{-- ------------------- JS ------------------ --}}
+    {{-- @if (session('success'))
+        <script>
+            window.onload = function() {
+                alert("{{ session('success') }}");
+                window.location.href = "{{ url()->previous() }}"; // Go back to course page
+            };
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            window.onload = function() {
+                alert("{{ session('error') }}");
+                window.location.href = "{{ url()->previous() }}"; // Go back even on error
+            };
+        </script>
+    @endif --}}
 </body>
+
 </html>

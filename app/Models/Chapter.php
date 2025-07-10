@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Chapter extends Model
 {
-    function lessons():HasMany{
-        return $this->hasMany(Lesson::class,'chapter_id','id');
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class)->where('is_approved', true)->orderBy('order');
     }
 }
+
