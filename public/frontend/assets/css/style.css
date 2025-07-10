@@ -3928,6 +3928,29 @@ p.form-message.error {
     border-color: #e3324c !important;
     color: #f0072a !important;
 }
+/*chapter-lesson*/
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.acd-heading {
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.acd-group {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.acd-group .card-body {
+    background: #f9f9f9;
+}
+
+
 
 
 

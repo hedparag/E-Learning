@@ -34,6 +34,9 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
+Route::get('additional',function(){
+return view('Frontend.teacher-dashboard.courses.checkAdditional');
+});
 
 /**
  * -----------STUDENT ROUTES--------------------
@@ -70,9 +73,10 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
 
     Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
+
     Route::get('profile', [TeacherDashboardController::class, 'profile'])->name('profile.index');
     Route::get('profile/edit', [TeacherDashboardController::class, 'editProfile'])->name('profile.edit');
     Route::post('profile/update', [TeacherDashboardController::class, 'updateProfile'])->name('profile.update');
