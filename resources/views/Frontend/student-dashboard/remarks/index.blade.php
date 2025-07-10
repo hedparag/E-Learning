@@ -35,14 +35,11 @@
 
                 <div class="col-lg-8">
                     @include('frontend.student-dashboard.navbar')
-                    <div class="dashboard-content">
+
+                    <div class="dashboard-content ajax-area">
                         <h4 class="mb-4">Remarks</h4>
-
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
                     </div>
+
                 </div>
             </div>
         </div>

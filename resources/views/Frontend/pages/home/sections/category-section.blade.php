@@ -45,42 +45,6 @@
                                     </span> <!-- singel category -->
                                 </a>
                             </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="singel-category text-center color-1">
-                                        <span class="icon">
-                                            <img src="{{ asset('frontend/assets/images/all-icon/ctg-1.png') }}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Language</span>
-                                        </span>
-                                    </span> <!-- singel category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="singel-category text-center color-2">
-                                        <span class="icon">
-                                            <img src="{{ asset('frontend/assets/images/all-icon/ctg-2.png') }}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Business</span>
-                                        </span>
-                                    </span> <!-- singel category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="singel-category text-center color-3">
-                                        <span class="icon">
-                                            <img src="{{ asset('frontend/assets/images/all-icon/ctg-3.png') }}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Literature</span>
-                                        </span>
-                                    </span> <!-- singel category -->
-                                </a>
-                            </div>
                         </div> <!-- category slied -->
                     </div>
                 </div> <!-- row -->

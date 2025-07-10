@@ -28,13 +28,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/vendors.css') }}" />
     <!-- app style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/style.css') }}" />
-    @vite(['resources/js/frontend.js', 'resources/js/Frontend/home.js'])
     <!--External-->
 
 
@@ -46,7 +44,6 @@
 </head>
 
 <body>
-
 
     <!--====== HEADER PART START ======-->
 
@@ -94,13 +91,9 @@
     <!--====== jquery js ======-->
 
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-   <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
-    <script src="vendor/laravel-filemanager/js/stand-alone-button.js"></script>
-
+    <script src="{{ asset('frontend/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!--====== Bootstrap js ======-->
-
-
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
 
     <!--====== Slick js ======-->
@@ -127,42 +120,27 @@
 
     <!--====== Ajax Contact js ======-->
     <script src="{{ asset('frontend/assets/js/ajax-contact.js') }}"></script>
-    <!--====== Ajax Teacher Modal js ======-->
-    <script src="{{ asset('frontend/assets/js/ajax-teacher_modal.js') }}"></script>
+
     <!--====== Main js ======-->
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
 
     <!--====== Map js ======-->
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
-    <script src="{{ asset('frontend/assets/js/map-script.js') }}"></script> --}}
-
-    <!--====== Ajax ======-->
-    <script src="{{ asset('frontend/assets/js/ajax-part.js') }}"></script>
-
-    <!--====== Sweetalert ======-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
+    <script src="{{ asset('frontend/assets/js/map-script.js') }}"></script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    {{--   <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script> --}}
-
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- plugins -->
-
-    <!--admin js-->
     <script src="{{ asset('admin_template/assets/js/vendors.js') }}"></script>
 
     <!-- custom app -->
     <script src="{{ asset('admin_template/assets/js/app.js') }}"></script>
-    @stack('scripts')
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script>
-        $(function() {
-            $('#lfm').filemanager('file');
-        });
+        $('#lfm').filemanager('file');
     </script>
-
-
     <script>
         var notyf = new Notyf({
             duration: 6000,
