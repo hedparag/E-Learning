@@ -64,3 +64,24 @@
 
     <!--====== TEACHER PART END ======-->
 @endsection
+
+
+
+<!--====== MCQ SUBMISSION SUCCESS ======-->
+@section('scripts')
+    @if (session('success'))
+        <script>
+            window.onload = function () {
+                alert("{{ session('success') }}");
+            };
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            window.onload = function () {
+                alert("{{ session('error') }}");
+            };
+        </script>
+    @endif
+@endsection
