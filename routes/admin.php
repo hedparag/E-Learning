@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\CourseApproveController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\FinalizedController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use App\Http\Controllers\Admin\MockSettingController;
 use App\Http\Controllers\Admin\ReportCardController;
@@ -83,4 +84,9 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
      Route::post('approveSubmit/{id}',[CourseApproveController::class,'store'])->name('approveSubmit');
      Route::get('coursePreview/{id}',[CourseApproveController::class,'preview'])->name('course.preview');
      Route::get('ReportCard',[ReportCardController::class,'index'])->name('reportCard');
+     Route::get('marks',[FinalizedController::class,'index'])->name('marks');
+      Route::get('resultDetails/{id}',[FinalizedController::class,'getDetailedResult'])->name('resultDetails');
+      Route::post('finalized',[FinalizedController::class,'report'])->name('finalize');
+      Route::get('generateReport',[FinalizedController::class,'generateReport'])->name('generateReportCard');
+      Route::get('ReportCardView',[FinalizedController::class,'reportView'])->name('reportView');
 });

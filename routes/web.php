@@ -67,6 +67,9 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 
     Route::get('/exam/{course_id}', [studentDashboardController::class, 'showMcqForm'])->name('exam');
     Route::post('/exam/{course_id}', [studentDashboardController::class, 'submitMcqForm'])->name('submit-mcq');
+    Route::get('report',function(){
+     return view('Admin.marks.reportCard');
+    });
 });
 
 

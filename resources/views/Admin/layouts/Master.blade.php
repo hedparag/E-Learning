@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
     <meta name="author" content="Potenza Global Solutions" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- app favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.ico">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/vendors.css') }}" />
     <!-- app style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_template/assets/css/style.css') }}" />
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
  @vite(['resources/js/Admin/admin.js'])
 </head>
 
@@ -415,6 +417,7 @@
 
     <!-- plugins -->
     <script src="{{ asset('admin_template/assets/js/vendors.js') }}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     <!-- custom app -->
     <script src="{{ asset('admin_template/assets/js/app.js') }}"></script>

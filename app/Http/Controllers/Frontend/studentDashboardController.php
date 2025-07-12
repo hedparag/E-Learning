@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\StudentMarksMail;
 use App\Models\PayoutInformation;
 use App\Traits\FileUpload;
 use Illuminate\Contracts\View\View;
@@ -20,6 +21,8 @@ use App\Models\MockQuestion;
 use App\Models\MockQuestionOption;
 use App\Models\MockTestAttempt;
 use App\Models\ChapterComment;
+use App\Models\MockSettings;
+use Illuminate\Support\Facades\Mail;
 
 class studentDashboardController extends Controller
 {
@@ -133,6 +136,7 @@ class studentDashboardController extends Controller
       ->where('status', 'active')
       ->orderBy('order')
       ->get();
+    //  dd($chapters);
 
     return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
   }
@@ -172,7 +176,7 @@ class studentDashboardController extends Controller
 
     // Check if there is an active test
     $mockTest = MockTest::where('course_id', $course_id)
-      ->where('status', 'pending')
+      ->where('status', 'active')
       ->first();
 
 
@@ -212,14 +216,18 @@ class studentDashboardController extends Controller
 
   public function submitMcqForm(Request $request, $course_id)
   {
+
+   // dd($request->all());
+   $rules=MockSettings::first();
     $answers = $request->input('answers', []);
     $user = Auth::user();
+$course=Course::findOrFail($course_id);
 
     // Get the active test for this course
     $mockTest = MockTest::where('course_id', $course_id)->where('status', 'active')->first();
-   if (!$mockTest) {
+  /* if (!$mockTest) {
       return back()->with('error', 'No active test found for this course.');
-    }
+    }*/
 
     $questions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
     $score = 0;
@@ -243,21 +251,32 @@ class studentDashboardController extends Controller
         : [$submitted];
 
       if ($submittedArray === $correctOptions) {
-        $score++;
+        $score=$score+$rules->total_marks;
       }
     }
+     $total_marks=($questions->count()) * ($rules->total_marks);
 
     // Save attempt
     MockTestAttempt::create([
       'student_id'   => $user->id,
       'mock_test_id' => $mockTest->id,
       'score'        => $score,
-      'total_marks'  => $questions->count(),
+      'total_marks'  => $total_marks,
       'attempt_date' => now()->toDateString(),
       'remarks'      => 'Submitted via MCQ form',
     ]);
+    $result=1;
+    if(config('mail_queue.is_queue')){
+Mail::to($user->email)->queue(new StudentMarksMail($course->title,$total_marks,$score,$user->name));
+    }
+    else{
+        Mail::to($user->email)->send(new StudentMarksMail($course->title,$total_marks,$score,$user->name));
+    }
 
-    return redirect()->route('student.enrolled-courses.index')->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
+    notyf()->success("We have mailed you your score");
+
+   // return redirect()->route('student.enrolled-courses.index')->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
+   return redirect()->route('student.enrolled-courses.index');
   }
 
   public function submitChapterComment(Request $request, $chapter_id)

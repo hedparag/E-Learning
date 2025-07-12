@@ -33,8 +33,8 @@
                              <li><a href="{{ route('admin.mock') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Mock Settings</span></a>
                             </li>
-                             <li><a href="{{ route('admin.reportCard') }}" aria-expanded="false"><i
-                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Report Card Maker</span></a>
+                             <li><a href="{{ route('admin.marks') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Marks Evaluation</span></a>
                             </li>
 
 
