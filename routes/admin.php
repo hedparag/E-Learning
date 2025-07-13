@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\FinalizedController;
 use App\Http\Controllers\Admin\InstructorRequestController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\MockSettingController;
 use App\Http\Controllers\Admin\ReportCardController;
 use App\Http\Controllers\Admin\SubjectAssignController;
@@ -89,4 +90,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
       Route::post('finalized',[FinalizedController::class,'report'])->name('finalize');
       Route::get('generateReport',[FinalizedController::class,'generateReport'])->name('generateReportCard');
       Route::get('ReportCardView',[FinalizedController::class,'reportView'])->name('reportView');
+       Route::get('message',[MessageController::class,'index'])->name('message');
+       Route::post('course-Message-Review-Store/{id}',[MessageController::class,'store'])->name('courseMessageReview');
+
 });

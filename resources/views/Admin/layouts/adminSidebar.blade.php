@@ -29,6 +29,10 @@
                             </li>
                              <li><a href="{{ route('admin.courseApprove') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Course Approve</span></a>
+
+                            </li>
+                            <li><a href="{{ route('admin.message') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Messages Review</span></a>
                             </li>
                              <li><a href="{{ route('admin.mock') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Mock Settings</span></a>

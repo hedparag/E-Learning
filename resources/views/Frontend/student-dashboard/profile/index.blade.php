@@ -11,6 +11,17 @@
 
     <section class="pt-90 pb-90">
         <div class="container">
+            @if ($count != 0)
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6 mb-2">
+                    <div class="alert alert-primary" role="alert">
+                        <h3 class="text-white">Hey! {{ Auth::guard('web')->user()->name }}</h3>
+                        <p class="text-white">You have message from teacher.</p>
+                            <a href="{{ route('student.viewReply') }}" class="btn btn-success">View</a>
+                    </div>
+                </div>
+                </div>
+            @endif
             <div class="row">
                 @include('frontend.student-dashboard.sidebar')
 
@@ -27,7 +38,7 @@
                             <tr>
                                 <td>
                                     <h6>Headline</h6>
-                            <p>{{ auth()->user()->headline ?? 'Not available' }}</p>
+                                    <p>{{ auth()->user()->headline ?? 'Not available' }}</p>
                                 </td>
                                 <td>
                                     <h6>Gender</h6>
@@ -58,7 +69,7 @@
 
                         <a href="{{ route('student.profile.edit') }}" class="main-btn mt-4">Edit Profile</a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

@@ -110,8 +110,8 @@
                                             </div>
                                             <div class="main-form pt-45">
 
-                                                <form action="{{ route('student.chapter.comment', $chapter?->id) }}"
-                                                    method="POST">
+                                                <form action="{{ route('student.chapter.comment', $course?->id) }}"
+                                                    class="commentSubmit">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-md-6">

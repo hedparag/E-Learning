@@ -23,6 +23,12 @@
            Announcements
         </a>
     </li>
+     <li class="nav-item">
+        <a href="{{ route('student.viewReply') }}"
+           class="nav-link {{ request()->is('student/announcements*') ? 'active' : '' }} customAjax">
+           Doubts
+        </a>
+    </li>
 </ul>
 
 

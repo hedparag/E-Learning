@@ -4480,7 +4480,7 @@ p.form-message.error {
 }
 
 /*=====================================================
-    29. SHOP PAGE css 
+    29. SHOP PAGE css
 ======================================================*/
 
 .shop-top-search {
@@ -4564,7 +4564,7 @@ p.form-message.error {
 
 
 /*=====================================================
-    30. SHOP SINGEL PAGE css 
+    30. SHOP SINGEL PAGE css
 ======================================================*/
 
 .shop-destails {
@@ -4714,7 +4714,7 @@ p.form-message.error {
 
 
 /*=====================================================
-    31. CONTACT PAGE css 
+    31. CONTACT PAGE css
 ======================================================*/
 
 .contact-from {
@@ -5130,4 +5130,19 @@ p.form-message.error {
     padding: 6px 16px;
     font-size: 0.9rem;
     display: inline-block;
+}
+.border-left-warning {
+    border-left: 5px solid #ffc107;
+}
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+}
+.card textarea {
+    resize: vertical;
+}
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
 }

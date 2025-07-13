@@ -30,8 +30,11 @@ class studentDashboardController extends Controller
 
   function index(): View
   {
-    // dd('hello');
-    return view('Frontend.student-dashboard.index');
+    $count=0;
+   $count = ChapterComment::where(['status'=> 'approved','student_id'=>Auth::guard('web')->user()->id,'viewed'=>false])
+                       ->whereNotNull('reply')
+                       ->count();
+    return view('Frontend.student-dashboard.index',compact('count'));
     //return view('Frontend.layouts.master');
   }
 
@@ -279,15 +282,31 @@ Mail::to($user->email)->queue(new StudentMarksMail($course->title,$total_marks,$
    return redirect()->route('student.enrolled-courses.index');
   }
 
-  public function submitChapterComment(Request $request, $chapter_id)
+  public function submitChapterComment(Request $request, string $id)
   {
+
+    $course=Course::findOrFail($id);
+
+
     $request->validate([
       'subject' => 'required|string|max:255',
-      'message' => 'required|string',
+      'message' => 'required|string|max:1200',
     ]);
+   // dd($request->all());
+    $comment=new ChapterComment();
+    $comment->subject=$request->subject;
+    $comment->message=$request->message;
+    $comment->student_id=Auth::guard('web')->user()->id;
+    $comment->teacher_id=$course->teacher->id;
+    $comment->course_id=$id;//its course id
+   $comment->asked_at = now()->toDateTimeString();
+   $comment->save();
 
-    $chapter = Chapter::findOrFail($chapter_id);
-    $user = Auth::user();
+    return response(['message'=>'your message has been sent'],200);
+   // dd($request->all());
+
+   // $chapter = Chapter::findOrFail($chapter_id);
+   /* $user = Auth::user();
 
     // Find teacher based on course_id of the chapter
     $subject = AddSubject::where('id', $chapter->course_id)->first();
@@ -305,6 +324,22 @@ Mail::to($user->email)->queue(new StudentMarksMail($course->title,$total_marks,$
       'message' => $request->message,
     ]);
 
-    return back()->with('success', 'Your message has been sent to the teacher!');
+    return back()->with('success', 'Your message has been sent to the teacher!');*/
+  }
+  public function viewReply(){
+    $doubts = ChapterComment::where(['status'=> 'approved','student_id'=>Auth::guard('web')->user()->id])
+                       ->whereNotNull('reply')
+                       ->get();
+
+      // Mark all unread replies as seen
+    ChapterComment::where([
+                        'status' => 'approved',
+                        'student_id' => Auth::guard('web')->user()->id,
+                        'viewed' => false,
+                    ])
+                    ->whereNotNull('reply')
+                    ->update(['viewed' => true]);
+
+    return view('Frontend.student-dashboard.doubts',compact('doubts'));
   }
 }

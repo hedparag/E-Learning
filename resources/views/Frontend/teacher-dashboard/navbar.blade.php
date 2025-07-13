@@ -23,6 +23,12 @@
            Announcements
         </a>
     </li>
+     <li class="nav-item">
+        <a href="{{ route('teacher.comments') }}"
+           class="nav-link {{ request()->is('teacher/announcements*') ? 'active' : '' }}">
+           Comments
+        </a>
+    </li>
 </ul>
 
 

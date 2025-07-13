@@ -11,10 +11,25 @@
 
     <section class="pt-90 pb-90">
         <div class="container">
+             @if (@$count > 0)
+       <div class="row justify-content-center mb-3">
+    <div class="col-md-6">
+        <div class="alert alert-info alert-dismissible fade show text-center" role="alert">
+            <strong>Hey! Some doubts have been posted by your students!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="ti ti-close"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+    @endif
+
             <div class="row">
                 @include('frontend.teacher-dashboard.sidebar')
 
                 <div class="col-lg-8">
+
                     @include('frontend.teacher-dashboard.navbar')
                     <div class="dashboard-content">
                         <div class="mb-5">
