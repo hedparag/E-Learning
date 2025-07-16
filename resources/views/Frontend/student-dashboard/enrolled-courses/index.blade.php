@@ -1,6 +1,7 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.student-dashboard.breadcrumb')
@@ -9,7 +10,7 @@
 
 
 
-    <!--====== TEACHER PART START ======-->
+    <!--====== STUDENT PART START ======-->
 
     <section class="pt-90 pb-90">
         <div class="container">
@@ -18,8 +19,8 @@
 
                 <div class="col-lg-8">
                     @include('frontend.student-dashboard.navbar')
-                    <div class="dashboard-content">
 
+                    <div class="dashboard-content">
                         <div class="container  ajax-area">
                             <h4 class="mb-4">Class {{ auth()->user()->student_classes_id ?? '' }}</h4>
                             <section class="pt-20 pb-20 gray-bg">
@@ -28,7 +29,6 @@
                                         @foreach ($courses as $course)
                                             <div class="col-lg-12">
                                                 <div class="singel-event-list mt-10">
-
                                                     <div class="event-thum">
                                                         <img src="{{ asset('frontend/assets/images/event/e-1.jpg') }}"
                                                             alt="Subject Thumbnail">
@@ -40,13 +40,10 @@
                                                             <h4>{{ $course->title }}</h4>
                                                         </a>
                                                         <p>{{ $course->desc ?? 'No description available.' }}</p>
-                                                        {{-- <a href="{{ route('student.exam', ['course_id' => $course->id]) }}"
-                                                            class="main-btn mcq-quiz-btn mt-2">
-                                                            Take Quiz
-                                                        </a> --}}
                                                         <a href="{{ route('student.exam', ['course_id' => $course->id]) }}"
-                                                            class="btn btn-primary">Take Quiz</a>
-
+                                                            class="btn btn-primary">
+                                                            Take Quiz
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -55,23 +52,25 @@
                                 </div>
                             </section>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!--====== TEACHER PART END ======-->
+    <!--====== STUDENT PART END ======-->
+    
 @endsection
 
 
 
 <!--====== MCQ SUBMISSION SUCCESS ======-->
+
 @section('scripts')
     @if (session('success'))
         <script>
-            window.onload = function () {
+            window.onload = function() {
                 alert("{{ session('success') }}");
             };
         </script>
@@ -79,7 +78,7 @@
 
     @if (session('error'))
         <script>
-            window.onload = function () {
+            window.onload = function() {
                 alert("{{ session('error') }}");
             };
         </script>

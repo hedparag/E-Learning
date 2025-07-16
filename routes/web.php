@@ -10,9 +10,6 @@ use App\Http\Controllers\Frontend\teacherDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 
@@ -76,7 +73,7 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'prefix' => 'teacher', 'as' => 'teacher.'], function () {
 
     Route::get('/dashboard', [teacherDashboardController::class, 'index'])->name('dashboard');
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
     Route::get('profile', [TeacherDashboardController::class, 'profile'])->name('profile.index');
@@ -86,7 +83,6 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     // Route::post('profile/update-social', [TeacherDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
     Route::get('courses', [TeacherDashboardController::class, 'courses'])->name('courses.index');
-    // Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
     Route::get('course/basic-info', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
     Route::post('course/basic-info', [teacherDashboardController::class, 'courseStore'])->name('course.basic-info');
     Route::post('course/basic-info-update', [teacherDashboardController::class, 'courseStoreUpdate'])->name('course.basic-info-update');
@@ -103,11 +99,13 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');
     Route::delete('course/chapter/delete/{id}', [CourseChapterController::class, 'destroyChapter'])->name('chapter.destroy');
     Route::delete('course/lesson/delete/{id}', [CourseChapterController::class, 'destroyLesson'])->name('lesson.destroy');
+    Route::get('chapters/{id}', [TeacherDashboardController::class, 'courseChapters'])->name('courses.chapters');
+
     Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
     Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
-    Route::get('fullCourses/edit/{id}',[teacherDashboardController::class,'editCourse'])->name('fullCourses.edit');
+    Route::get('fullCourses/edit/{id}', [teacherDashboardController::class, 'editCourse'])->name('fullCourses.edit');
 });
 
 

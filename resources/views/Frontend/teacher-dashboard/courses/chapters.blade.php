@@ -1,31 +1,29 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-
     <!--====== PAGE BANNER PART START ======-->
 
-    @include('Frontend.student-dashboard.breadcrumb')
+    @include('Frontend.teacher-dashboard.breadcrumb')
 
     <!--====== PAGE BANNER PART ENDS ======-->
 
 
 
-    <!--====== STUDENT PART START ======-->
+    <!--====== TEACHER PART START ======-->
 
     <section class="pt-90 pb-90">
         <div class="container">
             <div class="row">
-                @include('frontend.student-dashboard.sidebar')
+                @include('frontend.teacher-dashboard.sidebar')
 
                 <div class="col-lg-8">
-                    @include('frontend.student-dashboard.navbar')
-
+                    @include('frontend.teacher-dashboard.navbar')
                     <div class="dashboard-content">
                         <h4 class="mb-4">Chapters</h4>
 
                         <section class="pt-20 pb-20 gray-bg">
                             <div class="curriculam-cont">
-                                {{-- <div class="contact-from mt-30"> --}}
+                                {{-- <div class="contact-from mt-30"></div> --}}
                                 <div class="title">
                                     <h3>{{ $course->title }} Lecture Series</h3>
                                 </div>
@@ -96,86 +94,19 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <p>No chapters found for this subject.</p>
-                                    @endforelse
-                                </div>
-
-                                {{-- QUERY --}}
-                                {{-- <div class="col-lg-12 mt-4">
-                                    <div class="contact-from mt-30">
-                                        <div class="section-title">
-                                            <h5>Ask Your Doubt</h5>
-                                            <h4>Submit Query to the Teacher</h4>
+                                        <div class="text-center p-4 border rounded bg-light">
+                                            <i class="fa fa-info-circle mr-1"></i>
+                                            No chapters have been created for this course yet.
                                         </div>
-                                        <div class="main-form pt-45">
-                                            <form action="{{ route('student.chapter.comment', $chapter->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="singel-form form-group">
-                                                            <input name="subject" type="text" placeholder="Subject"
-                                                                required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="singel-form form-group">
-                                                            <textarea name="message" placeholder="Message" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="singel-form">
-                                                            <button type="submit" class="main-btn">Send</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <div class="col-lg-12 mt-4">
-                                    <div class="contact-from mt-30">
-                                        <div class="section-title">
-                                            <h5>Ask Your Doubt</h5>
-                                            <h4>Submit Query to the Teacher</h4>
-                                        </div>
-                                        <div class="main-form pt-45">
-                                            <form
-                                                action="{{ route('student.chapter.comment', $chapters->first()->id ?? 0) }}"
-                                                method="POST">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="singel-form form-group">
-                                                            <input name="subject" type="text" placeholder="Subject"
-                                                                required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="singel-form form-group">
-                                                            <textarea name="message" placeholder="Message" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="singel-form">
-                                                            <button type="submit" class="main-btn">Send</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                    @endempty
                             </div>
-                        </section>
-                    </div>
-
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!--====== STUDENT PART END ======-->
-    
+<!--====== TEACHER PART END ======-->
 @endsection

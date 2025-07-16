@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use App\Models\Chapter;
 
 class teacherDashboardController extends Controller
 {
@@ -74,22 +75,23 @@ class teacherDashboardController extends Controller
 
     public function createCourses()
     {
-        $editMode=0;
-       $classes = StudentClass::all();
-       return view('frontend.teacher-dashboard.courses.basic-info', compact('classes','editMode'));
+        $editMode = 0;
+        $classes = StudentClass::all();
+        return view('frontend.teacher-dashboard.courses.basic-info', compact('classes', 'editMode'));
         //return view('frontend.teacher-dashboard.courses.basic-info', compact('classes'))->with('step', 1);
         //return view('frontend.teacher-dashboard.courses.additional');
         // $course = Course::findOrFail($req->id);
-               // $admin=MockSettings::firstOrFail();
+        // $admin=MockSettings::firstOrFail();
 
-               // return view('Frontend.teacher-dashboard.courses.mock', compact('admin'));
+        // return view('Frontend.teacher-dashboard.courses.mock', compact('admin'));
     }
-    public function editCourse(string $id){
-$editMode=1;
-$course=Course::findOrFail($id);
-//dd($course);
-$classes = StudentClass::all();
- return view('frontend.teacher-dashboard.courses.basic-info', compact('classes','course','editMode'));
+    public function editCourse(string $id)
+    {
+        $editMode = 1;
+        $course = Course::findOrFail($id);
+        //dd($course);
+        $classes = StudentClass::all();
+        return view('frontend.teacher-dashboard.courses.basic-info', compact('classes', 'course', 'editMode'));
     }
 
     public function remarks()
@@ -127,16 +129,16 @@ $classes = StudentClass::all();
 
         // Decode JSON subject_ids to array
         //$teacherSubjectIds = json_decode($teacher->subject_ids, true) ?? [];
-  $teacherSubjectIds = $teacher->subject_ids ?? [];
+        $teacherSubjectIds = $teacher->subject_ids ?? [];
         // Get class's assigned subject IDs
         $classSubjectIds = ClassSubjectModel::where('class_id', $classId)
             ->pluck('subject_id')
             ->toArray();
 
-           if($request->filled('subject_id')){
-             $sub=AddSubject::findOrFail($request->subject_id);
-           //  dd($sub);
-           }
+        if ($request->filled('subject_id')) {
+            $sub = AddSubject::findOrFail($request->subject_id);
+            //  dd($sub);
+        }
 
         // Find common subjects
         $commonSubjectIds = array_intersect($teacherSubjectIds, $classSubjectIds);
@@ -153,10 +155,9 @@ $classes = StudentClass::all();
                 <select class="form-control" name="subject_id" id="commonSubject">
                     <option value="">-- Select Subject --</option>';
         foreach ($subjects as $subject) {
-           //$html .= '<option value="' . $subject->id . '">' . $subject->name . '</option>';
+            //$html .= '<option value="' . $subject->id . '">' . $subject->name . '</option>';
             //$html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->name == $subject->name ? 'selected' : '') . '>' . $subject->name . '</option>';
-$html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->id == $subject->id ? 'selected' : '') . '>' . $subject->name . '</option>';
-
+            $html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->id == $subject->id ? 'selected' : '') . '>' . $subject->name . '</option>';
         }
         $html .= '</select></div>';
 
@@ -165,7 +166,7 @@ $html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->id == $
 
     function courseStore(Request $req)
     {
-        $editMode=$req->editMode; //0
+        $editMode = $req->editMode; //0
         //dd($req->all());
         //$decodedSubjectIds = json_decode(Auth::user()->subject_ids ?? '[]', true);
         $req->validate([
@@ -174,7 +175,7 @@ $html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->id == $
             'desc' => ['nullable', 'string', 'max:1000'],
             'thumbnail' => ['required', 'image', 'max:5000'],
             'subject_id' => ['required', Rule::in(Auth::user()->subject_ids ?? [])]
-           // 'subject_id' => ['required', Rule::in(Auth::user()->subject_ids)],
+            // 'subject_id' => ['required', Rule::in(Auth::user()->subject_ids)],
         ]);
 
         // dd($req->all());
@@ -192,57 +193,77 @@ $html .= '<option value="' . $subject->id . '" ' . (isset($sub) && $sub->id == $
         return response()->json([
             'status' => 'success',
             'message' => 'Creation successful.',
-            'redirect' => route('teacher.courses.edit', ['id' => $course->id, 'step' => $req->next_step,'mode'=>$editMode])
+            'redirect' => route('teacher.courses.edit', ['id' => $course->id, 'step' => $req->next_step, 'mode' => $editMode])
         ]);
     }
     public function courseStoreUpdate(Request $req)
-{
-     $editMode=$req->editMode; //1
-    $course = Course::findOrFail($req->courseId);
+    {
+        $editMode = $req->editMode; //1
+        $course = Course::findOrFail($req->courseId);
 
-    $req->validate([
-        'target' => ['required', 'exists:student_classes,id'],
-        'title' => ['required', 'string', 'max:100'],
-        'desc' => ['nullable', 'string', 'max:1000'],
-        'thumbnail' => ['nullable', 'image', 'max:5000'],
-        'subject_id' => ['required', Rule::in(Auth::user()->subject_ids ?? [])]
-    ]);
-
-    // Generate slug only if title is changed OR always for consistency
-    $slug = Str::slug($req->title);
-
-    // Only validate uniqueness if the slug has changed
-    if ($slug !== $course->slug) {
-        $req->merge(['slug' => $slug]);
         $req->validate([
-            'slug' => [
-                'required',
-               Rule::unique('courses', 'slug')->ignore($course->id),
-
-            ],
+            'target' => ['required', 'exists:student_classes,id'],
+            'title' => ['required', 'string', 'max:100'],
+            'desc' => ['nullable', 'string', 'max:1000'],
+            'thumbnail' => ['nullable', 'image', 'max:5000'],
+            'subject_id' => ['required', Rule::in(Auth::user()->subject_ids ?? [])]
         ]);
-        $course->slug = $slug;
+
+        // Generate slug only if title is changed OR always for consistency
+        $slug = Str::slug($req->title);
+
+        // Only validate uniqueness if the slug has changed
+        if ($slug !== $course->slug) {
+            $req->merge(['slug' => $slug]);
+            $req->validate([
+                'slug' => [
+                    'required',
+                    Rule::unique('courses', 'slug')->ignore($course->id),
+
+                ],
+            ]);
+            $course->slug = $slug;
+        }
+
+        if ($req->filled('thumbnail')) {
+            $this->deleteFile($course->thumbnail);
+            $filePath = $this->uploadFile($req->file('thumbnail'));
+            $course->thumbnail = $filePath;
+        }
+
+        $course->title = $req->title;
+        $course->desc = $req->desc;
+        $course->teacher_id = Auth::id();
+        $course->subject_id = $req->subject_id;
+        $course->class_id = $req->target;
+
+        $course->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Updation successful.',
+            'redirect' => route('teacher.courses.edit', ['id' => $req->courseId, 'step' => $req->next_step, 'mode' => $editMode])
+        ]);
     }
 
-    if ($req->filled('thumbnail')) {
-        $this->deleteFile($course->thumbnail);
-        $filePath = $this->uploadFile($req->file('thumbnail'));
-        $course->thumbnail = $filePath;
+
+    public function courseChapters($courseId)
+    {
+        $teacherId = Auth::id();     
+
+        $course = Course::where('teacher_id', $teacherId)
+            ->findOrFail($courseId);
+   
+        $chapters = Chapter::with('lessons')
+            ->where('course_id', $course->id)
+            ->where('status', 'active')
+            ->whereHas('course', fn($q) => $q->where('teacher_id', $teacherId))
+            ->orderBy('order')
+            ->get();
+
+        return view(
+            'frontend.teacher-dashboard.courses.chapters',
+            compact('course', 'chapters')
+        );
     }
-
-    $course->title = $req->title;
-    $course->desc = $req->desc;
-    $course->teacher_id = Auth::id();
-    $course->subject_id = $req->subject_id;
-    $course->class_id = $req->target;
-
-    $course->save();
-
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Updation successful.',
-        'redirect' => route('teacher.courses.edit', ['id' => $req->courseId, 'step' => $req->next_step,'mode'=>$editMode])
-    ]);
-}
-
 }

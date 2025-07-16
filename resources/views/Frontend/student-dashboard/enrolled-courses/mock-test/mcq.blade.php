@@ -6,17 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCQ Exam</title>
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <style>
+        #mcq-timer {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #d9534f;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 
 <body class="mcq-body">
 
     <div class="mcq-container">
-
         <h1 class="mcq-chapter-title">{{ $course->title }}</h1>
+
+        <div id="mcq-timer" data-minutes="{{ $durationMinutes }}">
+            Time left: <span id="time-text"></span>
+        </div>
         <hr>
 
-        {{-- <form action="{{ route('student.submit-mcq') }}" method="POST" class="mcq-form"> --}}
-        <form action="{{ route('student.submit-mcq', ['course_id' => $course->id]) }}" method="POST">
+        <form id="mcq-form" action="{{ route('student.submit-mcq', ['course_id' => $course->id]) }}" method="POST">
             @csrf
 
             @foreach ($questions as $index => $question)
@@ -24,7 +34,6 @@
                     <div class="mcq-question-text">
                         {{ $index + 1 }}. {{ $question->text }}
                     </div>
-
                     @foreach ($question->options as $option)
                         <div class="mcq-option-block">
                             @if ($question->type === 'single')
@@ -45,28 +54,43 @@
                 </div>
             @endforeach
 
-            <button type="submit" class="mcq-submit-btn">Submit</button>
+            <button id="mcq-submit" type="submit" class="mcq-submit-btn">Submit</button>
         </form>
     </div>
 
-    {{-- ------------------- JS ------------------ --}}
-    {{-- @if (session('success'))
-        <script>
-            window.onload = function() {
-                alert("{{ session('success') }}");
-                window.location.href = "{{ url()->previous() }}"; // Go back to course page
-            };
-        </script>
-    @endif
 
-    @if (session('error'))
-        <script>
-            window.onload = function() {
-                alert("{{ session('error') }}");
-                window.location.href = "{{ url()->previous() }}"; // Go back even on error
+    <script>
+        (() => {
+            const timerEl = document.getElementById('mcq-timer');
+            const timeText = document.getElementById('time-text');
+            const form = document.getElementById('mcq-form');
+            const submitBtn = document.getElementById('mcq-submit');
+
+            // total time in seconds
+            let remaining = parseInt(timerEl.dataset.minutes, 10) * 60;
+
+            const fmt = s => {
+                const m = String(Math.floor(s / 60)).padStart(2, '0');
+                const sc = String(s % 60).padStart(2, '0');
+                return `${m}:${sc}`;
             };
-        </script>
-    @endif --}}
+
+            // initial text
+            timeText.textContent = fmt(remaining);
+
+            const countdown = setInterval(() => {
+                remaining -= 1;
+                timeText.textContent = fmt(remaining);
+
+                if (remaining <= 0) {
+                    clearInterval(countdown);
+                    submitBtn.disabled = true;
+                    timeText.textContent = '00:00';
+                    form.submit();
+                }
+            }, 1000);
+        })();
+    </script>
 </body>
 
 </html>

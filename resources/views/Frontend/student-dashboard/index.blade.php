@@ -4,8 +4,12 @@
 @section('content')
 
     <!--====== PAGE BANNER PART START ======-->
+
     @include('Frontend.student-dashboard.breadcrumb')
+
     <!--====== PAGE BANNER PART ENDS ======-->
+
+
 
     <!--====== DASHBOARD CONTENT START ======-->
     <section id="teachers-singel" class="pt-70 pb-120 gray-bg">
@@ -15,21 +19,21 @@
 
                 <div class="col-lg-8">
                     <div class="teachers-right mt-50">
-
                         <div class="col-lg-8">
                             @include('frontend.student-dashboard.navbar')
 
                             <div class="ajax-area">
                                 @include('frontend.student-dashboard.profile.index')
                             </div>
-
+                            
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!--====== DASHBOARD CONTENT END ======-->
+
 @endsection
 
 

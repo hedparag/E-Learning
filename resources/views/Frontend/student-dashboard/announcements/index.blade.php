@@ -1,6 +1,7 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.student-dashboard.breadcrumb')
@@ -9,7 +10,7 @@
 
 
 
-    <!--====== TEACHER PART START ======-->
+    <!--====== STUDENT PART START ======-->
 
     <section class="pt-90 pb-90">
         <div class="container">
@@ -64,5 +65,6 @@
         </div>
     </section>
 
-    <!--====== TEACHER PART END ======-->
+    <!--====== STUDENT PART END ======-->
+
 @endsection
