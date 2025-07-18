@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AddSubject;
 use App\Models\Announcement;
+use App\Models\ChapterComment;
 use App\Models\ClassSubjectModel;
 use App\Models\Course;
 use App\Models\MockSettings;
@@ -20,10 +21,16 @@ use App\Models\Chapter;
 class teacherDashboardController extends Controller
 {
     use FileUpload;
-    function index(): View
-    {
-        return view('Frontend.teacher-dashboard.index');
-    }
+    public function index(): View
+{
+
+    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+    $count = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
+                ->whereNull('reply')->count();
+
+    return view('Frontend.teacher-dashboard.index', compact('count'));
+}
+
 
     public function profile()
     {
@@ -267,3 +274,24 @@ class teacherDashboardController extends Controller
         );
     }
 }
+
+public function comments(){
+    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+    $data = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
+                ->whereNull('reply')->get();
+   // $data=ChapterComment::where(['status'=>'approved','reply'=>null])->get();
+    return view('Frontend.teacher-dashboard.comments.index',compact('data'));
+}
+
+public function commentStore(Request $request,string $id){
+    $data=ChapterComment::findOrFail($id);
+    $request->validate([
+'reply'=>['required','string']
+    ]);
+    $data->reply=$request->reply;
+    $data->replied_at=now()->toDayDateTimeString();
+    $data->save();
+    return response(['message'=>'Message sent successfully'],200);
+}
+
+

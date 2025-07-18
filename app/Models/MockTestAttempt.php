@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MockTestAttempt extends Model
 {
@@ -27,4 +28,6 @@ class MockTestAttempt extends Model
     {
         return $this->belongsTo(MockTest::class);
     }
+
+
 }

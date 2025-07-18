@@ -26,7 +26,8 @@
         </div>
         <hr>
 
-        <form id="mcq-form" action="{{ route('student.submit-mcq', ['course_id' => $course->id]) }}" method="POST">
+        {{-- <form action="{{ route('student.submit-mcq') }}" method="POST" class="mcq-form"> --}}
+        <form action="{{ route('student.submit-mcq',$course->id) }}" method="POST">
             @csrf
 
             @foreach ($questions as $index => $question)

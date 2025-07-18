@@ -215,61 +215,6 @@ class studentDashboardController extends Controller
     );
   }
 
-  // public function submitMcqForm(Request $request, $course_id)
-  // {
-  //   $answers = $request->input('answers', []);
-  //   $user = Auth::user();
-
-  //   // Get the active test for this course
-  //   $mockTest = MockTest::where('course_id', $course_id)->where('status', 'active')->first();
-  //   if (!$mockTest) {
-  //     return back()->with('error', 'No active test found for this course.');
-  //   }
-
-  //   $questions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
-  //   $score = 0;
-
-  //   foreach ($questions as $question) {
-  //     $submitted = $answers[$question->id] ?? null;
-
-  //     $correctOptions = MockQuestionOption::where('mock_question_id', $question->id)
-  //       ->where('correct_option', true)
-  //       ->pluck('option_text')
-  //       ->sort()
-  //       ->values()
-  //       ->toArray();
-
-  //     if (!$submitted) {
-  //       continue;
-  //     }
-
-  //     $submittedArray = is_array($submitted)
-  //       ? collect($submitted)->sort()->values()->toArray()
-  //       : [$submitted];
-
-  //     if ($submittedArray === $correctOptions) {
-  //       $score++;
-  //     }
-  //   }
-
-  //   // 2 marks per question
-  //   $rawCorrect     = $score;
-  //   $score          = $rawCorrect * 2;
-  //   $totalPossible  = $questions->count() * 2;
-
-  //   // Save attempt
-  //   MockTestAttempt::create([
-  //     'student_id'   => $user->id,
-  //     'mock_test_id' => $mockTest->id,
-  //     'score'        => $score,
-  //     'total_marks'  => $totalPossible,
-  //     'attempt_date' => now()->toDateString(),
-  //     'remarks'      => 'Submitted via MCQ form',
-  //   ]);
-
-  //   return redirect()->route('student.enrolled-courses.index')->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
-  // }
-
   public function submitMcqForm(Request $request, $course_id)
   {
     $answers = $request->input('answers', []);

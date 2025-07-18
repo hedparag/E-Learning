@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DemoController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Frontend\CourseChapterController;
 use App\Http\Controllers\Frontend\CourseCreateController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -33,6 +34,9 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
+Route::get('additional',function(){
+return view('Frontend.teacher-dashboard.courses.checkAdditional');
+});
 
 /**
  * -----------STUDENT ROUTES--------------------
@@ -61,6 +65,11 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 
     Route::get('/exam/{course_id}', [studentDashboardController::class, 'showMcqForm'])->name('exam');
     Route::post('/exam/{course_id}', [studentDashboardController::class, 'submitMcqForm'])->name('submit-mcq');
+    Route::get('report',function(){
+     return view('Admin.marks.reportCard');
+    });
+    Route::get('viewReply',[studentDashboardController::class,'viewReply'])->name('viewReply');
+
 });
 
 
@@ -76,6 +85,7 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
+
     Route::get('profile', [TeacherDashboardController::class, 'profile'])->name('profile.index');
     Route::get('profile/edit', [TeacherDashboardController::class, 'editProfile'])->name('profile.edit');
     Route::post('profile/update', [TeacherDashboardController::class, 'updateProfile'])->name('profile.update');
@@ -105,7 +115,9 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
     Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
-    Route::get('fullCourses/edit/{id}', [teacherDashboardController::class, 'editCourse'])->name('fullCourses.edit');
+    Route::get('fullCourses/edit/{id}',[teacherDashboardController::class,'editCourse'])->name('fullCourses.edit');
+    Route::get('comments',[teacherDashboardController::class,'comments'])->name('comments');
+    Route::post('commentPost/{id}',[teacherDashboardController::class,'commentStore'])->name('commentPost');
 });
 
 

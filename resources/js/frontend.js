@@ -17,16 +17,16 @@ $(function () {
     let questionIndex = $('.question-block').length;
     const minQuestions = window.minQuestions ?? 10;
     const maxQuestions = window.maxQuestions ?? 50;
-   // window.questionIndex = $('.question-block').length;
-   window.questionIndex = questionIndex;
-updateSubmitState();
+    // window.questionIndex = $('.question-block').length;
+    window.questionIndex = questionIndex;
+    updateSubmitState();
 
-    function loadSubjects(classId,subject) {
+    function loadSubjects(classId, subject) {
         if (classId !== '') {
             $.ajax({
                 url: subjectUrl,
                 method: 'GET',
-                data: { class_id: classId, subject_id:subject },
+                data: { class_id: classId, subject_id: subject },
                 success: function (response) {
                     console.log(subject);
                     $('.holder').html(response.html);
@@ -137,8 +137,8 @@ updateSubmitState();
     });
     if ($('.targetSubject.chooseClass').length) {
         let classId = $('.targetSubject.chooseClass').val();
-       let subject = $('.targetSubject.chooseClass').data('id');
-        loadSubjects(classId,subject);
+        let subject = $('.targetSubject.chooseClass').data('id');
+        loadSubjects(classId, subject);
     }
     $('.basic-info-submit').on('submit', function (e) {
         e.preventDefault();
@@ -287,7 +287,7 @@ updateSubmitState();
     $('.customLessonModal').on('click', function () {
         let courseId = $(this).data('course-id');
         let chapterId = $(this).data('chapter-id');
-         $('.ModalTitle').text('Add Lesson');
+        $('.ModalTitle').text('Add Lesson');
         console.log(lessonUrl);
         $.ajax({
             method: 'GET',
@@ -342,7 +342,7 @@ updateSubmitState();
         let chapterId = $(this).data('chapter-id');
         let editId = $(this).data('edit-id');
         let lessonId = $(this).data('lesson-id');
-           $('.ModalTitle').text('Edit Lesson');
+        $('.ModalTitle').text('Edit Lesson');
         console.log(chapterEditUrl);
         $.ajax({
             method: 'GET',
@@ -370,7 +370,89 @@ updateSubmitState();
         $('.course-form').find('input[name=next_step]').val(step);
         $('.course-form').trigger('submit');
     });
-  /*  $('#addQuestionBtn').on('click',function () {
+    /*  $('#addQuestionBtn').on('click',function () {
+          if (questionIndex >= maxQuestions) {
+              alert(`Maximum ${maxQuestions} questions allowed.`);
+              return;
+          }
+
+          const letters = ['A', 'B', 'C', 'D'];
+          let html = `
+              <div class="card mb-4 shadow-sm question-block" data-index="${questionIndex}">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                      <strong>Question ${questionIndex + 1}</strong>
+                      <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
+                  </div>
+                  <div class="card-body">
+                      <div class="mb-3">
+                          <label>Question Text</label>
+                          <textarea name="questions[${questionIndex}][text]" class="form-control" required></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label>Options</label>
+          `;
+
+          letters.forEach(letter => {
+              html += `
+                  <div class="input-group mb-2">
+                      <span class="input-group-text">${letter}</span>
+                      <input type="text" name="questions[${questionIndex}][options][${letter}]" class="form-control" required placeholder="Option ${letter}">
+                  </div>
+              `;
+          });
+
+          html += `
+                      <label>Select Correct Answer</label>
+                      <select name="questions[${questionIndex}][correct_answer]" class="form-select" required>
+                          <option value="">-- Select --</option>
+          `;
+
+          letters.forEach(letter => {
+              html += `<option value="${letter}">${letter}</option>`;
+          });
+
+          html += `
+                      </select>
+                  </div>
+              </div>
+          </div>`;
+
+          $('#questionContainer').append(html);
+          questionIndex++;
+          updateSubmitState();
+      });
+
+      // Remove question block
+      $(document).on('click', '.remove-btn', function () {
+          $(this).closest('.question-block').remove();
+          updateQuestionNumbers();
+          updateSubmitState();
+      });
+
+      function updateQuestionNumbers() {
+          questionIndex = 0;
+          $('.question-block').each(function () {
+              $(this).attr('data-index', questionIndex);
+              $(this).find('.card-header strong').text('Question ' + (questionIndex + 1));
+
+              $(this).find('textarea').attr('name', `questions[${questionIndex}][text]`);
+              $(this).find('select').attr('name', `questions[${questionIndex}][correct_answer]`);
+
+              const letters = ['A', 'B', 'C', 'D'];
+              letters.forEach(letter => {
+                  $(this).find(`input[name$="[${letter}]"]`).attr('name', `questions[${questionIndex}][options][${letter}]`);
+              });
+
+              questionIndex++;
+          });
+      }
+
+      function updateSubmitState() {
+          const totalQuestions = $('.question-block').length;
+          $('#submitBtn').prop('disabled', totalQuestions < minQuestions);
+      }*/
+
+    /*$('#addQuestionBtn').on('click', function () {
         if (questionIndex >= maxQuestions) {
             alert(`Maximum ${maxQuestions} questions allowed.`);
             return;
@@ -402,20 +484,24 @@ updateSubmitState();
         });
 
         html += `
-                    <label>Select Correct Answer</label>
-                    <select name="questions[${questionIndex}][correct_answer]" class="form-select" required>
-                        <option value="">-- Select --</option>
+                    <div class="mt-3">
+                        <label>Correct Answer(s)</label><br/>
         `;
 
         letters.forEach(letter => {
-            html += `<option value="${letter}">${letter}</option>`;
+            html += `
+                <div class="form-check form-check-inline me-3">
+                    <input class="form-check-input" type="checkbox" name="questions[${questionIndex}][correct_answers][]" value="${letter}" id="correct-${questionIndex}-${letter}">
+                    <label class="form-check-label" for="correct-${questionIndex}-${letter}">${letter}</label>
+                </div>
+            `;
         });
 
         html += `
-                    </select>
+                    </div>
                 </div>
             </div>
-        </div>`;
+        `;
 
         $('#questionContainer').append(html);
         questionIndex++;
@@ -429,124 +515,38 @@ updateSubmitState();
         updateSubmitState();
     });
 
+    // Update numbering and name attributes
     function updateQuestionNumbers() {
         questionIndex = 0;
         $('.question-block').each(function () {
             $(this).attr('data-index', questionIndex);
             $(this).find('.card-header strong').text('Question ' + (questionIndex + 1));
 
+            // Update question text
             $(this).find('textarea').attr('name', `questions[${questionIndex}][text]`);
-            $(this).find('select').attr('name', `questions[${questionIndex}][correct_answer]`);
 
+            // Update option names and correct checkboxes
             const letters = ['A', 'B', 'C', 'D'];
             letters.forEach(letter => {
-                $(this).find(`input[name$="[${letter}]"]`).attr('name', `questions[${questionIndex}][options][${letter}]`);
+                $(this).find(`input[type="text"][placeholder="Option ${letter}"]`)
+                    .attr('name', `questions[${questionIndex}][options][${letter}]`);
+
+                const checkbox = $(this).find(`input[type="checkbox"][value="${letter}"]`);
+                checkbox.attr('name', `questions[${questionIndex}][correct_answers][]`);
+                checkbox.attr('id', `correct-${questionIndex}-${letter}`);
+                checkbox.siblings('label').attr('for', `correct-${questionIndex}-${letter}`);
             });
 
             questionIndex++;
         });
     }
 
+    // Enable or disable submit based on min question count
     function updateSubmitState() {
         const totalQuestions = $('.question-block').length;
         $('#submitBtn').prop('disabled', totalQuestions < minQuestions);
     }*/
-
-/*$('#addQuestionBtn').on('click', function () {
-    if (questionIndex >= maxQuestions) {
-        alert(`Maximum ${maxQuestions} questions allowed.`);
-        return;
-    }
-
-    const letters = ['A', 'B', 'C', 'D'];
-    let html = `
-        <div class="card mb-4 shadow-sm question-block" data-index="${questionIndex}">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <strong>Question ${questionIndex + 1}</strong>
-                <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label>Question Text</label>
-                    <textarea name="questions[${questionIndex}][text]" class="form-control" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label>Options</label>
-    `;
-
-    letters.forEach(letter => {
-        html += `
-            <div class="input-group mb-2">
-                <span class="input-group-text">${letter}</span>
-                <input type="text" name="questions[${questionIndex}][options][${letter}]" class="form-control" required placeholder="Option ${letter}">
-            </div>
-        `;
-    });
-
-    html += `
-                <div class="mt-3">
-                    <label>Correct Answer(s)</label><br/>
-    `;
-
-    letters.forEach(letter => {
-        html += `
-            <div class="form-check form-check-inline me-3">
-                <input class="form-check-input" type="checkbox" name="questions[${questionIndex}][correct_answers][]" value="${letter}" id="correct-${questionIndex}-${letter}">
-                <label class="form-check-label" for="correct-${questionIndex}-${letter}">${letter}</label>
-            </div>
-        `;
-    });
-
-    html += `
-                </div>
-            </div>
-        </div>
-    `;
-
-    $('#questionContainer').append(html);
-    questionIndex++;
-    updateSubmitState();
-});
-
-// Remove question block
-$(document).on('click', '.remove-btn', function () {
-    $(this).closest('.question-block').remove();
-    updateQuestionNumbers();
-    updateSubmitState();
-});
-
-// Update numbering and name attributes
-function updateQuestionNumbers() {
-    questionIndex = 0;
-    $('.question-block').each(function () {
-        $(this).attr('data-index', questionIndex);
-        $(this).find('.card-header strong').text('Question ' + (questionIndex + 1));
-
-        // Update question text
-        $(this).find('textarea').attr('name', `questions[${questionIndex}][text]`);
-
-        // Update option names and correct checkboxes
-        const letters = ['A', 'B', 'C', 'D'];
-        letters.forEach(letter => {
-            $(this).find(`input[type="text"][placeholder="Option ${letter}"]`)
-                .attr('name', `questions[${questionIndex}][options][${letter}]`);
-
-            const checkbox = $(this).find(`input[type="checkbox"][value="${letter}"]`);
-            checkbox.attr('name', `questions[${questionIndex}][correct_answers][]`);
-            checkbox.attr('id', `correct-${questionIndex}-${letter}`);
-            checkbox.siblings('label').attr('for', `correct-${questionIndex}-${letter}`);
-        });
-
-        questionIndex++;
-    });
-}
-
-// Enable or disable submit based on min question count
-function updateSubmitState() {
-    const totalQuestions = $('.question-block').length;
-    $('#submitBtn').prop('disabled', totalQuestions < minQuestions);
-}*/
-  $('#addQuestionBtn').on('click', function () {
+    $('#addQuestionBtn').on('click', function () {
         if (window.questionIndex >= window.maxQuestions) {
             alert(`Maximum ${window.maxQuestions} questions allowed.`);
             return;
@@ -632,6 +632,29 @@ function updateSubmitState() {
 
         $('#submitBtn').prop('disabled', totalQuestions < window.minQuestions);
     }
+    $('.commentSubmit').on('submit', function (e) {
+        e.preventDefault();
+        //console.log("hello");
+        let formData = new FormData(this);
+        let url = $(this).attr('action');
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+notyf.success(data.message);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+            }
+
+        });
+    })
 });
 
 
