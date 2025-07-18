@@ -9,7 +9,8 @@ class Chapter extends Model
 {
     public function lessons()
     {
-        return $this->hasMany(Lesson::class)->where('is_approved', true)->orderBy('order');
+        //return $this->hasMany(Lesson::class)->where('is_approved', true)->orderBy('order');
+        return $this->hasMany(Lesson::class,'chapter_id','id');
     }
 }
 

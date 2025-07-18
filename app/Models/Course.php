@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Course extends Model
 {
@@ -22,6 +23,9 @@ class Course extends Model
    }
    function totalLessons():HasMany{
     return $this->hasMany(Lesson::class,'course_id','id');
+   }
+   function mock():HasOne{
+    return $this->hasOne(MockTest::class,'course_id','id');
    }
 
 }

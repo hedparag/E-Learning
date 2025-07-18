@@ -92,5 +92,6 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
       Route::get('ReportCardView',[FinalizedController::class,'reportView'])->name('reportView');
        Route::get('message',[MessageController::class,'index'])->name('message');
        Route::post('course-Message-Review-Store/{id}',[MessageController::class,'store'])->name('courseMessageReview');
+       Route::get('fetchAllCourse',[CourseApproveController::class,'fetch'])->name('fetch-all-courses');
 
 });

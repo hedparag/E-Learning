@@ -32,6 +32,11 @@ class CourseCreateController extends Controller
             case '3':
                 $course = Course::findOrFail($req->id);
                 $editMode=$req->mode;
+                $count=Course::whereHas('chapters',function($q){
+                    $q->whereHas('lessons');
+                })->count();
+                //dd($count);
+
                 return view('Frontend.teacher-dashboard.courses.curriculum', compact('course','editMode'));
                 break;
             case '4':
@@ -68,7 +73,7 @@ class CourseCreateController extends Controller
                 ]);
                 if ($request->source == 'upload') {
                     $request->validate([
-                        'file' => ['required', 'url']
+                    'file' => ['required', 'string']
                     ]);
                 } elseif ($request->source != 'upload') {
                     $request->validate([

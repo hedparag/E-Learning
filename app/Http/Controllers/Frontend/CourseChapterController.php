@@ -74,6 +74,7 @@ class CourseChapterController extends Controller
     }
     public function lessonStore(Request $request)
     {
+       // dd($request->all());
          $rules=[
             'title' => ['required', 'string', 'max:255'],
             'desc' => ['nullable', 'string', 'max:1000'],
