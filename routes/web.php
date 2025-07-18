@@ -11,9 +11,6 @@ use App\Http\Controllers\Frontend\teacherDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 
@@ -96,7 +93,6 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     // Route::post('profile/update-social', [TeacherDashboardController::class, 'updateSocial'])->name('profile.update-social');
 
     Route::get('courses', [TeacherDashboardController::class, 'courses'])->name('courses.index');
-    // Route::get('courses/create', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
     Route::get('course/basic-info', [TeacherDashboardController::class, 'createCourses'])->name('courses.create');
     Route::post('course/basic-info', [teacherDashboardController::class, 'courseStore'])->name('course.basic-info');
     Route::post('course/basic-info-update', [teacherDashboardController::class, 'courseStoreUpdate'])->name('course.basic-info-update');
@@ -113,6 +109,8 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::get('remarks', [TeacherDashboardController::class, 'remarks'])->name('remarks.index');
     Route::delete('course/chapter/delete/{id}', [CourseChapterController::class, 'destroyChapter'])->name('chapter.destroy');
     Route::delete('course/lesson/delete/{id}', [CourseChapterController::class, 'destroyLesson'])->name('lesson.destroy');
+    Route::get('chapters/{id}', [TeacherDashboardController::class, 'courseChapters'])->name('courses.chapters');
+
     Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');

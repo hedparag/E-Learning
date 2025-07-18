@@ -1,11 +1,14 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.student-dashboard.breadcrumb')
 
     <!--====== PAGE BANNER PART ENDS ======-->
+
+
 
     <!--====== STUDENT PART START ======-->
 
@@ -28,7 +31,7 @@
                 <div class="col-lg-8">
                     @include('frontend.student-dashboard.navbar')
 
-                    <div class="dashboard-content ajax-area">
+                    <div class="dashboard-content">
                         <div class="mb-5">
                             <h4 class="mb-2">Hey, {{ auth()->user()->name }} </h3>
                                 <p>Let's Study!</p>
@@ -76,4 +79,5 @@
     </section>
 
     <!--====== STUDENT PART START ======-->
+    
 @endsection

@@ -1,6 +1,7 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.teacher-dashboard.breadcrumb')
@@ -18,6 +19,7 @@
 
                 <div class="col-lg-8">
                     @include('frontend.teacher-dashboard.navbar')
+
                     <div class="dashboard-content">
                         <h4 class="mb-5">Announcements</h4>
 
@@ -55,10 +57,12 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </section>
 
     <!--====== TEACHER PART END ======-->
+
 @endsection

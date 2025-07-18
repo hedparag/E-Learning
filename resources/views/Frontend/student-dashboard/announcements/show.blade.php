@@ -1,15 +1,16 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.student-dashboard.breadcrumb')
 
     <!--====== PAGE BANNER PART ENDS ======-->
 
+    
 
-
-    <!--====== TEACHER PART START ======-->
+    <!--====== STUDENT PART START ======-->
 
     <section class="pt-90 pb-90">
         <div class="container">
@@ -18,6 +19,7 @@
 
                 <div class="col-lg-8">
                     @include('frontend.student-dashboard.navbar')
+
                     <div class="dashboard-content">
                         <h4 class="mb-5">Announcements</h4>
 
@@ -43,26 +45,29 @@
                                                     </span>
                                                 </a>
 
-                                                <a href="#"><span><i class="fa fa-map-marker"></i> Rc
-                                                        Auditorim</span></a>
+                                                <a href="#">
+                                                    <span><i class="fa fa-map-marker"></i> 
+                                                        Rc Auditorim
+                                                    </span>
+                                                </a>
 
-                                                {{-- Image with no class, using your original structure --}}
                                                 <img src="{{ $announcement->attachment ? asset($announcement->attachment) : asset('frontend/assets/images/event/e-1.jpg') }}"
                                                     alt="Announcement Image">
 
                                                 <p>{{ $announcement->body }}</p>
-                                            </div> <!-- events-left -->
+                                            </div>
                                         </div>
-                                    </div> <!-- row -->
-                                </div> <!-- events-area -->
-                            </div> <!-- container -->
+                                    </div>
+                                </div>
+                            </div>
                         </section>
-
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!--====== TEACHER PART END ======-->
+    <!--====== STUDENT PART END ======-->
+
 @endsection
