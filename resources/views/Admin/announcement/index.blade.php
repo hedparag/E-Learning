@@ -12,7 +12,12 @@
                             <h1>All Announcements</h1>
                         </div>
                         <div class="ml-auto d-flex align-items-center">
-                           <a href="{{ route('admin.announcement.create') }}" class="btn btn-primary">Post Announcement</a>
+                            <div><a href="{{ route('admin.announcement.approveEdit') }}" class="btn btn-primary">Approve Announcement</a></div>
+                        </div>
+
+                        <div class="ml-auto d-flex align-items-center">
+
+                           <div><a href="{{ route('admin.announcement.create') }}" class="btn btn-primary">Post Announcement</a></div>
                         </div>
                     </div>
                     <!-- end page title -->

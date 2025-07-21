@@ -38,9 +38,9 @@
 
                                 </div>
                                 <div class="form-group">
-                                    @if(@$edit == 1 )
-                                    <x-image-preview src="{{ asset(@$data?->attachment) }}" />
-                                        @endif
+                                    @if (@$edit == 1)
+                                        <x-image-preview src="{{ asset(@$data?->attachment) }}" />
+                                    @endif
                                     <br>
                                     <label for="exampleInputEmail1">Attachment</label>
                                     <div class="card-body">

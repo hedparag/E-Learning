@@ -69,6 +69,7 @@ $(function () {
 
                     },
                     success: function (data) {
+                        notyf.success(data);
                         window.location.reload();
 
                     },
@@ -654,7 +655,16 @@ notyf.success(data.message);
             }
 
         });
-    })
+    });
+    $('.targetClass').on('change',function(){
+let value=$(this).val();
+if(value =='class'){
+    $('.holder').removeClass('d-none');
+}
+else{
+ $('.holder').addClass('d-none');
+}
+    });
 });
 
 

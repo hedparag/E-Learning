@@ -76,6 +76,8 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
     Route::post('subCategory/{id}', [AddSubjectController::class, 'category'])->name('category-store');
     Route::resource('subjectAssign', SubjectAssignController::class);
     Route::resource('announcement', AnnouncementController::class);
+    Route::get('announcementEdit',[AnnouncementController::class,'approveEdit'])->name('announcement.approveEdit');
+    Route::post('announcementApprove/{id}',[AnnouncementController::class,'approve'])->name('announcementApprove');
     Route::get('data', [DataController::class, 'index']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');

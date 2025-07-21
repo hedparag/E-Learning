@@ -14,7 +14,7 @@
 
     <section class="pt-90 pb-90">
         <div class="container">
-            @if ($count != 0)
+            @if (@$count != 0)
                 <div class="row d-flex justify-content-center">
                     <div class="col-6 mb-2">
                     <div class="alert alert-primary" role="alert">
@@ -79,5 +79,5 @@
     </section>
 
     <!--====== STUDENT PART START ======-->
-    
+
 @endsection

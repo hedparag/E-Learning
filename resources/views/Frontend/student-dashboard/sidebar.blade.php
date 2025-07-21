@@ -7,7 +7,7 @@
         <div class="name">
             <h6>{{ auth()->user()->name }}</h6>
             {{-- <span>{{ ucfirst(auth()->user()->role) }}</span> --}}
-            <p>Class {{ auth()->user()->student_classes_id ?? '' }}</p>
+            <p>{{ auth()->user()->hasClass->name ?? '' }}</p>
         </div>
 
         <div class="description">

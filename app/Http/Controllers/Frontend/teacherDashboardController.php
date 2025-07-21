@@ -17,19 +17,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use App\Models\Chapter;
+use Carbon\Carbon;
 
 class teacherDashboardController extends Controller
 {
     use FileUpload;
     public function index(): View
-{
+    {
 
-    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
-    $count = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
-                ->whereNull('reply')->count();
+        //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+        $count = ChapterComment::where(['status' => 'approved', 'teacher_id' => Auth::user()->id])
+            ->whereNull('reply')->count();
 
-    return view('Frontend.teacher-dashboard.index', compact('count'));
-}
+        return view('Frontend.teacher-dashboard.index', compact('count'));
+    }
 
 
     public function profile()
@@ -108,20 +109,67 @@ class teacherDashboardController extends Controller
 
     public function announcements()
     {
-        $announcements = Announcement::where('is_active', true)
-            ->where(function ($query) {
-                $query->where('target_type', 'all')
-                    ->orWhere('created_by_id', auth()->id());
-            })
+        $announcements = Announcement::where('is_active', true)->where('target_type', 'all')
+            ->where('end_date', '>=', Carbon::now())
             ->orderBy('start_date', 'desc')
             ->get();
 
         return view('frontend.teacher-dashboard.announcements.index', compact('announcements'));
     }
+    public function postAnnouncements(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'desc' => ['nullable', 'string', 'max:1000'],
+            'docs' => ['nullable', 'image'],
+            'target' => ['required', 'in:student,class'],
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+            'status' => ['nullable', 'boolean'],
+            'class' => ['nullable']
+
+        ]);
+
+        $announcement = new Announcement();
+        $announcement->title = $request->title;
+        $announcement->body = $request->desc;
+        if ($request->has('docs')) {
+            $path = $this->uploadFile($request->file('docs'));
+            $announcement->attachment = $path;
+        }
+
+        $announcement->target_type = $request->target;
+        if ($request->target == 'class') {
+            $announcement->target_id = $request->class;
+        }
+        $announcement->is_active = $request->status ?? 0;
+        $announcement->start_date = $request->start_date;
+        $announcement->end_date = $request->end_date;
+
+        if (Auth::guard('admin')->check()) {
+            $announcement->creator_type = 'admin';
+            $announcement->created_by_id = Auth::guard('admin')->id();
+        } elseif (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'teacher') {
+            $announcement->creator_type = 'teacher';
+            $announcement->created_by_id = Auth::guard('web')->id();
+        } else {
+            return abort(401);
+        }
+        //$announcement->created_by_id=$request->title;
+        $announcement->save();
+         notyf()->success("Admin will approve your announcement before posting");
+        return redirect()->back();
+    }
 
     public function createAnnouncements()
     {
-        return view('frontend.teacher-dashboard.announcements.create');
+        $classes = StudentClass::all();
+        $announcements = Announcement::where('created_by_id', Auth::id())->latest()->get();
+
+
+        return view('frontend.teacher-dashboard.announcements.create', compact('classes', 'announcements'));
     }
     public function getCommonSubjects(Request $request)
     {
@@ -256,11 +304,11 @@ class teacherDashboardController extends Controller
 
     public function courseChapters($courseId)
     {
-        $teacherId = Auth::id();     
+        $teacherId = Auth::id();
 
         $course = Course::where('teacher_id', $teacherId)
             ->findOrFail($courseId);
-   
+
         $chapters = Chapter::with('lessons')
             ->where('course_id', $course->id)
             ->where('status', 'active')
@@ -273,25 +321,94 @@ class teacherDashboardController extends Controller
             compact('course', 'chapters')
         );
     }
+
+
+    public function comments()
+    {
+        //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+        $data = ChapterComment::where(['status' => 'approved', 'teacher_id' => Auth::user()->id])
+            ->whereNull('reply')->get();
+        // $data=ChapterComment::where(['status'=>'approved','reply'=>null])->get();
+        return view('Frontend.teacher-dashboard.comments.index', compact('data'));
+    }
+
+    public function commentStore(Request $request, string $id)
+    {
+        $data = ChapterComment::findOrFail($id);
+        $request->validate([
+            'reply' => ['required', 'string']
+        ]);
+        $data->reply = $request->reply;
+        $data->replied_at = now()->toDayDateTimeString();
+        $data->save();
+        return response(['message' => 'Message sent successfully'], 200);
+    }
+    public function destroy(string $id)
+    {
+        //dd($id);
+        $data = Announcement::findOrFail($id);
+        if ($data->attachment) {
+            $this->deleteFile($data->attachment);
+        }
+        $data->delete();
+        return response(['message' => 'Deleted Successfully'], 200);
+    }
+    public function editAnnouncement(string $id)
+    {
+        $edit = 1;
+        $data = Announcement::findOrFail($id);
+        $classes = StudentClass::all();
+        $announcements = Announcement::where('created_by_id', Auth::id())->latest()->get();
+
+
+        return view('frontend.teacher-dashboard.announcements.create', compact('classes', 'announcements', 'data', 'edit'));
+    }
+    public function updateAnnouncement(string $id,Request $request)
+    {
+       // dd($request->all());
+
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'desc' => ['nullable', 'string', 'max:1000'],
+            'docs' => ['nullable', 'image'],
+            'target' => ['required', 'in:student,class'],
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+            'status' => ['nullable', 'boolean'],
+            'class' => ['nullable']
+
+        ]);
+
+        $announcement = Announcement::findOrFail($id);
+        $announcement->title = $request->title;
+        $announcement->body = $request->desc;
+        if ($request->has('docs')) {
+            $this->deleteFile($announcement->attachment );
+            $path = $this->uploadFile($request->file('docs'));
+            $announcement->attachment = $path;
+        }
+        $announcement->target_id=null;
+
+        $announcement->target_type = $request->target;
+        if ($request->target == 'class') {
+            $announcement->target_id = $request->class;
+        }
+        $announcement->is_active = $request->status ?? 0;
+        $announcement->start_date = $request->start_date;
+        $announcement->end_date = $request->end_date;
+
+        if (Auth::guard('admin')->check()) {
+            $announcement->creator_type = 'admin';
+            $announcement->created_by_id = Auth::guard('admin')->id();
+        } elseif (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'teacher') {
+            $announcement->creator_type = 'teacher';
+            $announcement->created_by_id = Auth::guard('web')->id();
+        } else {
+            return abort(401);
+        }
+        //$announcement->created_by_id=$request->title;
+        $announcement->save();
+         notyf()->success("Admin will approve your announcement before posting");
+     return redirect()->route('teacher.announcements.create');
+    }
 }
-
-public function comments(){
-    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
-    $data = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
-                ->whereNull('reply')->get();
-   // $data=ChapterComment::where(['status'=>'approved','reply'=>null])->get();
-    return view('Frontend.teacher-dashboard.comments.index',compact('data'));
-}
-
-public function commentStore(Request $request,string $id){
-    $data=ChapterComment::findOrFail($id);
-    $request->validate([
-'reply'=>['required','string']
-    ]);
-    $data->reply=$request->reply;
-    $data->replied_at=now()->toDayDateTimeString();
-    $data->save();
-    return response(['message'=>'Message sent successfully'],200);
-}
-
-

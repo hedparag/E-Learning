@@ -161,4 +161,14 @@ class AnnouncementController extends Controller
 
     return response(['message' => 'Deleted successfully'], 200);
 }
+public function approveEdit(){
+ $data=Announcement::where(['creator_type'=>'teacher','is_active'=>false])->get();
+ return view('Admin.announcement.approveEdit',compact('data'));
+}
+public function approve(Request $request,string $id){
+   $data=Announcement::findOrFail($id);
+   $data->is_active=$request->status;
+   $data->save();
+   return redirect()->back();
+}
 }

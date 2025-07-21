@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\InstructorDashboardController;
 use App\Http\Controllers\Frontend\studentDashboardController;
 use App\Http\Controllers\Frontend\teacherDashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Mail\TeacherCourseStatus;
 use Illuminate\Support\Facades\Route;
 
 
@@ -114,6 +115,9 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:teacher'], 'pr
     Route::get('announcements', [TeacherDashboardController::class, 'announcements'])->name('announcements.index');
     Route::get('announcements/create', [TeacherDashboardController::class, 'createAnnouncements'])->name('announcements.create');
     Route::post('announcements/post', [TeacherDashboardController::class, 'postAnnouncements'])->name('announcements.post');
+    Route::delete('announcement/destroy/{id}',[teacherDashboardController::class,'destroy'])->name('announcements.destroy');
+    Route::get('announcement/edit/{id}',[teacherDashboardController::class,'editAnnouncement'])->name('announcements.edit');
+    Route::post('announcement/update/{id}',[teacherDashboardController::class,'updateAnnouncement'])->name('announcements.update');
     Route::get('/get-common-subjects', [TeacherDashboardController::class, 'getCommonSubjects'])->name('get.common.subjects');
     Route::get('fullCourses/edit/{id}',[teacherDashboardController::class,'editCourse'])->name('fullCourses.edit');
     Route::get('comments',[teacherDashboardController::class,'comments'])->name('comments');
