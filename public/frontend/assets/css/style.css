@@ -3589,7 +3589,7 @@ p {
 }
 
 .singel-event-list .event-cont a:hover h4 {
-    color: #ffc600;
+    color: blueviolet;
 }
 
 
@@ -4109,44 +4109,51 @@ p {
     border-bottom: 1px solid #d2d2d2;
 }
 
-.blog-comment .comment .comment-author{
+.blog-comment .comment .comment-author {
     display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
-.blog-comment .comment .comment-author .author-thum img{
+
+.blog-comment .comment .comment-author .author-thum img {
     border-radius: 5px;
 }
-.blog-comment .comment .comment-author .comment-name{
+
+.blog-comment .comment .comment-author .comment-name {
     padding-left: 20px;
 }
-.blog-comment .comment .comment-author .comment-name h6{
+
+.blog-comment .comment .comment-author .comment-name h6 {
     font-size: 16px;
     font-weight: 600;
     color: #000;
 }
-.blog-comment .comment .comment-author .comment-name span{
+
+.blog-comment .comment .comment-author .comment-name span {
     font-size: 15px;
-	color: #8a8a8a;
-	font-weight: 400;
-	font-family: 'Poppins', sans-serif;
+    color: #8a8a8a;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
 }
+
 .blog-comment .comment .comment-replay {
-	position: absolute;
-	top: 15px;
-	right: 0;
+    position: absolute;
+    top: 15px;
+    right: 0;
 }
-.comment-form .form-singel{
+
+.comment-form .form-singel {
     margin-top: 20px;
 }
+
 .comment-form .form-singel input,
-.comment-form .form-singel textarea{
+.comment-form .form-singel textarea {
     height: 60px;
     width: 100%;
     padding: 0 20px;
@@ -4154,7 +4161,8 @@ p {
     border-radius: 5px;
     font-size: 15px;
 }
-.comment-form .form-singel textarea{
+
+.comment-form .form-singel textarea {
     height: 120px;
     resize: none;
     padding-top: 20px;
@@ -4165,72 +4173,82 @@ p {
 ======================================================*/
 
 .shop-top-search {
-	background-color: #fff;
-	padding: 15px 30px;
-	border-radius: 5px;
+    background-color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
 }
+
 .shop-top-search .shop-bar {
     display: inline-block;
 }
+
 .shop-top-search .nav .nav-item {
-	margin-right: 15px;
-	font-size: 15px;
-	color: #8a8a8a;
+    margin-right: 15px;
+    font-size: 15px;
+    color: #8a8a8a;
 }
-.shop-top-search .nav .nav-item a{
+
+.shop-top-search .nav .nav-item a {
     font-size: 16px;
     color: #8a8a8a;
 }
+
 .shop-top-search .nav .nav-item a.active {
-	color: #ffc600;
+    color: #ffc600;
 }
+
 .shop-top-search .shop-select {
-	display: inline-block;
+    display: inline-block;
     float: right;
     margin-top: -3px;
 }
 
 .shop-top-search .shop-select .nice-select {
-	background-color: #f6f6f6;
-	border-radius: 5px;
-	border: 0;
-	font-size: 14px;
-	height: 30px;
-	width: 135px;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 0;
+    font-size: 14px;
+    height: 30px;
+    width: 135px;
     line-height: 30px;
     color: #8a8a8a;
 }
+
 .shop-top-search .shop-select .nice-select.open .list {
-	width: 100%;
+    width: 100%;
     margin-top: 0;
     background-color: #f6f6f6;
     border: 0;
 }
 
 #shop-list .singel-publication .cont {
-	display: block;
+    display: block;
     padding-top: 0;
 }
+
 #shop-list .singel-publication .cont .name {
-	width: 100%;
+    width: 100%;
 }
+
 #shop-list .singel-publication .cont .name a h6 {
-	font-size: 18px;
+    font-size: 18px;
 }
+
 #shop-list .singel-publication .cont .name span {
-	font-size: 16px;
-	color: #8a8a8a;
-	padding-top: 15px;
+    font-size: 16px;
+    color: #8a8a8a;
+    padding-top: 15px;
 }
+
 #shop-list .singel-publication .cont .button {
-	width: 100%;
+    width: 100%;
     padding-top: 10px;
 }
 
 #shop-list .singel-publication .cont .button a {
-	padding: 0 20px;
-	font-size: 12px;
-	line-height: 35px;
+    padding: 0 20px;
+    font-size: 12px;
+    line-height: 35px;
 }
 
 
@@ -4238,96 +4256,113 @@ p {
     30. SHOP SINGEL PAGE css
 ======================================================*/
 
-.shop-destails{
+.shop-destails {
     background-color: #fff;
     padding: 20px 50px 50px;
     border-radius: 5px;
 }
-.shop-destails .shop-left{
+
+.shop-destails .shop-left {
     padding-right: 50px;
 }
-.shop-destails .shop-left .shop-image a{
+
+.shop-destails .shop-left .shop-image a {
     display: block;
 }
-.shop-destails .shop-left .shop-image img{
+
+.shop-destails .shop-left .shop-image img {
     width: 100%;
     border-radius: 4px;
 }
-.shop-destails .shop-left .nav .nav-item{
+
+.shop-destails .shop-left .nav .nav-item {
     margin-right: 25px;
 }
-.shop-destails .shop-left .nav .nav-item:last-child{
+
+.shop-destails .shop-left .nav .nav-item:last-child {
     margin-right: 0;
 }
+
 .shop-destails .shop-left .nav .nav-item a {
-	display: block;
+    display: block;
 }
-.shop-destails .shop-left .nav .nav-item a .shop-thum img{
+
+.shop-destails .shop-left .nav .nav-item a .shop-thum img {
     width: 100%;
     border-radius: 3px;
 }
 
 /* .shop-right{} */
-.shop-right h6{
+.shop-right h6 {
     font-size: 18px;
     padding-bottom: 5px;
 }
-.shop-right span{
+
+.shop-right span {
     font-size: 15px;
     color: #8a8a8a;
 }
-.shop-right p{
+
+.shop-right p {
     padding-bottom: 15px;
 }
+
 .nice-number {
     position: relative;
     display: inline-block;
     margin-right: 20px;
 }
+
 .nice-number input {
-	width: 50px !important;
+    width: 50px !important;
     height: 40px;
     border-radius: 5px;
     border: 2px solid #aaa;
     padding-right: 20px;
 }
+
 .nice-number button {
-	position: absolute;
-	width: 25px;
-	padding: 0;
-	right: 2px;
-	top: 2px;
-	border: 0;
+    position: absolute;
+    width: 25px;
+    padding: 0;
+    right: 2px;
+    top: 2px;
+    border: 0;
     border-top-right-radius: 5px;
     background: none;
     cursor: pointer;
 }
 
-.nice-number button:last-child{
+.nice-number button:last-child {
     top: auto;
     bottom: 2px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 5px;
 }
-.nice-number button i{
+
+.nice-number button i {
     font-size: 15px;
     color: #000;
 }
-.add-btn{
+
+.add-btn {
     display: inline-block;
 }
-.add-btn .main-btn{
+
+.add-btn .main-btn {
     line-height: 46px;
 }
 
 /* .shop-reviews .nav .nav-item{} */
-.shop-reviews .nav .nav-item:first-child a{
+.shop-reviews .nav .nav-item:first-child a {
     border-top-left-radius: 5px;
 }
-.shop-reviews .nav .nav-item:last-child a{
+
+.shop-reviews .nav .nav-item:last-child a {
     border-top-right-radius: 5px;
 }
-.shop-reviews .nav .nav-item a{
+
+.shop-reviews .nav .nav-item a {
     width: 165px;
     line-height: 55px;
     background-color: #315377;
@@ -4339,23 +4374,25 @@ p {
     -webkit-transition: all 0.4s linear;
     transition: all 0.4s linear;
 }
-.shop-reviews .nav .nav-item a.active{
+
+.shop-reviews .nav .nav-item a.active {
     background-color: #fafafa;
     color: #315377;
 }
 
-.shop-reviews .tab-content{
+.shop-reviews .tab-content {
     background-color: #fafafa;
     padding: 0px 45px 40px;
     border-radius: 5px;
     border-top-left-radius: 0;
 }
-.shop-reviews .tab-content .reviews-cont{
+
+.shop-reviews .tab-content .reviews-cont {
     padding: 0;
 }
 
 /* .releted-item{} */
-.releted-item .title h3{
+.releted-item .title h3 {
     font-size: 30px;
     color: #07294d;
 }
@@ -4366,17 +4403,19 @@ p {
     31. CONTACT PAGE css
 ======================================================*/
 
-.contact-from{
+.contact-from {
     background-color: #fff;
     padding: 50px;
     border-radius: 5px;
 }
+
 /* .contact-from .main-form{} */
-.contact-from .main-form .singel-form{
+.contact-from .main-form .singel-form {
     margin-top: 20px;
 }
+
 .contact-from .main-form .singel-form input,
-.contact-from .main-form .singel-form textarea{
+.contact-from .main-form .singel-form textarea {
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -4386,41 +4425,44 @@ p {
     font-size: 15px;
 }
 
-.contact-from .main-form .singel-form textarea{
+.contact-from .main-form .singel-form textarea {
     padding-top: 10px;
     height: 100px;
     resize: none;
 }
 
-.form-group{
+.form-group {
     margin: 0;
 }
+
 .list-unstyled li {
-	font-size: 13px;
-	margin-left: 2px;
-	margin-top: 5px;
-	color: #f00;
-}
-p.form-message.success,
-p.form-message.error {
-	font-size: 16px;
-	color: #353535;
-	background: #ddd;
-	padding: 10px 15px;
-	margin-left: 15px;
-	margin-top: 15px;
+    font-size: 13px;
+    margin-left: 2px;
+    margin-top: 5px;
+    color: #f00;
 }
 
-.contact-address{
+p.form-message.success,
+p.form-message.error {
+    font-size: 16px;
+    color: #353535;
+    background: #ddd;
+    padding: 10px 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.contact-address {
     background-color: #fff;
     padding: 20px 50px 50px;
     border-radius: 5px;
 }
 
-.contact-address ul li{
+.contact-address ul li {
     padding-top: 30px;
 }
-.contact-address ul li .singel-address{
+
+.contact-address ul li .singel-address {
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
@@ -4847,7 +4889,6 @@ p.form-message.error {
 
 .dashboard-tabs .nav-link.active {
     background-color: #1c87c9;
-    /* Your template's blue */
     color: white;
     font-weight: 600;
     border-color: #1c87c9;
@@ -4860,7 +4901,6 @@ p.form-message.error {
     border: 2px solid #ccc;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    /* Optional: keep it slightly rounded */
 }
 
 .info-box {
@@ -4868,6 +4908,15 @@ p.form-message.error {
     /* light yellow */
     border: 1px solid #f5e9b4;
     padding: 1.5rem;
+}
+
+/* .profile-index h5 {
+
+} */
+
+.profile-index p {
+    color: #505050;
+    padding-left: 10px;
 }
 
 .fixed-table {
@@ -4885,123 +4934,55 @@ p.form-message.error {
 .fixed-table tr {
     border: none !important;
 }
-/*external
-    .course-card {
-        aspect-ratio: 1 / 1;
-        border-radius: 10px;
-        overflow: hidden;
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 15px;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s;
-    }
 
-    .course-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .course-img-wrapper {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        position: relative;
-    }
-
-    .course-img-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .price-badge {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        background: #ffc107;
-        color: #000;
-        font-size: 12px;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-weight: 600;
-    }
-
-    .course-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin: 5px 0;
-    }
-
-    .course-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .teacher-info img {
-        width: 30px;
-        height: 30px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 6px;
-    }
-
-    .rating i {
-        color: #ffc107;
-        font-size: 14px;
-    }*/
-    /*External new*/
-
-    .course-card {
-        height: 100%;
-        padding: 15px;
-        /* background: #fff;
+.course-card {
+    height: 100%;
+    padding: 15px;
+    /* background: #fff;
         border: 1px solid #ddd; */
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .course-img-wrapper img {
-        width: 100%;
-        height: 180px; /* fixed height */
-        object-fit: cover;
-        border-radius: 8px;
-    }
+.course-img-wrapper img {
+    width: 100%;
+    height: 180px;
+    /* fixed height */
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-    .course-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin-top: 10px;
-        height: 48px;
-        overflow: hidden;
-    }
+.course-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    height: 48px;
+    overflow: hidden;
+}
 
-    .course-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: auto;
-    }
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
 
-    .course-footer img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 5px;
-    }
-    .alert.alert-outline-danger {
+.course-footer img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.alert.alert-outline-danger {
     border-color: #e3324c !important;
     color: #f0072a !important;
 }
+
 /*chapter-lesson*/
 .border-radius-10 {
     border-radius: 10px;
@@ -5033,12 +5014,15 @@ p.form-message.error {
     border-radius: 5px;
     background: #f9f9f9;
 }
+
 .lesson-box * {
     color: #000 !important;
 }
+
 .lesson-box:hover {
     background-color: #f1f1f1;
 }
+
 .lesson-icon {
     width: 40px;
 }
@@ -5064,6 +5048,14 @@ p.form-message.error {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+.mcq-class-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #505050;
+}
+
 .mcq-chapter-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -5081,8 +5073,9 @@ p.form-message.error {
 }
 
 .mcq-question-block {
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    /* margin-bottom: 2rem;
+    margin-top: 2rem; */
+    margin: 2rem;
 }
 
 .mcq-question-text {
@@ -5111,9 +5104,10 @@ p.form-message.error {
 }
 
 .mcq-submit-btn {
-    background-color: #2563eb;
+    background-color: blueviolet;
     color: white;
     padding: 0.6rem 1.4rem;
+    margin-left: 2rem;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
@@ -5131,16 +5125,29 @@ p.form-message.error {
     font-size: 0.9rem;
     display: inline-block;
 }
+
+#mcq-timer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #d9534f;
+    margin-bottom: 1rem;
+}
+
+
+
 .border-left-warning {
     border-left: 5px solid #ffc107;
 }
+
 .card {
     background-color: #fff;
     border-radius: 10px;
 }
+
 .card textarea {
     resize: vertical;
 }
+
 .btn-warning {
     background-color: #ffc107;
     border-color: #ffc107;

@@ -1,4 +1,4 @@
-<section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8"
+<section id="page-banner" class="pt-50 pb-50 bg_cover" data-overlay="8"
         style="background-image: url({{ asset('frontend/assets/images/page-banner-3.jpg') }})">
         <div class="container">
             <div class="row">

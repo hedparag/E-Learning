@@ -41,7 +41,21 @@
                                                         <li><i class="fa fa-book"></i></li>
                                                         <li><span class="lecture">Lecture
                                                                 {{ $chapter->order ?? $index + 1 }}</span></li>
-                                                        <li><span class="head">{{ $chapter->title }}</span></li>
+                                                        @php
+                                                            $completedLessons = $chapter->lessons
+                                                                ->whereIn('id', $lessonCompletions ?? [])
+                                                                ->count();
+                                                            $totalLessons = $chapter->lessons->count();
+                                                        @endphp
+                                                        <li>
+                                                            <span class="head">{{ $chapter->title }}</span>
+                                                            @if ($totalLessons > 0 && $completedLessons === $totalLessons)
+                                                                <span class="badge badge-success ml-2">Completed ✅</span>
+                                                            @else
+                                                                <span class="badge badge-secondary ml-2">Not Completed ❌</span>
+                                                            @endif
+                                                        </li>
+
                                                         <li>
                                                             <span class="time d-none d-md-block">
                                                                 <i class="fa fa-clock-o"></i>
@@ -89,6 +103,17 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <form action="{{ route('student.lesson.complete') }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="lesson_id"
+                                                                    value="{{ $lesson->id }}">
+                                                                <input type="checkbox" name="completed"
+                                                                    onchange="this.form.submit()"
+                                                                    {{ in_array($lesson->id, $completedLessonIds ?? []) ? 'checked disabled' : '' }}>
+                                                            </form>
+                                                        </div>
                                                     @empty
                                                         <p class="text-muted">No lessons found in this chapter.</p>
                                                     @endforelse
@@ -132,7 +157,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                        @endif
+                                @endif
                             </div>
                     </div>
 
@@ -142,5 +167,5 @@
 
 
     <!--====== STUDENT PART END ======-->
-    
+
 @endsection

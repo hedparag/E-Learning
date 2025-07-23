@@ -1,7 +1,7 @@
 <ul class="dashboard-tabs nav nav-tabs nav-justified mb-4" role="tablist">
     <li class="nav-item">
         <a href="{{ route('student.profile.index') }}"
-           class="ajax-nav nav-link {{ request()->routeIs('student.dashboard') || request()->is('student/profile*') ? 'active' : '' }}">
+           class="nav-link {{ request()->routeIs('student.dashboard') || request()->is('student/profile*') ? 'active' : '' }}">
            Profile
         </a>
     </li>
@@ -14,7 +14,7 @@
     <li class="nav-item">
         <a href="{{ route('student.remarks.index') }}"
            class="nav-link {{ request()->is('student/remarks*') ? 'active' : '' }} customAjax">
-           Remark
+           Remarks
         </a>
     </li>
     <li class="nav-item">

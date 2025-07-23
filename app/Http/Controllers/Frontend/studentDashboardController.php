@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\StudentMarksMail;
 use App\Models\PayoutInformation;
 use App\Traits\FileUpload;
 use Illuminate\Contracts\View\View;
@@ -10,17 +11,21 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\AddSubject;
 use App\Models\Announcement;
-use App\Models\Chapter;
 use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\Chapter;
 use App\Models\MockTest;
 use App\Models\MockQuestion;
 use App\Models\MockQuestionOption;
 use App\Models\MockTestAttempt;
 use App\Models\ChapterComment;
-
+use App\Models\MockSettings;
+use Illuminate\Support\Facades\Mail;
+use App\Models\LessonCompletion;
 
 class studentDashboardController extends Controller
 {
@@ -28,15 +33,49 @@ class studentDashboardController extends Controller
 
   function index(): View
   {
-    return view('Frontend.student-dashboard.index');
+    $count = 0;
+    $count = ChapterComment::where(['status' => 'approved', 'student_id' => Auth::guard('web')->user()->id, 'viewed' => false])
+      ->whereNotNull('reply')
+      ->count();
+    return view('Frontend.student-dashboard.index', compact('count'));
+    //return view('Frontend.layouts.master');
+  }
+
+  function becomeInstructor(string $id): View
+  {
+    return view('student.becomeTeacher', compact('id'));
+  }
+
+  function store(Request $req, string $id): RedirectResponse
+  {
+    //dd($req->all());
+    $req->validate([
+      'document' => ['required', 'file', 'max:3000'],
+      'payout' => ['required', 'in:scipe,paypal,razorpay'],
+      'payout_info' => ['required', 'string', 'max:1000'],
+      'policy' => ['required'],
+      'bio' => ['nullable', 'string', 'max:2000']
+    ]);
+    $filePath = $this->uploadFile($req->file('document'));
+    $data = User::findOrFail($id);
+    $data->document = $filePath;
+    $data->bio = $req->bio;
+    $data->approved_status = 'pending';
+    $data->save();
+    PayoutInformation::updateOrCreate(
+      ['teacher_id' => $id],
+      [
+        'payoutGateway' => $req->payout,
+        'payoutInformation' => $req->payout_info
+      ]
+    );
+    return redirect()->back()->with('success', 'Profile updated successfully!');
   }
 
 
-
-  // ----- PROFILE ------------------------------------------------------------------------------------------------------
   public function profile(Request $request)
   {
-    $user = Auth::user();
+    $user = Auth::user(); // get the logged in student
 
     if ($request->ajax()) {
       return view('frontend.student-dashboard.profile.index', compact('user'));
@@ -80,68 +119,90 @@ class studentDashboardController extends Controller
     return redirect()->route('student.profile.index')->with('success', 'Profile updated successfully.');
   }
 
-
-
-  // ----- COURSE -------------------------------------------------------------------------------------------------------
   public function courses(Request $request)
   {
     $user = Auth::user();
     $classId = $user->student_classes_id;
-    $courses = Course::where('class_id', $classId)->get();
 
-    return view('frontend.student-dashboard.enrolled-courses.index', compact('courses'));
+    $courses = Course::where('class_id', '<=', $classId)->get();
+    $completedCourseIds = [];
+
+    foreach ($courses as $course) {
+      // Get all lesson IDs for this course
+      $lessonIds = Lesson::whereHas('chapter', function ($query) use ($course) {
+        $query->where('course_id', $course->id);
+      })->pluck('id');
+
+      // Count how many of those are completed by the current student
+      $completedCount = LessonCompletion::whereIn('lesson_id', $lessonIds)
+        ->where('user_id', $user->id)
+        ->count();
+
+      // If all lessons are completed, mark course as complete
+      if ($lessonIds->count() > 0 && $completedCount === $lessonIds->count()) {
+        $completedCourseIds[] = $course->id;
+      }
+    }
+
+    // Promotion button logic
+    $currentClassCourses = Course::where('class_id', $classId)->pluck('id');
+    $tests = MockTest::whereIn('course_id', $currentClassCourses)->get();
+
+    $canPromote = true;
+
+    foreach ($tests as $test) {
+        $attempt = DB::table('mock_test_attempts')
+            ->where('mock_test_id', $test->id)
+            ->where('student_id', $user->id)
+            ->latest()
+            ->first();
+
+        if (!$attempt || $attempt->score < ($attempt->total_marks / 2)) {
+            $canPromote = false;
+            break;
+        }
+    }
+
+    return view('frontend.student-dashboard.enrolled-courses.index', compact('courses', 'completedCourseIds', 'canPromote'));
   }
 
   public function courseChapters($id)
   {
     $course = Course::findOrFail($id);
-    $chapters = Chapter::with('lessons')   // load lessons
+
+    $chapters = Chapter::with('lessons')
       ->where('course_id', $id)
       ->where('status', 'active')
       ->orderBy('order')
       ->get();
 
-    return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters'));
+    // Get the current student's completed lessons
+    $completedLessonIds = LessonCompletion::where('user_id', Auth::id())
+      ->pluck('lesson_id')
+      ->toArray();
+
+    return view('frontend.student-dashboard.enrolled-courses.chapters', compact('course', 'chapters', 'completedLessonIds'));
   }
 
-  public function submitChapterComment(Request $request, $chapter_id)
+  public function markLessonComplete(Request $request)
   {
     $request->validate([
-      'subject' => 'required|string|max:255',
-      'message' => 'required|string',
+      'lesson_id' => 'required|exists:lessons,id',
     ]);
 
-    $chapter = Chapter::findOrFail($chapter_id);
-    $user    = Auth::user();
-
-    $teacherId = $chapter->course->teacher_id ?? null;
-
-    if (!$teacherId) {
-      return back()->with('error', 'Teacher not found for this subject.');
-    }
-
-    ChapterComment::create([
-      'student_id'  => $user->id,
-      'teacher_id'  => $teacherId,
-      'chapter_id'  => $chapter_id,
-      'subject'     => $request->subject,
-      'message'     => $request->message,
+    LessonCompletion::firstOrCreate([
+      'user_id' => auth()->id(),
+      'lesson_id' => $request->lesson_id,
     ]);
 
-    return back()->with('success', 'Your message has been sent to the teacher!');
+    return back();
   }
 
-
-
-  // ----- REMARKS ------------------------------------------------------------------------------------------------------
   public function remarks(Request $request)
   {
     return view('frontend.student-dashboard.remarks.index');
   }
 
-
-
-  // ----- ANNOUNCEMENTS -------------------------------------------------------------------------------------------------
   public function announcements(Request $request)
   {
     $announcements = Announcement::where('is_active', true)
@@ -165,18 +226,17 @@ class studentDashboardController extends Controller
 
 
 
-  // ----- MOCK TEST ----------------------------------------------------------------------------------------------------
   public function showMcqForm($course_id)
   {
     $course = Course::findOrFail($course_id);
 
     // Check if there is an active test
     $mockTest = MockTest::where('course_id', $course_id)
-      ->where('status', 'pending')
+      ->where('status', 'active')
       ->first();
 
 
-   /* if (!$mockTest) {
+    /* if (!$mockTest) {
       return redirect()->back()->with('error', 'No active test found for this course.');
     }*/
 
@@ -187,6 +247,7 @@ class studentDashboardController extends Controller
       return redirect()->back()->with('error', 'No questions found in this test.');
     }
 
+
     // Prepare questions with at least one option
     $questions = $rawQuestions->map(function ($question) {
       $options = MockQuestionOption::where('mock_question_id', $question->id)->get();
@@ -195,97 +256,187 @@ class studentDashboardController extends Controller
         ? (object)[
           'id' => $question->id,
           'text' => $question->question_text,
-          'type' => 'single',
+          'type' => 'single', // placeholder for now
           'options' => $options->map(fn($opt) => $opt->option_text)->toArray(),
         ]
         : null;
-    })->filter();   // Remove null entries
+    })->filter(); // Remove null entries
 
     if ($questions->isEmpty()) {
       return redirect()->back()->with('error', 'No valid questions with options found.');
     }
 
-    //dynamic duration
+    $totalMarks = $questions->count() * 2;
     $durationMinutes = $questions->count() * 2;
 
-    // Pass everything to the view
-    return view(
-      'Frontend.student-dashboard.enrolled-courses.mock-test.mcq',
-      compact('course', 'questions', 'durationMinutes')
-    );
+    return view('Frontend.student-dashboard.enrolled-courses.mock-test.mcq', compact('course', 'questions', 'totalMarks', 'durationMinutes'));
   }
+
 
   public function submitMcqForm(Request $request, $course_id)
   {
-    $answers = $request->input('answers', []);
-    $user    = Auth::user();
 
-    // Locate the active test
-    $mockTest = MockTest::where('course_id', $course_id)
-      ->where('status', 'active')
-      ->first();
+    // dd($request->all());
+    $rules = MockSettings::first();
+    $answers = $request->input('answers', []);
+    $user = Auth::user();
+    $course = Course::findOrFail($course_id);
 
     // Get the active test for this course
     $mockTest = MockTest::where('course_id', $course_id)->where('status', 'active')->first();
-   if (!$mockTest) {
+    /* if (!$mockTest) {
       return back()->with('error', 'No active test found for this course.');
-    }
+    }*/
 
-    // Pull questions + prepare counters
     $questions = MockQuestion::where('mock_test_id', $mockTest->id)->get();
-    $totalPossible = $questions->count() * 2;  // 2 marks each
-    $score = 0.0;  // running total
+    $score = 0;
 
-    // Evaluate each question
     foreach ($questions as $question) {
+      $submitted = $answers[$question->id] ?? null;
 
-      // 1 - Correct options for this question
       $correctOptions = MockQuestionOption::where('mock_question_id', $question->id)
         ->where('correct_option', true)
         ->pluck('option_text')
-        ->sort()->values()->toArray();
+        ->sort()
+        ->values()
+        ->toArray();
 
-      // 2 - Student’s selection
-      $submitted = $answers[$question->id] ?? [];   // null
-      $submitted = is_array($submitted) ? $submitted : [$submitted];
-      $submitted = collect($submitted)->sort()->values()->toArray();
-
-      if (empty($submitted)) {
-        continue;   // left blank, so 0 marks
+      if (!$submitted) {
+        continue;
       }
 
-      // 3 - If any wrong option chosen, so 0 marks
-      $wrongChosen = array_diff($submitted, $correctOptions);
-      if (!empty($wrongChosen)) {
-        continue;   // no marks for this question
+      $submittedArray = is_array($submitted)
+        ? collect($submitted)->sort()->values()->toArray()
+        : [$submitted];
+
+      if ($submittedArray === $correctOptions) {
+        $score = $score + $rules->total_marks;
       }
-
-      // 4 - Otherwise : proportional marks
-      $numCorrectChosen = count($submitted);   // how many correct ones they ticked
-      $totalCorrect = count($correctOptions);   // how many correct exist
-
-      // Marks = chosen_correct × (2 ÷ total_correct)
-      $questionMarks = $numCorrectChosen * (2 / $totalCorrect);
-      $score += $questionMarks;
     }
+    $total_marks = ($questions->count()) * ($rules->total_marks);
 
     // Save attempt
     MockTestAttempt::create([
-      'student_id' => $user->id,
+      'student_id'   => $user->id,
       'mock_test_id' => $mockTest->id,
-      'score' => round($score, 2),   // keeping two decimals
-      'total_marks' => $totalPossible,
+      'score'        => $score,
+      'total_marks'  => $total_marks,
       'attempt_date' => now()->toDateString(),
-      'remarks' => 'Submitted via MCQ/MSQ form',
+      'remarks'      => 'Submitted via MCQ form',
+    ]);
+    $result = 1;
+    if (config('mail_queue.is_queue')) {
+      Mail::to($user->email)->queue(new StudentMarksMail($course->title, $total_marks, $score, $user->name));
+    } else {
+      Mail::to($user->email)->send(new StudentMarksMail($course->title, $total_marks, $score, $user->name));
+    }
+
+    notyf()->success("We have mailed you your score");
+
+    // return redirect()->route('student.enrolled-courses.index')->with('success', 'Your responses have been submitted! You scored ' . $score . '/' . $questions->count());
+    return redirect()->route('student.enrolled-courses.index');
+  }
+
+  public function submitChapterComment(Request $request, string $id)
+  {
+
+    $course = Course::findOrFail($id);
+
+
+    $request->validate([
+      'subject' => 'required|string|max:255',
+      'message' => 'required|string|max:1200',
+    ]);
+    // dd($request->all());
+    $comment = new ChapterComment();
+    $comment->subject = $request->subject;
+    $comment->message = $request->message;
+    $comment->student_id = Auth::guard('web')->user()->id;
+    $comment->teacher_id = $course->teacher->id;
+    $comment->course_id = $id; //its course id
+    $comment->asked_at = now()->toDateTimeString();
+    $comment->save();
+
+    return response(['message' => 'your message has been sent'], 200);
+    // dd($request->all());
+
+    // $chapter = Chapter::findOrFail($chapter_id);
+    /* $user = Auth::user();
+
+    // Find teacher based on course_id of the chapter
+    $subject = AddSubject::where('id', $chapter->course_id)->first();
+    $teacherId = $subject ? $subject->created_by : null;
+
+    if (!$teacherId) {
+      return back()->with('error', 'Teacher not found for this subject.');
+    }
+
+    ChapterComment::create([
+      'student_id' => $user->id,
+      'teacher_id' => $teacherId,
+      'chapter_id' => $chapter_id,
+      'subject' => $request->subject,
+      'message' => $request->message,
     ]);
 
-    // Redirect with result
-    return redirect()
-      ->route('student.enrolled-courses.index')
-      ->with(
-        'success',
-        "Your responses have been submitted! You scored " .
-          round($score, 2) . " / {$totalPossible}."
-      );
+    return back()->with('success', 'Your message has been sent to the teacher!');*/
+  }
+  public function viewReply()
+  {
+    $doubts = ChapterComment::where(['status' => 'approved', 'student_id' => Auth::guard('web')->user()->id])
+      ->whereNotNull('reply')
+      ->get();
+
+    // Mark all unread replies as seen
+    ChapterComment::where([
+      'status' => 'approved',
+      'student_id' => Auth::guard('web')->user()->id,
+      'viewed' => false,
+    ])
+      ->whereNotNull('reply')
+      ->update(['viewed' => true]);
+
+    return view('Frontend.student-dashboard.doubts.index', compact('doubts'));
+  }
+
+
+  public function promoteStudent(Request $request)
+  {
+    $user = Auth::user();
+    $currentClassId = $user->student_classes_id;
+
+    if ($currentClassId >= 9) {
+      return back()->with('error', 'Promotion is only allowed up to class 9.');
+    }
+
+    // Get all courses for current class
+    $courseIds = Course::where('class_id', $currentClassId)->pluck('id');
+
+    // Get all tests for current class
+    $tests = MockTest::whereIn('course_id', $courseIds)->get();
+
+    $eligibleForPromotion = true;
+
+    foreach ($tests as $test) {
+      $attempt = DB::table('mock_test_attempts')
+        ->where('mock_test_id', $test->id)
+        ->where('student_id', $user->id)
+        ->latest()
+        ->first();
+
+      if (!$attempt || $attempt->score < ($attempt->total_marks / 2)) {
+        $eligibleForPromotion = false;
+        break;
+      }
+    }
+
+    if ($eligibleForPromotion) {
+      $user->student_classes_id = $currentClassId + 1;
+      $user->save();
+
+      return back()->with('success', '🎉 You have been promoted to class ' . ($currentClassId + 1) . '!');
+    } else {
+      return back()->with('error', 'You must attempt and pass all tests with at least 50% to get promoted.');
+    }
   }
 }

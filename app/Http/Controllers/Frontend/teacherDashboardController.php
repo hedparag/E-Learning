@@ -21,15 +21,16 @@ use App\Models\Chapter;
 class teacherDashboardController extends Controller
 {
     use FileUpload;
+
     public function index(): View
-{
+    {
 
-    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
-    $count = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
-                ->whereNull('reply')->count();
+        //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+        $count = ChapterComment::where(['status' => 'approved', 'teacher_id' => Auth::user()->id])
+            ->whereNull('reply')->count();
 
-    return view('Frontend.teacher-dashboard.index', compact('count'));
-}
+        return view('Frontend.teacher-dashboard.index', compact('count'));
+    }
 
 
     public function profile()
@@ -92,6 +93,7 @@ class teacherDashboardController extends Controller
 
         // return view('Frontend.teacher-dashboard.courses.mock', compact('admin'));
     }
+
     public function editCourse(string $id)
     {
         $editMode = 1;
@@ -123,6 +125,7 @@ class teacherDashboardController extends Controller
     {
         return view('frontend.teacher-dashboard.announcements.create');
     }
+
     public function getCommonSubjects(Request $request)
     {
         //dd($request->all());
@@ -203,6 +206,7 @@ class teacherDashboardController extends Controller
             'redirect' => route('teacher.courses.edit', ['id' => $course->id, 'step' => $req->next_step, 'mode' => $editMode])
         ]);
     }
+
     public function courseStoreUpdate(Request $req)
     {
         $editMode = $req->editMode; //1
@@ -256,11 +260,11 @@ class teacherDashboardController extends Controller
 
     public function courseChapters($courseId)
     {
-        $teacherId = Auth::id();     
+        $teacherId = Auth::id();
 
         $course = Course::where('teacher_id', $teacherId)
             ->findOrFail($courseId);
-   
+
         $chapters = Chapter::with('lessons')
             ->where('course_id', $course->id)
             ->where('status', 'active')
@@ -273,25 +277,25 @@ class teacherDashboardController extends Controller
             compact('course', 'chapters')
         );
     }
+
+    public function comments()
+    {
+        //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
+        $data = ChapterComment::where(['status' => 'approved', 'teacher_id' => Auth::user()->id])
+            ->whereNull('reply')->get();
+        // $data=ChapterComment::where(['status'=>'approved','reply'=>null])->get();
+        return view('Frontend.teacher-dashboard.comments.index', compact('data'));
+    }
+
+    public function commentStore(Request $request, string $id)
+    {
+        $data = ChapterComment::findOrFail($id);
+        $request->validate([
+            'reply' => ['required', 'string']
+        ]);
+        $data->reply = $request->reply;
+        $data->replied_at = now()->toDayDateTimeString();
+        $data->save();
+        return response(['message' => 'Message sent successfully'], 200);
+    }
 }
-
-public function comments(){
-    //$courses = Course::where('teacher_id', Auth::user()->id)->pluck('id')->toArray();
-    $data = ChapterComment::where(['status'=> 'approved','teacher_id'=>Auth::user()->id])
-                ->whereNull('reply')->get();
-   // $data=ChapterComment::where(['status'=>'approved','reply'=>null])->get();
-    return view('Frontend.teacher-dashboard.comments.index',compact('data'));
-}
-
-public function commentStore(Request $request,string $id){
-    $data=ChapterComment::findOrFail($id);
-    $request->validate([
-'reply'=>['required','string']
-    ]);
-    $data->reply=$request->reply;
-    $data->replied_at=now()->toDayDateTimeString();
-    $data->save();
-    return response(['message'=>'Message sent successfully'],200);
-}
-
-

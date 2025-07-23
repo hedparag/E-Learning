@@ -1,7 +1,6 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-
     <!--====== PAGE BANNER PART START ======-->
 
     @include('Frontend.student-dashboard.breadcrumb')
@@ -40,17 +39,46 @@
                                                             <h4>{{ $course->title }}</h4>
                                                         </a>
                                                         <p>{{ $course->desc ?? 'No description available.' }}</p>
-                                                        <a href="{{ route('student.exam', ['course_id' => $course->id]) }}"
-                                                            class="btn btn-primary">
-                                                            Take Quiz
-                                                        </a>
                                                     </div>
+                                                    @if (in_array($course->id, $completedCourseIds))
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="badge badge-secondary mb-0 mr-2">Course Completed
+                                                                ✅</span>
+                                                            <a href="{{ route('student.exam', ['course_id' => $course->id]) }}"
+                                                                class="btn btn-primary btn-sm">
+                                                                TEST
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="badge badge-secondary mb-0 mr-2">Course Incomplete
+                                                                ❌</span>
+                                                            <button class="btn btn-secondary btn-sm" disabled>
+                                                                TEST Locked
+                                                            </button>
+                                                        </div>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         @endforeach
+
                                     </div>
                                 </div>
                             </section>
+                            @if (Auth::user()->student_classes_id < 10)
+                                <form action="{{ route('student.promote') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success m-4" {{ !$canPromote ? 'disabled' : '' }}>
+                                        Promote to Next Class
+                                    </button>
+                                    @if (!$canPromote)
+                                        <small class="text-danger d-block mt-3">
+                                            ⚠️ Complete and pass all tests (50% minimum) before promoting.
+                                        </small>
+                                    @endif
+                                </form>
+                            @endif
                         </div>
                     </div>
 
@@ -60,7 +88,6 @@
     </section>
 
     <!--====== STUDENT PART END ======-->
-    
 @endsection
 
 

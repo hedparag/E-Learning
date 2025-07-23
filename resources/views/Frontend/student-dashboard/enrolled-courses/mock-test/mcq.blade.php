@@ -6,28 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCQ Exam</title>
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-    <style>
-        #mcq-timer {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #d9534f;
-            margin-bottom: 1rem;
-        }
-    </style>
 </head>
 
 <body class="mcq-body">
 
     <div class="mcq-container">
-        <h1 class="mcq-chapter-title">{{ $course->title }}</h1>
-
-        <div id="mcq-timer" data-minutes="{{ $durationMinutes }}">
-            Time left: <span id="time-text"></span>
+        <div class="text-center">
+            <div class="mcq-class-title">
+                {{ ucfirst($course->class->name ?? 'N/A') }}
+            </div>
+            <h1 class="mcq-chapter-title">{{ $course->title }}</h1>
         </div>
+
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; font-size: 16px; margin-bottom: 1rem;">
+            <div>
+                Total Marks: <strong>{{ $totalMarks }}</strong>
+            </div>
+            <div id="mcq-timer" data-minutes="{{ $durationMinutes }}">
+                <span style="color: red;">Time Left: <span id="time-text"></span></span>
+            </div>
+        </div>
+
         <hr>
 
         {{-- <form action="{{ route('student.submit-mcq') }}" method="POST" class="mcq-form"> --}}
-        <form action="{{ route('student.submit-mcq',$course->id) }}" method="POST">
+        <form action="{{ route('student.submit-mcq', $course->id) }}" method="POST">
             @csrf
 
             @foreach ($questions as $index => $question)
