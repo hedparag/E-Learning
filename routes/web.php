@@ -29,6 +29,7 @@ Route::get('announcements', [FrontendController::class, 'announcements'])->name(
 Route::get('teachers', [FrontendController::class, 'teachers'])->name('teachers');
 
 Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('contactSubmit',[FrontendController::class,'store'])->name('contactSubmit');
 
 Route::get('/dashboard', function () {
     return redirect()->route('home');

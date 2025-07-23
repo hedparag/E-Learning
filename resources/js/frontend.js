@@ -665,6 +665,28 @@ else{
  $('.holder').addClass('d-none');
 }
     });
+
+$('.contactForm').on('submit',function(){
+    let url=$(this).attr('action');
+    let forms=new FormData(this);
+    $.ajax({
+    method:'POST',
+    url:url,
+    data:forms,
+    contentType: false,
+    processData: false,
+    beforeSend:function(){
+
+    },
+    success:function(data){
+        notyf.success(data.message);
+
+    },
+    error:function(xhr,status,error){
+        console.log(xhr);
+    }
+    });
+}) ;
 });
 
 

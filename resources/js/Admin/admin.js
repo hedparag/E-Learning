@@ -4,7 +4,7 @@ window.$ = window.jQuery = $;
 const base_url = $('meta[name="base_url"]').attr('content');
 const csrf_token = $(`meta[name="csrf_token"]`).attr('content');
 let url = base_url + '/admin/data';
-let fetch_course=base_url+'/admin/fetchAllCourse';
+let fetch_course = base_url + '/admin/fetchAllCourse';
 // base_url + '/admin/class/:id'.replace(':id',id)
 var notyf = new Notyf({
     duration: 6000,
@@ -192,37 +192,58 @@ $(function () {
 
     $(document).on('click', '.videoView', function () {
         console.log("hi");
-        let url=$(this).data('url');
+        let url = $(this).data('url');
         console.log(url);
         $('.modal-title').text("lesson video");
 
         $('.videoPlayModal').attr('src', url);
     });
 
-    $('.classList').on('change',function(){
-let value=$(this).val();
-console.log(value);
-$.ajax({
-method:'GET',
-url:fetch_course,
-data:{
-   'class':value
-},
-beforeSend:function(){
+    $('.classList').on('change', function () {
+        let value = $(this).val();
+        console.log(value);
+        $.ajax({
+            method: 'GET',
+            url: fetch_course,
+            data: {
+                'class': value
+            },
+            beforeSend: function () {
 
-},
-success:function(data){
-    $('.myContainer').removeClass('d-none');
-    $('.tableBody').html(data);
+            },
+            success: function (data) {
+                $('.myContainer').removeClass('d-none');
+                $('.tableBody').html(data);
 
-},
-error:function(xhr,status,error){
+            },
+            error: function (xhr, status, error) {
 
-}
-});
+            }
+        });
     });
 
+    $('.contactSubmit').on('submit', function () {
+        let forms = new FormData(this);
+        let url = $(this).attr('action');
+        $.ajax({
+            method: 'POST',
 
+            url: url,
+            data: forms,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                notyf.success(data.message);
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+
+            }
+        })
+    })
 
 
 });

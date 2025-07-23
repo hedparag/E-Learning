@@ -15,6 +15,9 @@
                             <li><a href="{{ route('admin.instructor-request') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Instructor Request</span></a>
                             </li>
+                             <li><a href="{{ route('admin.contactView') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Messages</span></a>
+                            </li>
                              <li><a href="{{ route('admin.class.index') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Add Class</span></a>
                             </li>

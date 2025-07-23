@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
+use App\Models\ContactUs;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FrontendController extends Controller
 {
@@ -66,5 +68,23 @@ class FrontendController extends Controller
     function contact(): View
     {
         return view('frontend.pages.contact');
+    }
+    function store(Request $request):Response{
+        $request->validate([
+       'name'=>['string','max:30','required'],
+       'email'=>['email','max:100','required'],
+       'phone'=>['required','string','max:12'],
+       'subject'=>['required','string','max:30'],
+       'messege'=>['required','string','max:1000']
+        ]);
+        $data=new ContactUs();
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->subject=$request->subject;
+        $data->phone=$request->phone;
+        $data->message=$request->messege;
+        $data->save();
+        return response(['message'=>'sent successfully'],200);
+
     }
 }

@@ -30,7 +30,7 @@
                                             <div class="col-lg-12">
                                                 <div class="singel-event-list mt-10">
                                                     <div class="event-thum">
-                                                        <img src="{{ asset('frontend/assets/images/event/e-1.jpg') }}"
+                                                        <img src="{{ asset($course->thumbnail) }}"
                                                             alt="Subject Thumbnail">
                                                     </div>
                                                     <div class="event-cont">
@@ -60,7 +60,7 @@
     </section>
 
     <!--====== STUDENT PART END ======-->
-    
+
 @endsection
 
 

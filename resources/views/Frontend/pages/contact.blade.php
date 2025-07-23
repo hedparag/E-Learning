@@ -3,7 +3,7 @@
 @section('content')
 
     <!--====== PAGE BANNER PART START ======-->
-    
+
     <section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url({{ asset('frontend/assets/images/page-banner-6.jpg') }})">
         <div class="container">
             <div class="row">
@@ -21,11 +21,11 @@
             </div> <!-- row -->
         </div> <!-- container -->
     </section>
-    
+
     <!--====== PAGE BANNER PART ENDS ======-->
-    
+
     <!--====== CONTACT PART START ======-->
-    
+
     <section id="contact-page" class="pt-90 pb-120 gray-bg">
         <div class="container">
             <div class="row">
@@ -36,7 +36,8 @@
                             <h2>Keep in touch</h2>
                         </div> <!-- section title -->
                         <div class="main-form pt-45">
-                            <form id="contact-form" action="#" method="post" data-toggle="validator">
+                            <form id="contact-form" class="contactForm" action="{{ route('contactSubmit') }}" method="post" data-toggle="validator">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="singel-form form-group">
@@ -54,7 +55,7 @@
                                         <div class="singel-form form-group">
                                             <input name="subject" type="text" placeholder="Subject" data-error="Subject is required." required="required">
                                             <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form --> 
+                                        </div> <!-- singel form -->
                                     </div>
                                     <div class="col-md-6">
                                         <div class="singel-form form-group">
@@ -68,12 +69,12 @@
                                             <div class="help-block with-errors"></div>
                                         </div> <!-- singel form -->
                                     </div>
-                                    <p class="form-message"></p>
+
                                     <div class="col-md-12">
                                         <div class="singel-form">
                                             <button type="submit" class="main-btn">Send</button>
                                         </div> <!-- singel form -->
-                                    </div> 
+                                    </div>
                                 </div> <!-- row -->
                             </form>
                         </div> <!-- main form -->
@@ -123,7 +124,7 @@
             </div> <!-- row -->
         </div> <!-- container -->
     </section>
-    
+
     <!--====== CONTACT PART ENDS ======-->
 
     @endsection

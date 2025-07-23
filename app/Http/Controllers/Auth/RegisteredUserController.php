@@ -86,6 +86,7 @@ class RegisteredUserController extends Controller
             event(new Registered($user));
 
             Auth::login($user);
+            notyf()->success("you will be promoted to teacher once your teacher request will be approved");
             return redirect(route('student.dashboard', false));
         } else {
             return abort(404);

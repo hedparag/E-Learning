@@ -51,32 +51,41 @@
                                                 <div class="tab tab-border nav-center">
                                                     <ul class="nav nav-tabs" role="tablist">
                                                         <li class="nav-item">
-                                                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab">Student</a>
+                                                            <a class="nav-link active show" id="home-tab"
+                                                                data-toggle="tab" href="#home"
+                                                                role="tab">Student</a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab">Teacher</a>
+                                                            <a class="nav-link" id="profile-tab" data-toggle="tab"
+                                                                href="#profile" role="tab">Teacher</a>
                                                         </li>
                                                     </ul>
 
                                                     <div class="tab-content">
 
                                                         <!-- Student Register -->
-                                                        <div class="tab-pane fade active show py-3" id="home" role="tabpanel">
+                                                        <div class="tab-pane fade active show py-3" id="home"
+                                                            role="tabpanel">
                                                             <p>Student Register</p>
-                                                            <form method="POST" action="{{ route('register.post', ['type' => 'student']) }}">
+                                                            <form method="POST"
+                                                                action="{{ route('register.post', ['type' => 'student']) }}">
                                                                 @csrf
                                                                 <div class="row">
                                                                     <div class="col-12 col-sm-6">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Name</label>
-                                                                            <input type="text" class="form-control" name="name" placeholder="First name" value="{{ old('name') }}" required>
+                                                                            <input type="text" class="form-control"
+                                                                                name="name" placeholder="First name"
+                                                                                value="{{ old('name') }}" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Email*</label>
-                                                                            <input type="email" class="form-control" name="email" placeholder="Your email" value="{{ old('email') }}" required>
+                                                                            <input type="email" class="form-control"
+                                                                                name="email" placeholder="Your email"
+                                                                                value="{{ old('email') }}" required>
                                                                         </div>
                                                                     </div>
 
@@ -84,9 +93,11 @@
                                                                         <div class="form-group">
                                                                             <label class="control-label">Class*</label>
                                                                             <select name="class" class="form-control">
-                                                                                <option value="">---Select---</option>
+                                                                                <option value="">---Select---
+                                                                                </option>
                                                                                 @foreach ($data as $d)
-                                                                                    <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                                                                    <option value="{{ $d->id }}">
+                                                                                        {{ $d->name }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -94,73 +105,101 @@
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Password*</label>
-                                                                            <input type="password" class="form-control" name="password" placeholder="Your password" required>
+                                                                            <label
+                                                                                class="control-label">Password*</label>
+                                                                            <input type="password" class="form-control"
+                                                                                name="password"
+                                                                                placeholder="Your password" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Confirm Password*</label>
-                                                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Your password" required>
+                                                                            <label class="control-label">Confirm
+                                                                                Password*</label>
+                                                                            <input type="password" class="form-control"
+                                                                                name="password_confirmation"
+                                                                                placeholder="Your password" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                                            <label class="form-check-label" for="gridCheck">
+                                                                            <input class="form-check-input"
+                                                                                type="checkbox" id="gridCheck">
+                                                                            <label class="form-check-label"
+                                                                                for="gridCheck">
                                                                                 I accept terms & policy
                                                                             </label>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12 mt-3">
-                                                                        <button type="submit" class="btn btn-primary">Sign up</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Sign up</button>
                                                                     </div>
 
                                                                     <div class="col-12 mt-3">
-                                                                        <p>Already have an account ? <a href="{{ route('login') }}">Sign In</a></p>
+                                                                        <p>Already have an account ? <a
+                                                                                href="{{ route('login') }}">Sign In</a>
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
 
                                                         <!-- Teacher Register -->
-                                                        <div class="tab-pane fade py-3" id="profile" role="tabpanel">
+                                                        <div class="tab-pane fade py-3" id="profile"
+                                                            role="tabpanel">
                                                             <p>Teacher Register</p>
-                                                            <form method="POST" action="{{ route('register.post', ['type' => 'teacher']) }}" enctype="multipart/form-data">
+                                                            <form method="POST"
+                                                                action="{{ route('register.post', ['type' => 'teacher']) }}"
+                                                                enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="row">
                                                                     <div class="col-12 col-sm-6">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Name</label>
-                                                                            <input type="text" class="form-control" name="name" placeholder="First name" value="{{ old('name') }}" required>
+                                                                            <input type="text" class="form-control"
+                                                                                name="name"
+                                                                                placeholder="First name"
+                                                                                value="{{ old('name') }}" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Email*</label>
-                                                                            <input type="email" class="form-control" name="email" placeholder="Your email" value="{{ old('email') }}" required>
+                                                                            <input type="email" class="form-control"
+                                                                                name="email"
+                                                                                placeholder="Your email"
+                                                                                value="{{ old('email') }}" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Password*</label>
-                                                                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                                            <label
+                                                                                class="control-label">Password*</label>
+                                                                            <input type="password"
+                                                                                class="form-control" name="password"
+                                                                                placeholder="Password" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Confirm Password*</label>
-                                                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
+                                                                            <label class="control-label">Confirm
+                                                                                Password*</label>
+                                                                            <input type="password"
+                                                                                class="form-control"
+                                                                                name="password_confirmation"
+                                                                                placeholder="Confirm password"
+                                                                                required>
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-12">
+                                                                    {{--  <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label><strong>Choose Subjects</strong></label>
                                                                             <select id="subjectDropdown" name="subject_ids[]" class="form-control select2" multiple>
@@ -179,30 +218,67 @@
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
+                                                                    </div> --}}
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label><strong>Choose
+                                                                                    Subjects</strong></label>
+                                                                            <select id="subjectDropdown"
+                                                                                name="subject_ids[]"
+                                                                                class="form-control select2" multiple>
+                                                                                @foreach ($subjects->whereNull('parent_id') as $main)
+                                                                                    <optgroup
+                                                                                        label="{{ $main->name }}">
+                                                                                        {{-- Include parent as selectable --}}
+                                                                                        <option
+                                                                                            value="{{ $main->id }}">
+                                                                                            {{ $main->name }}
+                                                                                        </option>
+
+                                                                                        {{-- Include all subcategories --}}
+                                                                                        @foreach ($main->subCategories as $sub)
+                                                                                            <option
+                                                                                                value="{{ $sub->id }}">
+                                                                                                &nbsp;&nbsp;↳
+                                                                                                {{ $sub->name }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </optgroup>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
+
 
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Document Upload*</label>
-                                                                            <input type="file" name="document" class="form-control" required>
+                                                                            <label class="control-label">Document
+                                                                                Upload*</label>
+                                                                            <input type="file" name="document"
+                                                                                class="form-control" required>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="checkbox" id="gridCheck2">
-                                                                            <label class="form-check-label" for="gridCheck2">
+                                                                            <input class="form-check-input"
+                                                                                type="checkbox" id="gridCheck2">
+                                                                            <label class="form-check-label"
+                                                                                for="gridCheck2">
                                                                                 I accept terms & policy
                                                                             </label>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-12 mt-3">
-                                                                        <button type="submit" class="btn btn-primary">Sign up</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Sign up</button>
                                                                     </div>
 
                                                                     <div class="col-12 mt-3">
-                                                                        <p>Already have an account ? <a href="{{ route('login') }}">Sign In</a></p>
+                                                                        <p>Already have an account ? <a
+                                                                                href="{{ route('login') }}">Sign
+                                                                                In</a></p>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -220,7 +296,9 @@
                             <div class="col-sm-4 col-xxl-7 col-lg-5 bg-gradient o-hidden order-1 order-sm-2">
                                 <div class="row align-items-center h-100">
                                     <div class="col-7 mx-auto">
-                                        <img class="img-fluid" src="{{ asset('admin_template/assets/img/bg/login.svg') }}" alt="login illustration">
+                                        <img class="img-fluid"
+                                            src="{{ asset('admin_template/assets/img/bg/login.svg') }}"
+                                            alt="login illustration">
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +318,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#subjectDropdown').select2({
                 placeholder: "Select subjects...",
                 width: '100%'
@@ -260,4 +338,5 @@
     </script>
 
 </body>
+
 </html>

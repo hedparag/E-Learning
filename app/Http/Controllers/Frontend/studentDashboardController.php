@@ -137,7 +137,7 @@ class studentDashboardController extends Controller
         $course = Course::findOrFail($id);
         $chapters = Chapter::with('lessons') // eager load lessons
             ->where('course_id', $id)
-            ->where('status', 'active')
+            ->where('status', 'draft') //have to modify to active
             ->orderBy('order')
             ->get();
         //  dd($chapters);

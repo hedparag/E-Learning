@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\MockSettingController;
 use App\Http\Controllers\Admin\ReportCardController;
 use App\Http\Controllers\Admin\SubjectAssignController;
+use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -95,5 +96,6 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
        Route::get('message',[MessageController::class,'index'])->name('message');
        Route::post('course-Message-Review-Store/{id}',[MessageController::class,'store'])->name('courseMessageReview');
        Route::get('fetchAllCourse',[CourseApproveController::class,'fetch'])->name('fetch-all-courses');
-
+Route::get('contactView',[ContactUsController::class,'index'])->name('contactView');
+Route::post('contactMail/{id}',[ContactUsController::class,'mail'])->name('contactMail');
 });
