@@ -5,6 +5,10 @@ const base_url = $('meta[name="base_url"]').attr('content');
 const csrf_token = $(`meta[name="csrf_token"]`).attr('content');
 let url = base_url + '/admin/data';
 // base_url + '/admin/class/:id'.replace(':id',id)
+var notyf = new Notyf({
+    duration: 6000,
+    dismissible: true
+});
 $(function () {
     $('#delete-item').on('click', function (e) {
 
@@ -101,4 +105,87 @@ else{
     $('.holder').addClass('d-none');
 }
     })
+    $('.resultModal').on('click',function(){
+      /*console.log("hello");*/
+      let url=$(this).attr('href');
+      let id=$(this).data('id');
+      $.ajax({
+        method:'GET',
+        url:url,
+        data:{
+        'id':id
+        },
+        beforeSend:function(){
+
+        },
+        success:function(data){
+$('.resultBody').html(data)
+        },
+        error:function(xhr,status,error){
+            console.log(xhr);
+        }
+      })
+
+    });
+    $(document).on('click','.resultButton',function(){
+        url=base_url+'/admin/finalized'
+        let student=$(this).data('id');
+        let classId=$(this).data('classid');
+       $.ajax({
+        method:'POST',
+        url:url,
+        data:{
+            _token:csrf_token,
+        'student':student,
+        'classId':classId
+        },
+        beforeSend:function(){
+
+        },
+        success:function(data){
+            if(data.success){
+          $('.ReportButton').removeClass('d-none');
+
+          $('.resultButton').addClass('d-none');
+          notyf.success(data.success);
+
+            }
+
+        },
+        error:function(xhr,status,error){
+            console.log(xhr);
+        }
+      })
+    });
+    $(document).on('click','.ReportButton',function(e){
+        e.preventDefault();
+        let url=$(this).attr('href');
+        let student=$(this).data('id');
+        let classId=$(this).data('classid');
+
+     $.ajax({
+        method:'GET',
+        url:url,
+        data:{
+        'student':student,
+        'classId':classId
+        },
+        beforeSend:function(){
+
+        },
+        success:function(data){
+        $('.resultBody').empty().html(data);
+
+        },
+        error:function(xhr,status,error){
+
+        }
+
+
+     })
+    });
+    $(document).on('click','.cross',function(){
+        window.location.reload();
+    })
+
 });

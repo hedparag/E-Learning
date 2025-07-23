@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const href = this.getAttribute('href');
 
-            updateActiveTab(this); // 🔥 Highlight active tab
+            updateActiveTab(this);
 
             fetch(href, {
                 headers: {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(html => {
                     content.innerHTML = html;
-                    history.pushState(null, '', href); // 🔄 Update URL in address bar
+                    history.pushState(null, '', href);
                 })
                 .catch(error => {
                     content.innerHTML = `<div class="alert alert-danger">Error loading content</div>`;
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // 🔁 Handle back/forward browser buttons
     window.addEventListener('popstate', () => {
         const currentURL = window.location.href;
         const activeLink = [...links].find(link => link.href === currentURL);

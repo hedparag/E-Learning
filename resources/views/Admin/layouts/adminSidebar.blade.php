@@ -27,6 +27,19 @@
                             <li><a href="{{ route('admin.announcement.index') }}" aria-expanded="false"><i
                                         class="nav-icon ti ti-comment"></i><span class="nav-title">Announcements</span></a>
                             </li>
+                             <li><a href="{{ route('admin.courseApprove') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Course Approve</span></a>
+
+                            </li>
+                            <li><a href="{{ route('admin.message') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Messages Review</span></a>
+                            </li>
+                             <li><a href="{{ route('admin.mock') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Mock Settings</span></a>
+                            </li>
+                             <li><a href="{{ route('admin.marks') }}" aria-expanded="false"><i
+                                        class="nav-icon ti ti-comment"></i><span class="nav-title">Marks Evaluation</span></a>
+                            </li>
 
 
 

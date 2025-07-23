@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('msg_for_reviewer')->nullable();
 
             $table->enum('status', ['draft', 'active', 'archived'])->default('draft');
+            $table->timestamps();
         });
     }
 

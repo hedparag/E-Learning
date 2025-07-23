@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('mock_tests', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained('add_subjects')->onDelete('cascade');
+            $table->foreignId('class_id')->constrained('student_classes')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->enum('status', ['pending', 'active', 'inactive'])->default('pending'); // pending, submitted, approved, rejected
+            $table->integer('marks');
+            $table->enum('question_type', ['MCQ', 'True/False', 'Fill in the blanks']);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('mock_tests');
+    }
+};

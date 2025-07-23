@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,6 +19,12 @@ class User extends Authenticatable
     }
     function hasClass() :BelongsTo{
         return $this->belongsTo(StudentClass::class,'student_classes_id','id');
+    }
+    function test():HasMany{
+        return $this->hasMany(MockTestAttempt::class,'student_id','id');
+    }
+    function finalStudent():HasOne{
+        return $this->hasOne(FinalStudent::class,'student_id','id');
     }
     /**
      * The attributes that are mass assignable.
@@ -34,12 +41,14 @@ class User extends Authenticatable
         'bio',
         'gender',
         'student_classes_id',
-        'subject_ids'
+        'subject_ids',
+        'question_type'
 
     ];
-    protected $casts = [
+     protected $casts = [
     'subject_ids' => 'array'
 ];
+
 
     /**
      * The attributes that should be hidden for serialization.
